@@ -1,0 +1,14 @@
+
+AndAgain/
+
+\.vs/MCJsonExporter/v15/\.suo
+
+\.vs/MCJsonExporter/v15/sqlite3/
+
+Export/obj/Debug/netcoreapp1\.1/
+
+MCJsonExporter/bin/Debug/netstandard1\.4/
+
+MCJsonExporter/obj/Debug/netstandard1\.4/
+
+MCJsonExporter/obj/

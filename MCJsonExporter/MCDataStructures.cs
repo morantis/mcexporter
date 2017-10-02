@@ -1,0 +1,3556 @@
+﻿using System;
+using System.Collections.Generic;
+using System.Text;
+
+namespace MCJsonExporter
+{
+    public class MCDataStructures
+    {
+        public class Range
+        {
+            public float Min { get; set; }
+            public float Max { get; set; }
+        }
+
+        public class Minecraft_filter
+        {
+
+        }
+
+        public class Loot_table
+        {
+            public string Table { get; set; } // path, relative to the Behavior Pack's path, to the loot table file
+        }
+
+        public class Vector
+        {
+            public float X { get; set; }
+            public float Y { get; set; }
+            public float Z { get; set; }
+        }
+
+        public class Trigger
+        {
+
+        }
+
+        public class EntityTypesSub
+        {
+            public Minecraft_filter filters { get; set; } // Minecraft Filter Conditions that make this entry in the list valid
+            public float max_dist { get; set; } // 16	Maximum distance this mob can be away to be a valid choice
+            public bool must_see { get; set; } // Boolean false	If true, the mob has to be visible to be a valid choice
+            public float sprint_speed_multiplier { get; set; } // 1.0	Multiplier for the running speed.A value of 1.0 means the speed is unchanged
+            public float walk_speed_multiplier { get; set; } // 1.0	Multiplier for the walking speed.A value of 1.0 means the speed is unchanged
+        }
+
+        public class Attributes
+        {
+
+            public class Minecraft_attack
+            {
+                // Defines an entity's melee attack and any additional effects on it.
+                public Range Damage;
+                public float Effect_duration { get; set; } // {get; set;} //	0.0	Duration in seconds of the status ailment applied to the damaged entity
+                public string Effect_name { get; set; }  // Name of the status ailment to apply to an entity attacked by this entity's melee attack
+            }
+
+            public class Minecraft_spell_effects
+            {
+
+                //Defines what mob effects to add and remove to the entity when adding this component.
+                public List<string> add_effects { get; set; } //List of effects to add to this entity after adding this component
+                public string Effect { get; set; } // Effect to add to this entity.Includes 'duration' in seconds, 'amplifier' level, 'ambient' if it is to be considered an ambient effect, and 'visible' if the effect should be visible
+                public string Remove_effects { get; set; }// {get; set;} // String  List of names of effects to be removed from this entity after adding this component
+            }
+
+            public class Minecraft_strength
+            {
+                public int Max { get; set; } // {get; set;} // Integer 	5	The maximum strength of this entity
+                public int Value { get; set; } // {get; set;} // Integer  1	The initial value of the strength
+            }
+        }
+
+        public class Properties
+        {
+
+            public class Minecraft_ambient_sound_interval
+            {
+                //Sets the entity's delay between playing its ambient sound.
+
+                public float Range { get; set; } // {get; set;} //	16.0	Maximum time is seconds to randomly add to the ambient sound delay time.
+                public float Value { get; set; } // {get; set;} //   8.0	Minimum time in seconds before the entity plays its ambient sound again
+            }
+
+            public class Minecraft_burns_in_daylight
+            {
+                //Sets that this entity burns if exposed to daylight.
+
+            }
+
+            public class Minecraft_can_climb
+            {
+                //Allows this entity to climb up ladders.
+            }
+
+            public class Minecraft_can_fly
+            {
+                //Marks the entity as being able to fly, the pathfinder won't be restricted to paths where a solid block is required underneath it.
+            }
+
+
+
+            public class Minecraft_can_power_jump
+            {
+                //Allows the entity to power jump like the horse does in vanilla.
+            }
+
+
+            public class Minecraft_collision_box
+            {
+                //Sets the width and height of the Entity's collision box.
+                public float Height { get; set; }// {get; set;} //	1.0	Height of the Collision Box in Blocks
+                public float Width { get; set; } // {get; set;} // 1.0	Width and Depth of the Collision Box in Blocks
+            }
+
+            public class Minecraft_color
+            {
+                //Defines the entity's color. Only works on vanilla entities that have predefined color values (sheep, llama, shulker).
+                public float Value { get; set; } // 	The Palette Color value of the entity
+            }
+
+            public class Minecraft_default_look_angle
+            {
+                //Sets this entity's default head rotation angle.
+                public float Value { get; set; } //	0.0f	Angle in degrees
+            }
+
+            public class Minecraft_equipment
+            {
+                //Sets the Equipment table to use for this Entity.
+                public string Table { get; set; } // The path to the equipment table, relative to the Behavior Pack's root
+            }
+
+            public class Minecraft_fire_immune
+            {
+                //Sets that this entity doesn't take damage from fire.
+            }
+
+            public class Minecraft_floats_in_liquid
+            {
+                //Sets that this entity can float in liquid blocks.
+            }
+
+            public class Minecraft_flying_speed
+            {
+                //Speed in Blocks that this entity flies at.
+                public float Value { get; set; } //	0.02	Flying speed in blocks per tick
+            }
+
+            public class Minecraft_foot_size
+            {
+                //Sets the number of blocks the entity can step without jumping.
+                public float Value { get; set; } //	0.5	The value of the size of the entity's step
+            }
+
+            public class Minecraft_friction_modifier
+            {
+                //Defines how much does friction affect this entity.
+                public float Value { get; set; } //	1.0	The higher the number, the more the friction affects this entity.A value of 1.0 means regular friction, while 2.0 means twice as much
+            }
+
+            public class Minecraft_ground_offset
+            {
+                //Sets the offset from the ground that the entity is actually at.
+                public float Value { get; set; } //	0.0	The value of the entity's offset from the terrain, in blocks
+            }
+
+            public class Minecraft_hurt_when_wet
+            {
+                //Sets that this entity will take damage when it is wet.
+            }
+
+            public class Minecraft_input_ground_controlled
+            {
+                //When configured as a rideable entity, the entity will be controlled using WASD controls.
+            }
+
+            public class Minecraft_is_baby
+            {
+                //Sets that this entity is a baby.
+            }
+
+            public class Minecraft_is_charged
+            {
+                //Sets that this entity is charged.
+            }
+
+            public class Minecraft_is_chested
+            {
+                //Sets that this entity is currently carrying a chest.
+            }
+
+            public class Minecraft_is_dyeable
+            {
+                //Allows dyes to be used on this entity to change its color.
+                public string Interact_text { get; set; }// {get; set;} // String       The text that will display when interacting with this entity with a dye when playing with Touch-screen controls
+            }
+
+
+            public class Minecraft_is_ignited
+            {
+                //Sets that this entity is currently on fire.
+            }
+
+            public class Minecraft_is_saddled
+            {
+                //Sets that this entity is currently saddled.
+            }
+
+            public class Minecraft_is_shaking
+            {
+                //Sets that this entity is currently shaking.
+            }
+
+            public class Minecraft_is_sheared
+            {
+                //Sets that this entity is currently sheared.
+            }
+
+            public class Minecraft_is_stackable
+            {
+                //Sets that this entity can be stacked.
+            }
+
+            public class Minecraft_is_tamed
+            {
+                //Sets that this entity is currently tamed.
+            }
+
+            public class Minecraft_item_controllable
+            {
+                //Defines what items can be used to control this entity while ridden
+                public List<string> Control_items { get; set; } // List List of items that can be used to control this entity
+            }
+
+
+            public class Minecraft_loot
+            {
+                //Sets the loot table for what items this entity drops upon death.
+                public string Table { get; set; } // The path to the loot table, relative to the Behavior Pack's root
+            }
+
+            public class Minecraft_mark_variant
+            {
+                //Additional variant value.Can be used to further differentiate variants.
+                public float Value { get; set; } // 	The ID of the variant.By convention, 0 is the ID of the base entity
+            }
+
+            public class Minecraft_push_through
+            {
+                //Sets the distance through which the entity can push through.
+                public float Value { get; set; } //	0.0	The value of the entity's push-through, in blocks
+            }
+
+            public class Minecraft_scale
+            {
+                //Sets the entity's visual size.
+                public float Value { get; set; } //	1.0	The value of the scale. 1.0 means the entity will appear at the scale they are defined in their model. Higher numbers make the entity bigger
+            }
+
+            public class Minecraft_sound_volume
+            {
+                //Sets the entity's base volume for sound effects.
+                public float Value { get; set; } //	1.0	The value of the volume the entity uses for sound effects
+            }
+
+            public class Minecraft_type_family
+            {
+                //Defines the families this entity belongs to.
+                public List<string> Family { get; set; } // List        List of family names
+            }
+
+
+            public class Minecraft_variant
+            {
+                //Used to differentiate the component group of a variant of an entity from others (e.g.ocelot, villager)
+                public float Value { get; set; } // {get; set;} // Integer  0	The ID of the variant.By convention, 0 is the ID of the base entity
+            }
+
+            public class Minecraft_walk_animation_speed
+            {
+                //Sets the speed multiplier for this entity's walk animation speed.
+                public float Value { get; set; } //	1.0	The higher the number, the faster the animation for walking plays. A value of 1.0 means normal speed, while 2.0 means twice as fast
+            }
+
+            public class Minecraft_wants_jockey
+            {
+                //Sets that this entity wants to become a jockey.
+            }
+        }
+
+        public class Components
+        {
+
+            public class Minecraft_addrider
+            {
+                //Adds a rider to the entity.Requires public class Minecraft_rideable.
+                public string Entity_type { get; set; } //  The entity type that will be riding this entity
+            }
+
+            public class Minecraft_ageable
+            {
+                //Adds a timer for the entity to grow up.It can be accelerated by giving the entity the items it likes as defined by feedItems.
+                public float Duration { get; set; } // 	1200.0	Amount of time before the entity grows
+                public List<string> FeedItems { get; set; } //  List List of items that can be fed to the entity.Includes 'item' for the item name and 'growth' to define how much time it grows up by
+                public string Grow_up { get; set; } // {get; set;} // String  Event to run when this entity grows up
+            }
+
+            public class Minecraft_angry
+            {
+                //Defines the entity's 'angry' state using a timer.
+                public bool BroadcastAnger { get; set; } // {get; set;} // Boolean	false	If true, other entities of the same entity definition within the broadcastRange will also become angry
+                public int BroadcastRange { get; set; } // {get; set;} // Integer 	20	Distance in blocks within which other entities of the same entity definition will become angry
+                public string Calm_event { get; set; } // {get; set;} // String  Event to run after the number of seconds specified in duration expires(when the entity stops being 'angry')
+                public int Duration { get; set; } // {get; set;} // Integer  25	The amount of time in seconds that the entity will be angry
+            }
+
+            public class Minecraft_boostable
+            {
+
+                public class Boost_items
+                {
+                    public int damage { get; set; } // {get; set;} // Integer  1	This is the damage that the item will take each time it is used
+                    public string item { get; set; } // {get; set;} // String  Name of the item that can be used to boost
+                    public string replaceItem { get; set; } //  {get; set;} // String  The item used to boost will become this item once it is used up
+                }
+
+                //Defines the conditions and behavior of a rideable entity's boost
+                public List<Boost_items> boost_items { get; set; } // List        List of items that can be used to boost while riding this entity.Each item has the following properties:
+                public int Duration { get; set; } // {get; set;} // Integer 	3	Time in seconds for the boost
+                public float Speed_multiplier { get; set; } // {get; set;} //	1.0	Factor by which the entity's normal speed increases. E.g. 2.0 means go twice as fast
+            }
+
+            public class Minecraft_breathable
+            {
+                //Defines what blocks this entity can breathe in and gives them the ability to suffocate
+                public List<string> BreatheBlocks { get; set; } // List List of blocks this entity can breathe in, in addition to the above
+                public bool BreathesAir { get; set; } //	true	If true, this entity can breathe in air
+                public bool BreathesLava { get; set; } //	If true, this entity can breathe in lava
+                public bool BreathesSolids { get; set; } //	If true, this entity can breathe in solid blocks
+                public bool BreathesWater { get; set; } //	If true, this entity can breathe in water
+                public bool GeneratesBubbles { get; set; } //		If true, this entity will have visible bubbles while in water
+                public List<string> nonBreatheBlocks { get; set; } // List List of blocks this entity can't breathe in, in addition to the above
+                public int SuffocateTime { get; set; } // {get; set;} // Integer 	-20	Time in seconds between suffocation damage
+                public int totalSupply { get; set; } // {get; set;} // Integer 	15	Time in seconds the entity can hold its breath
+            }
+
+            public class Minecraft_breedable
+            {
+                //Defines the way an entity can get into the 'love' state.
+                public bool AllowSitting { get; set; } // {get; set;} // Boolean	false	If true, entities can breed while sitting
+                public float breedCooldown { get; set; } // {get; set;} // 60.0	Time in seconds before the Entity can breed again
+                public List<string> breedItems { get; set; } // List The list of items that can be used to get the entity into the 'love' state
+
+                public class BreedsWithSub
+                {
+                    public string babyType { get; set; } // {get; set;} // String  The entity definition of this entity's babies
+                    public string breed_event { get; set; } // {get; set;} // String       Event to run when this entity breeds
+                    public string mateType { get; set; } // {get; set;} // String       The entity definition of this entity's mate
+                }
+                public List<BreedsWithSub> breedsWith { get; set; } // List The list of entity definitions that this entity can breed with
+
+
+                public float extraBabyChance { get; set; }// {get; set;} //	0.0	Chance that up to 16 babies will spawn between 0.0 and 1.0, where 1.0 is 100%
+                public bool inheritTamed { get; set; } // Boolean	true	If true, the babies will be automatically tamed if its parents are
+                public class Mutation_factorSub
+                {
+                    // JSON Object     Determines how likely the babies are to NOT inherit one of their parent's variances. Values are between 0.0 and 1.0, with a higher number meaning more likely to mutate
+                    public float color { get; set; } // 0.0	The percentage chance of a mutation on the entity's color
+                    public float extra_variant { get; set; } //	0.0	The percentage chance of a mutation on the entity's extra variant type
+                    public float variant { get; set; } //	0.0	The percentage chance of a mutation on the entity's variant type
+                }
+                public Mutation_factorSub Mutation_factor { get; set; }
+                public bool requireTame { get; set; } // Boolean	true	If true, the entities need to be tamed first before they can breed.
+            }
+
+            public class Minecraft_damage_sensor
+            {
+                //Defines what events to call when this entity is damaged by specific entities or items. Can be either an array or a single instance.
+                public string cause { get; set; } // {get; set;} // String  Type of damage that triggers this set of events
+                public bool deals_damage { get; set; } // Boolean true	If true, the damage dealt to the entity will take off health from it. Set to false to make the entity ignore that damage
+                public List<string> on_damage { get; set; } // List List of triggers with the events to call when taking this specific kind of damage. Allows specifying filters for entity definitions and events
+            }
+
+            public class Minecraft_environment_sensor
+            {
+                //Creates a trigger based on environment conditions.
+                public List<string> on_environment { get; set; } // List        The list of triggers that fire when the environment conditions match the given filter criteria.
+            }
+
+            public class Minecraft_equippable
+            {
+                //Defines an entity's behavior for having items equipped to it
+                public class EquippableSub
+                {
+                    List<string> accepted_items { get; set; } // List The list of items that can go in this slot
+                    public string interact_text { get; set; } // {get; set;} // String  Text to be displayed when the entity can be equipped with this item when playing with Touch-screen controls
+                    public string item { get; set; } // {get; set;} // String       Name of the item that can be equipped for this slot
+                    public string on_equip { get; set; } // {get; set;} // String  Event to trigger when this entity is equipped with this item
+                    public string on_unequip { get; set; } // {get; set;} // String  Event to trigger when this item is removed from this entity
+                    public int slot { get; set; } // {get; set;} // Integer  0	The slot number of this slot
+                }
+
+                public List<EquippableSub> slots { get; set; } // List        List of slots and the item that can be equipped
+            }
+
+            public class Minecraft_explode
+            {
+                //Defines how the entity explodes.
+                public bool breaks_blocks { get; set; } // Boolean	true	If true, the explosion will destroy blocks in the explosion radius
+                public bool causesFire { get; set; } // Boolean false	If true, blocks in the explosion radius will be set on fire
+                public bool destroyAffectedByGriefing { get; set; } // Boolean	false	If true, whether the explosion breaks blocks is affected by the mob griefing game rule
+                public bool fireAffectedByGriefing { get; set; } // Boolean false	If true, whether the explosion causes fire is affected by the mob griefing game rule
+                public Range fuseLength { get; set; } // Range[a, b][0.0, 0.0] The range for the random amount of time the fuse will be lit before exploding. A negative value means the explosion will be immediate
+                public bool fuseLit { get; set; } // Boolean false	If true, the fuse is already lit when this component is added to the entity
+                public float maxResistance { get; set; } // Infinite Blocks with less resistance than this value will be broken by the explosion
+                public float power { get; set; } // 3.0	The radius of the explosion in blocks and the amount of damage the explosion deals
+            }
+
+            public class Minecraft_healable
+            {
+                //Defines the interactions with this entity for healing it.
+
+                public class HealableSub
+                {
+                    public Minecraft_filter filters { get; set; } // Minecraft Filter The list of conditions for this trigger
+                    public bool force_use { get; set; } // Boolean false	Determines if item can be used regardless of entity being full health
+                    public float heal_amount { get; set; } //	1.0	The amount of health this entity gains when fed this item
+                    public string item { get; set; } //String Name of the item this entity likes and can be used to heal this entity
+                }
+                public List<HealableSub> items { get; set; } // List        The list of items that can be used to heal this entity
+            }
+
+            public class Minecraft_interact
+            {
+                //Defines interactions with this entity.
+                public List<Loot_table> add_items { get; set; } // JSON Object Loot table with items to add to the player's inventory upon successful interaction
+                public float cooldown { get; set; } //	0.0	Time in seconds before this entity can be interacted with again
+                public int hurt_item { get; set; } //Integer	0	The amount of damage the item will take when used to interact with this entity.A value of 0 means the item won't lose durability
+                public string interact_text { get; set; } // String       Text to show when the player is able to interact in this way with this entity when playing with Touch-screen controls
+                public string on_interact { get; set; } // String       Event to fire when the interaction occurs
+                public string play_sounds { get; set; } // String  List of sounds to play when the interaction occurs
+                public string spawn_entities { get; set; } // String       List of entities to spawn when the interaction occurs
+                public List<Loot_table> spawn_items { get; set; }// JSON Object     Loot table with items to drop on the ground upon successful interaction        
+                public bool swing { get; set; } // Boolean	false	If true, the player will do the 'swing' animation when interacting with this entity
+                public string transform_to_item { get; set; } // String  The item used will transform to this item upon successful interaction. Format: itemName:auxValue
+                public bool use_item { get; set; } // Boolean false	If true, the interaction will use an item
+            }
+
+            public class Minecraft_inventory
+            {
+                //Defines this entity's inventory properties.
+                public int additional_slots_per_strength { get; set; } // Integer 	0	Number of slots that this entity can gain per extra strength
+                public bool can_be_siphoned_from { get; set; } // Boolean	false	If true, the contents of this inventory can be removed by a hopper
+                public string container_type { get; set; } // String  none    Type of container this entity has. Can be horse, minecart_chest, minecart_hopper, inventory, container or hopper
+                public int inventory_size { get; set; } // Integer  5	Number of slots the container has
+                public int linked_slots_size { get; set; } // Integer 	0	Number of linked slots (e.g.Player Hotbar) the container has
+                public bool isprivate { get; set; } // Boolean	false	If true, only the entity can access the inventory
+                public bool restrict_to_owner { get; set; } // Boolean	false	If true, the entity's inventory can only be accessed by its owner or itself
+            }
+            public class Minecraft_item_hopper
+            {
+                //Determines that this entity is an item hopper
+            }
+
+            public class Minecraft_jump_dynamic
+            {
+                //Defines a dynamic type jump control that will change jump properties based on the speed modifier of the mob.
+            }
+
+            public class Minecraft_jump_static
+            {
+                //Gives the entity the ability to jump.
+            }
+
+            public class Minecraft_leashable
+            {
+                //Allows this entity to be leashed and Defines the conditions and events for this entity when is leashed.
+                public float hard_distance { get; set; } //	6.0	Distance in blocks at which the leash stiffens, restricting movement
+                public float max_distance { get; set; } //	10.0	Distance in blocks at which the leash breaks
+                public string on_leash { get; set; } // String       Event to call when this entity is leashed
+                public string on_unleash { get; set; } // String  Event to call when this entity is unleashed
+                public float soft_distance { get; set; } // 4.0	Distance in blocks at which the 'spring' effect starts acting to keep this entity close to the entity that leashed it
+            }
+
+            public class Minecraft_lookat
+            {
+                //Defines the behavior when another entity looks at this entity.
+                public string filters { get; set; } // String   player Defines the entities that can trigger this component
+                public Range look_cooldown { get; set; } // Range[a, b][0.0, 0.0] The range for the random amount of time during which the entity is 'cooling down' and won't get angered or look for a target
+                public string look_event { get; set; } // String       Event to run when the entities specified in filters look at this entity
+                public bool mAllowInvulnerable { get; set; } // Boolean false	If true, invulnerable entities (e.g.Players in creative mode) are considered valid targets
+                public float searchRadius { get; set; } // 10.0	Maximum distance this entity will look for another entity looking at it
+                public bool setTarget { get; set; } // Boolean true	If true, this entity will set the attack target as the entity that looked at it
+            }
+
+            public class Minecraft_movement_basic
+            {
+                //This component accents the movement of an entity.
+                public float max_turn { get; set; } //	30.0	The maximum number in degrees the mob can turn per tick.
+            }
+            public class Minecraft_movement_fly
+            {
+                //This move control causes the mob to fly.
+                public float max_turn { get; set; } //	30.0	The maximum number in degrees the mob can turn per tick.
+            }
+
+            public class Minecraft_movement_jump
+            {
+                //Move control that causes the mob to jump as it moves with a specified delay between jumps.
+                public Range jump_delay { get; set; } // Delay after landing when using the slime move control.
+                public float max_turn { get; set; } // 30.0	The maximum number in degrees the mob can turn per tick.
+            }
+
+            public class Minecraft_movement_skip
+            {
+                //This move control causes the mob to hop as it moves.
+                public float max_turn { get; set; } // 30.0	The maximum number in degrees the mob can turn per tick.
+            }
+
+            public class Minecraft_movement_sway
+            {
+                //This move control causes the mob to sway side to side giving the impression it is swimming.
+                public float max_turn { get; set; } //	30.0	The maximum number in degrees the mob can turn per tick.
+            }
+
+            public class Minecraft_nameable
+            {
+                //Allows this entity to be named (e.g. using a name tag)
+                public bool allowNameTagRenaming { get; set; } // Boolean true	If true, this entity can be renamed with name tags
+                public bool alwaysShow { get; set; } // Boolean false	If true, the name will always be shown
+                public string default_trigger { get; set; } // String       Trigger to run when the entity gets named
+
+                public class NameActionsSub
+                {
+                    public string name_filter { get; set; } // String  List of special names that will cause the events defined in 'on_named' to fire
+                    public string on_named { get; set; } // String       Event to be called when this entity acquires the name specified in 'name_filter'
+                }
+                public NameActionsSub name_actions { get; set; } // JSON Object Describes the special names for this entity and the events to call when the entity acquires those names
+            }
+
+            public class Minecraft_navigation_climb
+            {
+                //Allows this entity to generate paths that include vertical walls like the vanilla Spiders do.
+                public bool avoid_portals { get; set; } // Boolean	false	Tells the pathfinder to avoid portals (like nether portals) when finding a path
+                public bool avoid_sun { get; set; } // Boolean	false	Whether or not the pathfinder should avoid tiles that are exposed to the sun when creating paths
+                public bool avoid_water { get; set; } // Boolean	false	Tells the pathfinder to avoid water when creating a path
+                public bool can_float { get; set; } // Boolean	false	Tells the pathfinder whether or not it can float in water
+                public bool can_open_doors { get; set; } // Boolean	false	Tells the pathfinder that it can path through a closed door assuming the AI will open the door
+                public bool can_pass_doors { get; set; } // Boolean	true	Whether a path can be created through a door
+            }
+
+            public class Minecraft_navigation_float
+            {
+                //Allows this entity to generate paths by flying around the air like the regular Ghast.
+                public bool avoid_portals { get; set; } // Boolean	false	Tells the pathfinder to avoid portals (like nether portals) when finding a path
+                public bool avoid_sun { get; set; } // Boolean	false	Whether or not the pathfinder should avoid tiles that are exposed to the sun when creating paths
+                public bool avoid_water { get; set; } // Boolean	false	Tells the pathfinder to avoid water when creating a path
+                public bool can_float { get; set; } // Boolean	false	Tells the pathfinder whether or not it can float in water
+                public bool can_open_doors { get; set; } // Boolean	false	Tells the pathfinder that it can path through a closed door assuming the AI will open the door
+                public bool can_pass_doors { get; set; } // Boolean	true	Whether a path can be created through a door
+            }
+
+            public class Minecraft_navigation_fly
+            {
+                //Allows this entity to generate paths in the air like the vanilla Parrots do.
+                public bool avoid_portals { get; set; } // Boolean	false	Tells the pathfinder to avoid portals (like nether portals) when finding a path
+                public bool avoid_sun { get; set; } // Boolean	false	Whether or not the pathfinder should avoid tiles that are exposed to the sun when creating paths
+                public bool avoid_water { get; set; } // Boolean	false	Tells the pathfinder to avoid water when creating a path
+                public bool can_float { get; set; } // Boolean	false	Tells the pathfinder whether or not it can float in water
+                public bool can_open_doors { get; set; } // Boolean	false	Tells the pathfinder that it can path through a closed door assuming the AI will open the door
+                public bool can_pass_doors { get; set; } // Boolean	true	Whether a path can be created through a door
+            }
+
+            public class Minecraft_navigation_swim
+            {
+                //Allows this entity to generate paths that include water.
+                public bool avoid_portals { get; set; } // Boolean	false	Tells the pathfinder to avoid portals (like nether portals) when finding a path
+                public bool avoid_sun { get; set; } // Boolean	false	Whether or not the pathfinder should avoid tiles that are exposed to the sun when creating paths
+                public bool avoid_water { get; set; } // Boolean	false	Tells the pathfinder to avoid water when creating a path
+                public bool can_float { get; set; } // Boolean	false	Tells the pathfinder whether or not it can float in water
+                public bool can_open_doors { get; set; } // Boolean	false	Tells the pathfinder that it can path through a closed door assuming the AI will open the door
+                public bool can_pass_doors { get; set; } // Boolean	true	Whether a path can be created through a door
+            }
+
+            public class Minecraft_navigation_walk
+            {
+                //Allows this entity to generate paths by walking around and jumping up and down a block like regular mobs.
+                public bool avoid_portals { get; set; } // Boolean	false	Tells the pathfinder to avoid portals (like nether portals) when finding a path
+                public bool avoid_sun { get; set; } // Boolean	false	Whether or not the pathfinder should avoid tiles that are exposed to the sun when creating paths
+                public bool avoid_water { get; set; } // Boolean	false	Tells the pathfinder to avoid water when creating a path
+                public bool can_float { get; set; } // Boolean	false	Tells the pathfinder whether or not it can float in water
+                public bool can_open_doors { get; set; } // Boolean	false	Tells the pathfinder that it can path through a closed door assuming the AI will open the door
+                public bool can_pass_doors { get; set; } // Boolean	true	Whether a path can be created through a door
+            }
+
+            public class Minecraft_peek
+            {
+                //Defines the entity's 'peek' behavior, defining the events that should be called during it
+                public string on_close { get; set; } // String  Event to call when the entity is done peeking
+                public string on_open { get; set; } // String  Event to call when the entity starts peeking
+                public string on_target_open { get; set; } // String  Event to call when the entity's target entity starts peeking
+            }
+
+            public class Minecraft_projectile
+            {
+                //Allows the entity to be a thrown entity.
+                public float angleoffset { get; set; } //	0.0	Determines the angle at which the projectile is thrown
+                public bool catchFire { get; set; } // Boolean	false	If true, the entity hit will be set on fire
+                public bool critParticleOnHurt { get; set; } // Boolean false   If true, the projectile will produce additional particles when a critical hit happens
+                public bool destroyOnHurt { get; set; } // Boolean false   If true, this entity will be destroyed when hit
+                public string filter { get; set; } // String       Entity Definitions defined here can't be hurt by the projectile
+                public bool fireAffectedByGriefing { get; set; } // Boolean false   If true, whether the projectile causes fire is affected by the mob griefing game rule
+                public float gravity { get; set; } // 0.05    The gravity applied to this entity when thrown.The higher the value, the faster the entity falls
+                public string hitSound { get; set; } // String       The sound that plays when the projectile hits something
+                public bool homing { get; set; } // Boolean false   If true, the projectile homes in to the nearest entity
+                public float inertia { get; set; } // 0.99    The fraction of the projectile's speed maintained every frame while traveling in air
+                public bool isdangerous { get; set; } // Boolean false   If true, the projectile will be treated as dangerous to the players
+                public bool knockback { get; set; } // Boolean true    If true, the projectile will knock back the entity it hits
+                public float liquid_inertia { get; set; } // 0.6 The fraction of the projectile's speed maintained every frame while traveling in water
+                public Vector offset { get; set; } // Vector[a, b, c]    [0.0, 0.5, 0.0]The offset from the entity's anchor where the projectile will spawn
+                public float onFireTime { get; set; } //	5.0	Time in seconds that the entity hit will be on fire for
+                public string particle { get; set; } // String  iconcrack Particle to use upon collision
+                public int potionEffect { get; set; } // Integer 	-1	Defines the effect the arrow will apply to the entity it hits
+                public float power { get; set; } //	1.3	Determines the velocity of the projectile
+                public bool reflectOnHurt { get; set; } // Boolean	false	If true, this entity will be reflected back when hit
+                public bool semirandomdiffdamage { get; set; } // Boolean	false	If true, damage will be randomized based on damage and speed
+                public string shootSound { get; set; } // String  The sound that plays when the projectile is shot
+                public bool shoottarget { get; set; } // Boolean	true	If true, the projectile will be shot towards the target of the entity firing it
+                public bool shouldbounce { get; set; } // Boolean	false	If true, the projectile will bounce upon hit
+                public bool splashPotion { get; set; } // Boolean	false	If true, the projectile will be treated like a splash potion
+                public float splashRange { get; set; } //	4.0	Radius in blocks of the 'splash' effect
+                public float uncertaintyBase { get; set; } //	0.0	The base accuracy. Accuracy is determined by the formula uncertaintyBase - difficultyLevel * uncertaintyMultiplier
+                public float uncertaintyMultiplier { get; set; } //	0.0	Determines how much difficulty affects accuracy. Accuracy is determined by the formula uncertaintyBase - difficultyLevel * uncertaintyMultiplier
+            }
+
+            public class Minecraft_rail_movement
+            {
+                //Defines the entity's movement on the rails. An entity with this component is only allowed to move on the rail.
+                public float max_speed { get; set; } //	0.4	Maximum speed that this entity will move at when on the rail
+            }
+
+            public class Minecraft_rail_sensor
+            {
+                //Defines the behavior of the entity when the rail gets activated or deactivated.
+                public bool check_block_types { get; set; } // Boolean	false	If true, on tick this entity will trigger its on_deactivate behavior
+                public bool eject_on_activate { get; set; } // Boolean	true	If true, this entity will eject all of its riders when it passes over an activated rail
+                public bool eject_on_deactivate { get; set; } // Boolean	false	If true, this entity will eject all of its riders when it passes over a deactivated rail
+                public string on_activate { get; set; } // String  Event to call when the rail is activated
+                public string on_deactivate { get; set; } // String  Event to call when the rail is deactivated
+                public bool tick_command_block_on_activate { get; set; } // Boolean	true	If true, command blocks will start ticking when passing over an activated rail
+                public bool tick_command_block_on_deactivate { get; set; } // Boolean	false	If false, command blocks will stop ticking when passing over a deactivated rail
+            }
+
+            public class Minecraft_rideable
+            {
+                //Determines whether this entity can be ridden. Allows specifying the different seat positions and quantity.
+                public int controlling_seat { get; set; } // Integer 	0	The seat that designates the driver of the entity
+                public bool crouching_skip_interact { get; set; } // Boolean	true	If true, this entity can't be interacted with if the entity interacting with it is crouching
+                public List<string> family_types { get; set; } // List List of entities that can ride this entity
+                public string interact_text { get; set; } // String  The text to display when the player can interact with the entity when playing with Touch-screen controls
+                public bool pull_in_entities { get; set; } // Boolean	false	If true, this entity will pull in entities that are in the correct family_types into any available seats
+                public int seat_count { get; set; } // Integer 	1	The number of entities that can ride this entity at the same time
+
+                public class SeatsSub
+                {
+                    public float lock_rider_rotation { get; set; } //	181.0	Angle in degrees that a rider is allowed to rotate while riding this entity. Omit this property for no limit
+                    public int max_rider_count { get; set; } // Integer 	0	Defines the maximum number of riders that can be riding this entity for this seat to be valid
+                    public int min_rider_count { get; set; } // Integer 	0	Defines the minimum number of riders that need to be riding this entity before this seat can be used
+                    public Vector position { get; set; } // Position of this seat relative to this entity's position
+                    public float rotate_rider_by { get; set; } //	0.0	Offset to rotate riders by
+                }
+
+                public List<SeatsSub> seats { get; set; } // List The list of positions and number of riders for each position for entities riding this entity
+            }
+
+            public class Minecraft_scale_by_age
+            {
+                //Defines the entity's size interpolation based on the entity's age.
+                public float end_scale { get; set; } //	1.0	Ending scale of the entity when it's fully grown
+                public float start_scale { get; set; } //	1.0	Initial scale of the newborn entity
+            }
+
+            public class Minecraft_shareables
+            {
+                //Defines a list of items the mob wants to share. Each item must have the following parameters:
+                public string craft_into { get; set; } // String  Defines the item this entity wants to craft with the item defined above. Should be an item name
+                public string item { get; set; } // String  The name of the item
+                public int surplus_amount { get; set; } // Integer 	-1	Number of this item considered extra that the entity wants to share
+                public int want_amount { get; set; } // Integer 	-1	Number of this item this entity wants to share
+            }
+
+            public class Minecraft_shooter
+            {
+                //Defines the entity's ranged attack behavior.
+                public int auxVal { get; set; } // Integer 	-1	ID of the Potion effect to be applied on hit
+                public string def { get; set; } // String  Entity definition to use as projectile for the ranged attack. The entity definition must have the projectile component to be able to be shot as a projectile
+            }
+
+            public class Minecraft_sittable
+            {
+                //Defines the entity's 'sit' state.
+                public string sit_event { get; set; } // String  Event to run when the entity enters the 'sit' state
+                public string stand_event { get; set; } // String  Event to run when the entity exits the 'sit' state
+            }
+
+            public class Minecraft_spawn_entity
+            {
+                //Adds a timer after which this entity will spawn another entity or item (similar to vanilla's chicken's egg-laying behavior).
+                public int max_wait_time { get; set; } // Integer 	600	Maximum amount of time to randomly wait in seconds before another entity is spawned
+                public int min_wait_time { get; set; } // Integer 	300	Minimum amount of time to randomly wait in seconds before another entity is spawned
+                public string spawn_entity { get; set; } // String  Identifier of the entity to spawn. Leave empty to spawn the item defined above instead
+                public string spawn_event { get; set; } // String  public class Minecraft_entity_born Event to call when the entity is spawned
+                public string spawn_item { get; set; } // String  egg Name of the item to spawn
+                public string spawn_method { get; set; } // String  born Method to use to spawn the entity
+                public string spawn_sound { get; set; } // String  plop Name of the sound effect to play when the entity is spawned
+            }
+
+            public class Minecraft_tameable
+            {
+                //Defines the rules for a mob to be tamed by the player.
+                public float probability { get; set; } //	1.0	The chance of taming the entity with each item use between 0.0 and 1.0, where 1.0 is 100%
+                public List<string> tameItems { get; set; }// List The list of items that can be used to tame this entity
+                public string tame_event { get; set; } // String  Event to run when this entity becomes tamed
+            }
+
+            public class Minecraft_tamemount
+            {
+                //Allows the Entity to be tamed by mounting it.
+                public int attemptTemperMod { get; set; } // Integer 	5	The amount the entity's temper will increase when mounted
+
+                public class AutoRejectSub
+                {
+                    public List<string> item { get; set; } // String  Name of the item this entity dislikes and will cause it to get angry if used while untamed
+                }
+
+                public AutoRejectSub autoRejectItems { get; set; } // JSON Object The list of items that, if carried while interacting with the entity, will anger it
+
+                public class FeedItemsSub
+                {
+                    public List<string> item { get; set; } // String  Name of the item this entity likes and can be used to increase this entity's temper
+
+                }
+
+                public List<FeedItemsSub> feedItems { get; set; }// JSON Object The list of items that can be used to increase the entity's temper and speed up the taming process
+
+                public float temperMod { get; set; } // 0.0 The amount of temper this entity gains when fed this item
+                public string feed_text { get; set; } // String  The text that shows in the feeding interact button
+                public int maxTemper { get; set; } // Integer  100 The maximum value for the entity's random starting temper
+                public string minTemper { get; set; } // Integer  0   The minimum value for the entity's random starting temper
+                public string ride_text { get; set; } // String       The text that shows in the riding interact button
+                public string tame_event { get; set; } // String       Event that triggers when the entity becomes tamed
+            }
+
+            public class Minecraft_target_nearby_sensor
+            {
+                //Defines the entity's range within which it can see or sense other entities to target them.
+                public float inside_range { get; set; } // 1.0 Maximum distance in blocks that another entity will be considered in the 'inside' range
+                public string on_inside_range { get; set; } // String       Event to call when an entity gets in the inside range.Can specify 'event' for the name of the event and 'target' for the target of the event
+                public string on_outside_range { get; set; } // String       Event to call when an entity gets in the outside range.Can specify 'event' for the name of the event and 'target' for the target of the event
+                public float outside_range { get; set; } // 5.0 Maximum distance in blocks that another entity will be considered in the 'outside' range
+            }
+
+            public class Minecraft_teleport
+            {
+                //Defines an entity's teleporting behavior.
+                public float darkTeleportChance { get; set; } // 0.01    Modifies the chance that the entity will teleport if the entity is in darkness
+                public float lightTeleportChance { get; set; } // 0.01    Modifies the chance that the entity will teleport if the entity is in daylight
+                public float maxRandomTeleportTime { get; set; } // 20.0    Maximum amount of time in seconds between random teleports
+                public float minRandomTeleportTime { get; set; } // 0.0 Minimum amount of time in seconds between random teleports
+                public Vector randomTeleportCube { get; set; } // Entity will teleport to a random position within the area defined by this cube
+                public bool randomTeleports { get; set; } // Boolean	true	If true, the entity will teleport randomly
+                public float targetDistance { get; set; } //	16.0	Maximum distance the entity will teleport when chasing a target
+                public float target_teleport_chance { get; set; } //	1.0	The chance that the entity will teleport between 0.0 and 1.0. 1.0 means 100%
+            }
+
+            public class Minecraft_tick_world
+            {
+                //Defines if the entity ticks the world and the radius around it to tick.
+                public float distance_to_players { get; set; } //	128	The distance at which the closest player has to be before this entity despawns. This option will be ignored if never_despawn is true. Min: 128 blocks.
+                public bool never_despawn { get; set; } // Boolean	true	If true, this entity will not despawn even if players are far away. If false, distance_to_players will be used to determine when to despawn.
+                public int radius { get; set; } // Integer 	2	The area around the entity to tick. Default: 2. Allowed range: 2-6.
+            }
+
+            public class Minecraft_timer
+            {
+                //Adds a timer after which an event will fire.
+                public bool looping { get; set; } // Boolean	true	If true, the timer will restart every time after it fires
+                public bool randomInterval { get; set; } // Boolean	true	If true, the amount of time on the timer will be random between the min and max values specified in time
+                public Range time { get; set; } // Amount of time in seconds for the timer. Can be specified as a number or a pair of numbers (min and max)
+                public string time_down_event { get; set; } // String  Event to fire when the time on the timer runs out
+            }
+
+            public class Minecraft_trade_table
+            {
+                //Defines this entity's ability to trade with players.
+                public string display_name { get; set; } // String  Name to be displayed while trading with this entity
+                public string table { get; set; } // String  File path relative to the resource pack root for this entity's trades
+            }
+
+            public class Minecraft_transformation
+            {
+                //Defines an entity's transformation from the current definition into another
+
+                public class AddSub
+                {
+                    public List<string> component_groups { get; set; } // List        Names of component groups to add
+
+                }
+                public AddSub add { get; set; } // JSON Object     List of components to add to the entity after the transformation
+
+                public string begin_transform_sound { get; set; } // String       Sound to play when the transformation starts
+
+                public class DelaySub
+                {
+                    public float block_assist_chance { get; set; } // 0.0 Chance that the entity will look for nearby blocks that can speed up the transformation.Value must be between 0.0 and 1.0
+                    public float block_chance { get; set; } // 0.0 Chance that, once a block is found, will help speed up the transformation
+                    public int block_max { get; set; } // Integer  0   Maximum number of blocks the entity will look for to aid in the transformation.If not defined or set to 0, it will be set to the block radius
+                    public int block_radius { get; set; } // Integer  0   Distance in Blocks that the entity will search for blocks that can help the transformation
+                    List<string> block_types { get; set; } // List        List of blocks that can help the transformation of this entity
+                    public float value { get; set; } // 0.0 Time in seconds before the entity transforms
+                }
+
+                public DelaySub delay { get; set; } // JSON Object Defines the properties of the delay for the transformation
+
+                public string into { get; set; } // String       Entity Definition that this entity will transform into
+                public string transformation_sound { get; set; } // String       Sound to play when the entity is done transforming
+            }
+
+            public class Minecraft_behavior_avoid_mob_type
+            {
+                //Allows this entity to avoid certain mob types.
+                public class EntityTypesSub
+                {
+                    public Minecraft_filter filters { get; set; } //Minecraft Filter        Conditions that make this entry in the list valid
+                    public float max_dist { get; set; } // 16  Maximum distance this mob can be away to be a valid choice
+                    public bool must_see { get; set; } // Boolean false   If true, the mob has to be visible to be a valid choice
+                    public float sprint_speed_multiplier { get; set; } // 1.0 Multiplier for the running speed.A value of 1.0 means the speed is unchanged
+                    public float walk_speed_multiplier { get; set; } // 1.0 Multiplier for the walking speed.A value of 1.0 means the speed is unchanged
+                }
+                public EntityTypesSub entity_types { get; set; } //JSON Object List of entity types this mob avoids.
+                public float max_dist { get; set; } // 0.0 Maximum distance to look for an entity
+                public float probability_per_strength { get; set; } // 1.0 Determines how likely it is that this entity will stop avoiding another entity based on that entity's strength
+                public float sprint_speed_multiplier { get; set; } // 1.0 Multiplier for running speed. 1.0 means keep the regular speed, while higher numbers make the running speed faster
+                public float walk_speed_multiplier { get; set; } // 1.0 Multiplier for walking speed. 1.0 means keep the regular speed, while higher numbers make the walking speed faster
+            }
+
+            public class Minecraft_behavior_beg
+            {
+                //Allows this mob to look at and follow the player that holds food they like.
+                public List<string> items { get; set; } // List        List of items that this mob likes
+                public float look_distance { get; set; } // 8.0 Distance in blocks the mob will beg from
+                public Range look_time { get; set; } // Range[a, b]    [2, 4] The range of time in seconds this mob will stare at the player holding a food they like, begging for it
+            }
+
+            public class Minecraft_behavior_break_door
+            {
+                //Allows this mob to break doors.
+            }
+
+            public class Minecraft_behavior_breed
+            {
+                //Allows this mob to breed with other mobs.
+                public float speed_multiplier { get; set; } //	1.0	Movement speed multiplier of the mob when using this AI Goal
+            }
+
+            public class Minecraft_behavior_charge_attack
+            {
+                //Allows the mob to attack its target by running at it.
+            }
+
+            public class Minecraft_behavior_controlled_by_player
+            {
+                //Allows the mob to be controlled by the player.
+            }
+
+            public class Minecraft_behavior_defend_village_target
+            {
+                //Allows the mob to stay in the village and fight mobs hostile to the villagers.
+                public class EntityTypesSub
+                {
+                    public Minecraft_filter filters { get; set; } // Minecraft Filter Conditions that make this entry in the list valid
+                    public float max_dist { get; set; } // 16	Maximum distance this mob can be away to be a valid choice
+                    public bool must_see { get; set; } // Boolean false	If true, the mob has to be visible to be a valid choice
+                    public float sprint_speed_multiplier { get; set; } // 1.0	Multiplier for the running speed.A value of 1.0 means the speed is unchanged
+                    public float walk_speed_multiplier { get; set; } // 1.0	Multiplier for the walking speed.A value of 1.0 means the speed is unchanged
+                }
+
+                public EntityTypesSub entity_types { get; set; } //JSON Object List of entity types this mob considers a threat to the village
+            }
+
+
+            public class Minecraft_behavior_door_interact
+            {
+                //Allows the mob to open and close doors.
+            }
+
+            public class Minecraft_behavior_dragonchargeplayer
+            {
+                //Allows the dragon to attack a player by flying fast at them.The player is chosen by the dragonscanning goal.Can only be used by the Ender Dragon.
+            }
+
+            public class Minecraft_behavior_dragondeath
+            {
+                //Allows the dragon to go out with glory. This controls the Ender Dragon's death animation and can't be used by other mobs.
+            }
+
+            public class Minecraft_behavior_dragonflaming
+            {
+                //Allows the dragon to use its flame breath attack.Can only be used by the Ender Dragon.
+            }
+
+            public class Minecraft_behavior_dragonholdingpattern
+            {
+                //Allows the Dragon to fly around in a circle around the center podium. Can only be used by the Ender Dragon.
+            }
+
+            public class Minecraft_behavior_dragonlanding
+            {
+                //Allows the Dragon to stop flying and transition into perching mode.Can only be used by the Ender Dragon.
+            }
+
+            public class Minecraft_behavior_dragonscanning
+            {
+                //Allows the dragon to look around for a player to attack while in perch mode. Can only be used by the Ender Dragon.
+            }
+
+            public class Minecraft_behavior_dragonstrafeplayer
+            {
+                //Allows the dragon to fly around looking for a player and shoot fireballs at them.Can only be used by the Ender Dragon.
+            }
+
+            public class Minecraft_behavior_dragontakeoff
+            {
+                //Allows the dragon to leave perch mode and go back to flying around.Can only be used by the Ender Dragon.
+            }
+
+            public class Minecraft_behavior_eat_block
+            {
+                //Allows the mob to eat a block (for example, sheep eating grass).
+                public Trigger on_eat { get; set; }// Trigger Trigger to fire when the mob eats a block of grass
+            }
+
+            public class Minecraft_behavior_enderman_leave_block
+            {
+                //Allows the enderman to drop a block they are carrying. Can only be used by Endermen.
+            }
+
+            public class Minecraft_behavior_enderman_take_block
+            {
+                //Allows the enderman to take a block and carry it around. Can only be used by Endermen.
+            }
+
+            public class Minecraft_behavior_find_mount
+            {
+                //Allows the mob to look around for another mob to ride atop it.
+                public bool avoid_water { get; set; } // Boolean	false	If true, the mob will not go into water blocks when going towards a mount
+                public float mount_distance { get; set; } //	-1.0	This is the distance the mob needs to be, in blocks, from the desired mount to mount it. If the value is below 0, the mob will use its default attack distance
+                public int start_delay { get; set; } // Integer 	0	Time the mob will wait before starting to move towards the mount
+                public bool target_needed { get; set; } // Boolean	false	If true, the mob will only look for a mount if it has a target
+                public float within_radius { get; set; } //	0.0	Distance in blocks within which the mob will look for a mount
+            }
+
+            public class Minecraft_behavior_flee_sun
+            {
+                //Allows the mob to run away from direct sunlight and seek shade.
+            }
+
+            public float speed_multiplier { get; set; } //	1.0	Movement speed multiplier of the mob when using this AI Goal
+
+            public class Minecraft_behavior_float
+            {
+                //Allows the mob to stay afloat while swimming.
+            }
+
+            public class Minecraft_behavior_float_wander
+            {
+                //Allows the mob to float around like the Ghast.
+                public Range float_duration { get; set; } // Range [a, b]    [0.0, 0.0]  Range of time in seconds the mob will float around before landing and choosing to do something else
+                public bool must_reach { get; set; } // Boolean	false	If true, the point has to be reachable to be a valid target
+                public bool random_reselect { get; set; } // Boolean false	If true, the mob will randomly pick a new point while moving to the previously selected one
+                public int xz_dist { get; set; } // Integer  10	Distance in blocks on ground that the mob will look for a new spot to move to.Must be at least 1
+                public int y_dist { get; set; } // Integer 	7	Distance in blocks that the mob will look up or down for a new spot to move to.Must be at least 1
+                public float y_offset { get; set; } //	0.0	Height in blocks to add to the selected target position
+            }
+
+            public class Minecraft_behavior_follow_caravan
+            {
+                //Allows the mob to follow mobs that are in a caravan.
+                public int entity_count { get; set; } // Integer 	1	Number of entities that can be in the caravan
+
+                public EntityTypesSub entity_types { get; set; } // JSON Object List of entity types that this mob can follow in a caravan
+                public float speed_multiplier { get; set; } // 1.0	Movement speed multiplier of the mob when using this AI Goal
+            }
+
+            public class Minecraft_behavior_follow_mob
+            {
+                //Allows the mob to follow other mobs.
+                public int search_range { get; set; } // Integer 	0	The distance in blocks it will look for a mob to follow
+                public float speed_multiplier { get; set; } //	1.0	Movement speed multiplier of the mob when using this AI Goal
+                public float stop_distance { get; set; } //	2.0	The distance in blocks this mob stops from the mob it is following
+            }
+
+
+            public class Minecraft_behavior_follow_owner
+            {
+                //Allows the mob to follow the player that owns them.
+                public float speed_multiplier { get; set; } //	1.0	Movement speed multiplier of the mob when using this AI Goal
+                public float start_distance { get; set; } //	10.0	The distance in blocks that the owner can be away from this mob before it starts following it
+                public float stop_distance { get; set; } //	2.0	The distance in blocks this mob will stop from its owner while following it
+            }
+
+            public class Minecraft_behavior_follow_parent
+            {
+                //Allows the mob to follow their parent around.
+                public float speed_multiplier { get; set; } //	1.0	Movement speed multiplier of the mob when using this AI Goal
+            }
+
+            public class Minecraft_behavior_guardian_attack
+            {
+                //Allows the guardian to use its laser beam attack.Can only be used by Guardians and Elder Guardians.
+            }
+
+            public class Minecraft_behavior_harvest_farm_block
+            {
+                //Allows the villager to harvest nearby farms.Can only be used by Villagers.
+                public float speed_multiplier { get; set; } //	1.0	Movement speed multiplier of the mob when using this AI Goal
+            }
+
+            public class Minecraft_behavior_hurt_by_target
+            {
+                //Allows the mob to target another mob that hurts them.
+                public bool alert_same_type { get; set; } // Boolean	false	If true, nearby mobs of the same type will be alerted about the damage
+                public EntityTypesSub entity_types { get; set; } // JSON Object List of entity types that this mob can target when hurt by them
+                public bool hurt_owner { get; set; } // Boolean false	If true, the mob will hurt its owner and other mobs with the same owner as itself
+            }
+
+            public class Minecraft_behavior_leap_at_target
+            {
+                //Allows monsters to jump at and attack their target.Can only be used by hostile mobs.
+                public bool must_be_on_ground { get; set; } // Boolean	true	If true, the mob will only jump at its target if its on the ground. Setting it to false will allow it to jump even if its already in the air
+                public float yd { get; set; } //	0.0	The height in blocks the mob jumps when leaping at its target
+            }
+
+            public class Minecraft_behavior_look_at_entity
+            {
+                //Allows the mob to look at nearby entities.
+                public int angle_of_view_horizontal { get; set; } // Integer 	360	The angle in degrees that the mob can see in the Y-axis (up-down)
+                public int angle_of_view_vertical { get; set; } // Integer 	360	The angle in degrees that the mob can see in the X-axis (left-right)
+                public Minecraft_filter filters { get; set; } // Minecraft Filter Filter to determine the conditions for this mob to look at the entity
+                public float look_distance { get; set; } //	8.0	The distance in blocks from which the entity will look at
+                public Range look_time { get; set; } //    Time range to look at the entity
+                public float probability { get; set; } //	0.02	The probability of looking at the target. A value of 1.00 is 100%
+            }
+
+            public class Minecraft_behavior_look_at_player
+            {
+                //Allows the mob to look at the player when the player is nearby.
+                public int angle_of_view_horizontal { get; set; } // Integer 	360	The angle in degrees that the mob can see in the Y-axis (up-down)
+                public int angle_of_view_vertical { get; set; } // Integer 	360	The angle in degrees that the mob can see in the X-axis (left-right)
+                public float look_distance { get; set; } //	8.0	The distance in blocks from which the entity will look at
+                public Range look_time { get; set; } //Time range to look at the entity 
+                public float probability { get; set; } //	0.02	The probability of looking at the target. A value of 1.00 is 100%
+            }
+
+            public class Minecraft_behavior_look_at_target
+            {
+                //Allows the mob to look at the entity they are targetting.
+                public int angle_of_view_horizontal { get; set; } // Integer 	360	The angle in degrees that the mob can see in the Y-axis (up-down)
+                public int angle_of_view_vertical { get; set; } // Integer 	360	The angle in degrees that the mob can see in the X-axis (left-right)
+                public float look_distance { get; set; } //	8.0	The distance in blocks from which the entity will look at
+                public Range look_time { get; set; } //Time range to look at the entity
+                public float probability { get; set; } //	0.02	The probability of looking at the target. A value of 1.00 is 100%
+            }
+
+            public class Minecraft_behavior_look_at_trading_player
+            {
+                //Allows the mob to look at the player they are trading with.
+                public int angle_of_view_horizontal { get; set; } // Integer 	360	The angle in degrees that the mob can see in the Y-axis (up-down)
+                public int angle_of_view_vertical { get; set; } // Integer 	360	The angle in degrees that the mob can see in the X-axis (left-right)
+                public float look_distance { get; set; } //	8.0	The distance in blocks from which the entity will look at
+                public Range look_time { get; set; } // Time range to look at the entity
+                public float probability { get; set; } //	0.02	The probability of looking at the target. A value of 1.00 is 100%
+            }
+
+            public class Minecraft_behavior_make_love
+            {
+                //Allows the villager to look for a mate to spawn other villagers with. Can only be used by Villagers.
+            }
+
+            public class Minecraft_behavior_melee_attack
+            {
+                //Allows the mob to use close combat melee attacks.
+                public string attack_types { get; set; } // String  Defines the entity types this mob will attack
+                public int random_stop_interval { get; set; } // Integer 	0	Defines the probability the mob will stop fighting. A value of 0 disables randomly stopping, while a value of 1 defines a 50% chance
+                public float reach_multiplier { get; set; } //	2.0	Multiplier for how far outside its box the mob can reach its target (this can be used to simulate a mob with longer arms by making this bigger)
+                public float speed_multiplier { get; set; } //	1.0	Movement speed multiplier of the mob when using this AI Goal
+                public bool track_target { get; set; } // Boolean	false	If true, this mob will chase after the target as long as it's a valid target
+            }
+
+            public class Minecraft_behavior_mount_pathing
+            {
+                //Allows the mob to move around on its own while mounted seeking a target to attack.
+                public float speed_multiplier { get; set; } //	1.0	Movement speed multiplier of the mob when using this AI Goal
+                public float target_dist { get; set; } //	0.0	The distance at which this mob wants to be away from its target
+                public bool track_target { get; set; } // Boolean	false	If true, this mob will chase after the target as long as it's a valid target
+            }
+
+            public class Minecraft_behavior_move_indoors
+            {
+                //Can only be used by Villagers.Allows them to seek shelter indoors.
+                public float speed_multiplier { get; set; } //	1.0	Movement speed multiplier of the mob when using this AI Goal
+            }
+
+            public class Minecraft_behavior_move_through_village
+            {
+                //Can only be used by Villagers.Allows the villagers to create paths around the village.
+                public bool only_at_night { get; set; } // Boolean	false	If true, the mob will only move through the village during night time
+                public float speed_multiplier { get; set; } // 1.0	Movement speed multiplier of the mob when using this AI Goal
+            }
+
+            public class Minecraft_behavior_move_towards_restriction
+            {
+                //Allows Guardians, Iron Golems and Villagers to move within their pre-defined area that the mob should be restricted to.Other mobs don't have a restriction defined.
+                public float speed_multiplier { get; set; } //	1.0	Movement speed multiplier of the mob when using this AI Goal
+            }
+
+            public class Minecraft_behavior_move_towards_target
+            {
+                //Allows mob to move towards its current target.
+                public float within_radius { get; set; } //	0.0	Defines the radius in blocks that the mob tries to be from the target. A value of 0 means it tries to occupy the same block as the target
+            }
+
+            public class Minecraft_behavior_nearest_attackable_target
+            {
+                //Allows the mob to check for and pursue the nearest valid target.
+                public int attack_interval { get; set; } // Integer 	0	Time in seconds between attacks
+                public EntityTypesSub entity_types { get; set; } //  JSON Object     List of entity types that this mob considers valid targets
+                public bool must_reach { get; set; } // Boolean false	If true, only entities that this mob can path to can be selected as targets
+                public bool must_see { get; set; } // Boolean false	If true, only entities in this mob's viewing range can be selected as targets
+                public float must_see_forget_duration { get; set; } // 	3.0	Determines the amount of time in seconds that this mob will look for a target before forgetting about it and looking for a new one when the target isn't visible any more
+                public bool reselect_targets { get; set; } // Boolean false	If true, the target will change to the current closest entity whenever a different entity is closer
+                public float within_radius { get; set; } //	0.0	Distance in blocks that the target can be within to launch an attack
+            }
+
+            public class Minecraft_behavior_ocelot_sit_on_block
+            {
+                //Allows to mob to be able to sit in place like the ocelot.
+                public float speed_multiplier { get; set; } // 1.0	Movement speed multiplier of the mob when using this AI Goal
+            }
+
+            public class Minecraft_behavior_ocelotattack
+            {
+                //Can only be used by the Ocelot.Allows it to perform the sneak and pounce attack.
+                public float sneak_speed_multiplier { get; set; } //	1.0	Multiplier for the sneaking speed. 1.0 means the ocelot will move at the speed it normally sneaks
+                public float sprint_speed_multiplier { get; set; } // 1.0	Multiplier for the running speed of this mob while using this attack
+                public float walk_speed_multiplier { get; set; } // 1.0	Multiplier for the walking speed while using this attack
+            }
+
+            public class Minecraft_behavior_offer_flower
+            {
+                //Allows the mob to offer the player a flower like the Iron Golem does.
+            }
+
+            public class Minecraft_behavior_open_door
+            {
+                //Allows the mob to open doors.Requires the mob to be able to path through doors, otherwise the mob won't even want to try opening them.
+                public bool close_door_after { get; set; } // Boolean	true	If true, the mob will close the door after opening it and going through it
+            }
+
+
+            public class Minecraft_behavior_owner_hurt_by_target
+            {
+                //Allows the mob to target another mob that hurts their owner.
+                public EntityTypesSub entity_types { get; set; } // JSON Object List of entity types that this mob can target if they hurt their owner
+            }
+
+            public class Minecraft_behavior_owner_hurt_target
+            {
+                //Allows the mob to target a mob that is hurt by their owner.
+
+                public EntityTypesSub entity_types { get; set; } //  JSON Object List of entity types that this entity can target if the potential target is hurt by this mob's owner
+            }
+
+            public class Minecraft_behavior_panic
+            {
+                //Allows the mob to enter the panic state, which makes it run around and away from the damage source that made it enter this state.
+                public bool force { get; set; } // Boolean	false	If true, this mob will not stop panicking until it can't move anymore or the goal is removed from it
+                public float speed_multiplier { get; set; } //	1.0	Movement speed multiplier of the mob when using this AI Goal
+            }
+
+            public class Minecraft_behavior_peek
+            {
+                //Allows the mob to peek out. This is what the shulker uses to look out of its shell.
+            }
+
+            public class Minecraft_behavior_pickup_items
+            {
+                //Allows the mob to pick up items on the ground.
+                public float goal_radius { get; set; } //	0.5	Distance in blocks within the mob considers it has reached the goal. This is the "wiggle room" to stop the AI from bouncing back and forth trying to reach a specific spot
+                public float max_dist { get; set; } // 0.0	Maximum distance this mob will look for items to pick up
+                public float speed_multiplier { get; set; } //	1.0	Movement speed multiplier of the mob when using this AI Goal
+                public bool track_target { get; set; } // Boolean	false	If true, this mob will chase after the target as long as it's a valid target
+            }
+
+            public class Minecraft_behavior_play
+            {
+                //Allows the mob to play with other baby villagers.This can only be used by Villagers.
+                public float speed_multiplier { get; set; } //	1.0	Movement speed multiplier of the mob when using this AI Goal
+            }
+
+            public class Minecraft_behavior_player_ride_tamed
+            {
+                //Allows the mob to be ridden by the player after being tamed.
+            }
+
+            public class Minecraft_behavior_raid_garden
+            {
+                //Allows the mob to eat crops out of farms until they are full.
+                public List<String> blocks { get; set; } // List        Blocks that the mob is looking for to eat
+                public int eat_delay { get; set; } // Integer 	2	Time in seconds between each time it eats
+                public int full_delay { get; set; } // Integer 	100	Amount of time in seconds before this mob wants to eat again
+                public float goal_radius { get; set; } // 0.5	Distance in blocks within the mob considers it has reached the goal. This is the "wiggle room" to stop the AI from bouncing back and forth trying to reach a specific spot
+                public int max_to_eat { get; set; } // Integer  6	Maximum number of things this entity wants to eat
+                public int search_range { get; set; } // Integer 	0	Distance in blocks the mob will look for crops to eat
+                public float speed_multiplier { get; set; } // 1.0	Movement speed multiplier of the mob when using this AI Goal
+            }
+
+            public class Minecraft_behavior_random_fly
+            {
+                //Allows a mob to randomly fly around.
+                public bool can_land_on_trees { get; set; } // Boolean	true	If true, the mob can stop flying and land on a tree instead of the ground
+                public int xz_dist { get; set; } // Integer 	10	Distance in blocks on ground that the mob will look for a new spot to move to.Must be at least 1
+                public int y_dist { get; set; } // Integer 	7	Distance in blocks that the mob will look up or down for a new spot to move to.Must be at least 1
+            }
+
+            public class Minecraft_behavior_random_look_around
+            {
+                //Allows the mob to randomly look around.
+                public Range look_time { get; set; } // Range [a, b]    [2, 4]  The range of time in seconds the mob will stay looking in a random direction before looking elsewhere
+            }
+
+            public class Minecraft_behavior_random_stroll
+            {
+                //Allows a mob to randomly stroll around.
+                public int xz_dist { get; set; } // Integer 	10	Distance in blocks on ground that the mob will look for a new spot to move to.Must be at least 1
+                public int y_dist { get; set; } // Integer 	7	Distance in blocks that the mob will look up or down for a new spot to move to.Must be at least 1
+            }
+
+            public class Minecraft_behavior_ranged_attack
+            {
+                //Allows the mob to use ranged attacks like shooting arrows.
+                public int attack_interval_max { get; set; } // Integer 	0	Maximum amount of time in seconds the entity will wait after an attack before launching another
+                public int attack_interval_min { get; set; } // Integer  0	Minimum amount of time in seconds the entity will wait after an attack before launching another
+                public float attack_radius { get; set; } // 0.0	Maxmimum distance the target can be for this mob to fire.If the target is further away, this mob will move first before firing
+                public float burst_interval { get; set; } //	0.0	Amount of time in seconds between each individual shot when firing multiple shots per attack
+                public int burst_shots { get; set; } // Integer  1	Number of shots fired every time the mob uses a charged attack
+                public float charge_charged_trigger { get; set; } //	0.0	The minimum amount of time in ticks the mob has to charge before firing a charged attack
+                public float charge_shoot_trigger { get; set; } // 0.0	The minimum amount of time in ticks for the mob to start charging a charged shot. Must be greater than 0 to enable burst shots
+                public float speed_multiplier { get; set; } //	1.0	Movement speed multiplier of the mob when using this AI Goal
+            }
+
+            public class Minecraft_behavior_receive_love
+            {
+                //Allows the villager to stop so another villager can breed with it.Can only be used by a Villager.
+            }
+
+            public class Minecraft_behavior_restrict_open_door
+            {
+                //Allows the mob to stay indoors during night time.
+            }
+
+
+            public class Minecraft_behavior_restrict_sun
+            {
+                //Allows the mob to automatically start avoiding the sun when its a clear day out.
+            }
+
+            public class Minecraft_behavior_run_around_like_crazy
+            {
+                //Allows the mob to run around aimlessly.
+                public float speed_multiplier { get; set; } //	1.0	Movement speed multiplier of the mob when using this AI Goal
+            }
+
+
+            public class Minecraft_behavior_send_event
+            {
+                //Allows the mob to send an event to another mob.
+                public float cast_duration { get; set; } //  Total delay of the steps Time in seconds for the entire event sending process
+
+                public class SequenceSub
+                {
+                    public float base_delay { get; set; } //	0.0	Amount of time in seconds before starting this step
+                    public string Event { get; set; } // String The event to send to the entity
+                    public string sound_event { get; set; } // String  The sound event to play when this step happens
+                }
+                public SequenceSub sequence { get; set; } // List        List of events to send
+            }
+
+            public class Minecraft_behavior_share_items
+            {
+                //Allows the mob to give items it has to others.
+                public EntityTypesSub entity_types { get; set; } // JSON Object List of entities this mob will share items with
+            }
+
+
+            public class Minecraft_behavior_silverfish_merge_with_stone
+            {
+                //Allows the mob to go into stone blocks like Silverfish do. Currently it can only be used by Silverfish.
+            }
+
+
+            public class Minecraft_behavior_silverfish_wake_up_friends
+            {
+                //Allows the mob to alert mobs in nearby blocks to come out. Currently it can only be used by Silverfish.
+            }
+
+
+            public class Minecraft_behavior_skeleton_horse_trap
+            {
+                //Allows Equine mobs to be Horse Traps and be triggered like them, spawning a lightning bolt and a bunch of horses when a player is nearby.Can only be used by Horses, Mules, Donkeys and Skeleton Horses.
+                public float Duration { get; set; } // 	1.0	Amount of time in seconds the trap exists. After this amount of time is elapsed, the trap is removed from the world if it hasn't been activated
+                public float within_radius { get; set; } //	0.0	Distance in blocks that the player has to be within to trigger the horse trap
+            }
+
+            public class Minecraft_behavior_slime_attack
+            {
+                //Can only be used by Slimes and Magma Cubes.Allows the mob to use a melee attack like the slime's.
+            }
+
+            public class Minecraft_behavior_slime_float
+            {
+                //Can only be used by Slimes and Magma Cubes.Controls their ability to float in water / lava.
+            }
+
+            public class Minecraft_behavior_slime_keep_on_jumping
+            {
+                //Can only be used by Slimes and Magma Cubes.Allows the mob to continuously jump around like a slime.
+            }
+
+            public class Minecraft_behavior_slime_random_direction
+            {
+                //Can only be used by Slimes and Magma Cubes.Allows the mob to move in random directions like a slime.
+            }
+
+            public class Minecraft_behavior_squid_dive
+            {
+                //Allows the squid to dive down in water.Can only be used by the Squid.
+            }
+
+            public class Minecraft_behavior_squid_flee
+            {
+                //Allows the squid to swim away.Can only be used by the Squid.
+            }
+
+            public class Minecraft_behavior_squid_idle
+            {
+                //Allows the squid to swim in place idly. Can only be used by the Squid.
+            }
+
+            public class Minecraft_behavior_squid_move_away_from_ground
+            {
+                //Allows the squid to move away from ground blocks and back to water.Can only be used by the Squid.
+            }
+
+            public class Minecraft_behavior_squid_out_of_water
+            {
+                //Allows the squid to stick to the ground when outside water.Can only be used by the Squid.
+            }
+
+            public class Minecraft_behavior_stay_while_sitting
+            {
+                //Allows the mob to stay put while it is in a sitting state instead of doing something else.
+            }
+
+
+            public class Minecraft_behavior_stomp_attack
+            {
+                //Allows the mob to use the polar bear's melee attack.
+                public string attack_types { get; set; } // String       Defines the entity types this mob will attack
+                public int random_stop_interval { get; set; } // Integer  0	Defines the probability the mob will stop fighting. A value of 0 disables randomly stopping, while a value of 1 defines a 50% chance
+                public float reach_multiplier { get; set; } // 2.0	Multiplier for how far outside its box the mob can reach its target (this can be used to simulate a mob with longer arms by making this bigger)
+                public float speed_multiplier { get; set; } //	1.0	Movement speed multiplier of the mob when using this AI Goal
+                public bool track_target { get; set; } // Boolean	false	If true, this mob will chase after the target as long as it's a valid target
+            }
+
+            public class Minecraft_behavior_summon_entity
+            {
+                //Allows the mob to attack the player by summoning other entities.
+                public class SummonChoicesSub
+                {
+                    public float cast_duration { get; set; } // Total delay of the steps    Time in seconds the spell casting will take
+                    public float cooldown_time { get; set; } //	0.0	Time in seconds the mob has to wait before using the spell again
+                    public Minecraft_filter filters { get; set; } // Minecraft Filter
+                    public float max_activation_range { get; set; } //	-1.0	Upper bound of the activation distance in blocks for this spell
+                    public float min_activation_range { get; set; } // 1.0	Lower bound of the activation distance in blocks for this spell
+                    public int particle_color { get; set; } // Integer  0	The color of the particles for this spell
+
+                    public class SequenceSub
+                    {
+                        public float base_delay { get; set; } // 0.0	Amount of time in seconds to wait before this step starts
+                        public float delay_per_summon { get; set; } //	0.0	Amount of time in seconds before each entity is summoned in this step
+                        public float entity_lifespan { get; set; } // -1.0	Amount of time in seconds that the spawned entity will be alive for. A value of -1.0 means it will remain alive for as long as it can
+                        public string Entity_type { get; set; } //       The entity type of the entities we will spawn in this step
+                        public int num_entities_spawned { get; set; } // Integer  1	Number of entities that will be spawned in this step
+                        public string shape { get; set; } // String  line    The base shape of this step.Valid values are circle and line
+                        public float size { get; set; } //	1.0	The base size of the entity
+                        public string sound_event { get; set; } // String       The sound event to play for this step
+                        public int summon_cap { get; set; } // Integer  0	Maximum number of summoned entities at any given time
+                        public float summon_cap_radius { get; set; } // 0.0	
+                        public string target { get; set; } // String   self The target of the spell. This is where the spell will start (line will start here, circle will be centered here)
+                    }
+                    public List<SequenceSub> sequence { get; set; } // List List of steps for the spell.Each step has the following parameters:
+
+                    public string start_sound_event { get; set; } // String  The sound event to play when using this spell
+                    public float weight { get; set; } // 0.0	The weight of this spell.Controls how likely the mob is to choose this spell when casting one
+
+                    public List<SummonChoicesSub> summon_choices { get; set; } // List        List of spells for the mob to use to summon entities.Each spell has the following parameters:
+                }
+            }
+
+            public class Minecraft_behavior_swell
+            {
+                //Allows the creeper to swell up when a player is nearby.It can only be used by Creepers.
+                public float start_distance { get; set; } //	10.0	This mob starts swelling when a target is at least this many blocks away
+                public float stop_distance { get; set; } // 2.0	This mob stops swelling when a target has moved away at least this many blocks
+            }
+            public class Minecraft_behavior_take_flower
+            {
+                //Can only be used by Villagers.Allows the mob to accept flowers from Iron Golems.
+            }
+
+            public class Minecraft_behavior_tempt
+            {
+                //Allows the mob to be tempted by food they like.
+                public bool can_get_scared { get; set; } // Boolean	false	If true, the mob can stop being tempted if the player moves too fast while close to this mob
+                public List<string> items { get; set; } //  List List of items this mob is tempted by
+                public float speed_multiplier { get; set; } //	1.0	Movement speed multiplier of the mob when using this AI Goal
+                public float within_radius { get; set; } //	0.0	Distance in blocks this mob can get tempted by a player holding an item they like
+            }
+
+            public class Minecraft_behavior_trade_with_player
+            {
+                //Allows the player to trade with this mob.
+            }
+
+            public class Minecraft_behavior_vex_copy_owner_target
+            {
+                //Allows the mob to target the same entity its owner is targeting.
+                public EntityTypesSub entity_types { get; set; } //  JSON Object List of entities this mob can copy the owner from
+            }
+
+            public class Minecraft_behavior_vex_random_move
+            {
+                //Allows the mob to move around randomly like the Vex.
+            }
+
+            public class Minecraft_behavior_wither_random_attack_pos_goal
+            {
+                //Allows the wither to launch random attacks.Can only be used by the Wither Boss.
+            }
+
+            public class Minecraft_behavior_wither_target_highest_damage
+            {
+                //Allows the wither to focus its attacks on whichever mob has dealt the most damage to it.
+                public EntityTypesSub entity_types { get; set; } //  JSON Object List of entity types the wither takes into account to find who dealt the most damage to it
+            }
+        }
+    }
+    /*
+
+
+    Filters
+
+
+    Description
+
+
+    Filters allow data objects to specify test critera which allows their use.
+
+    : For example, a model that includes a filter will only be used when the filter criteria is true.
+
+
+
+    : A typical filter consists of four paramters:
+
+    : name: the name of the test to apply.
+
+    : domain: the domain the test should be performed in. An armor slot, for example.This parameter is only used by a few tests.
+
+    : operator: the comparison to apply with the value, such as 'equal' or 'greater'.
+
+    : value: the value being compared with the test.
+
+
+
+    : A typical filter looks like the following:
+
+    : { "test" : "moon_intensity", "subject" : "self", "operator" : "greater", "value" : "0.5" } 
+
+    : Which results in the calling entity(self) calculating the moon_intensity at its location and returning true if the result is greater than 0.5.
+
+
+
+    : Tests can be combined into groups using the collections 'all_of' and 'any_of'.
+
+    : All tests in an 'all_of' group must pass in order for the group to pass.
+
+    : One or more tests in an 'any_of' group must pass in order for the group to pass.
+
+
+
+    : Example:
+
+    : "all_of" : [
+
+    : { "test" : "moon_intensity", "subject" : "self", "operator" : "greater", "value" : "0.5" }, 
+
+    : { "test" : "in_water", "subject" : "target", "operator" : "equal", "value" : "true" } 
+
+    : ]
+
+    : This filter group will pass only when the moon_intensity is greater than 0.5 AND the caller's target entity is standing in water.
+    clock_time
+
+
+    Description
+
+    Compares the current time with a float value in the range(0.0, 1.0). 0.0= Noon 0.25= Sunset 0.5= Midnight 0.75= Sunrise
+    Parameters
+
+    Name Type    Default Description
+    operator {get; set;} // String   equals  (Optional) The comparison to apply with 'value'.
+    Options Description
+    !=	Test for inequality.
+    <	Test for less-than the value.
+    <=	Test for less-than or equal to the value.
+    <>	Test for inequality.
+    = Test for equality.
+    ==	Test for equality.
+    >	Test for greater-than the value.
+    >=	Test for greater-than or equal to the value.
+    equals Test for equality.
+    not Test for inequality.
+    subject {get; set;} // String   self    (Optional) The subject of this filter test.
+    Options Description
+    other The other member of an interaction, not the caller.
+    parent The caller's current parent.
+    player The player involved with the interaction.
+    self The entity or object calling the test
+    target The caller's current target.
+    public float Value {get; set;} //     (Required) A floating point value.
+    Examples
+
+    { "test": "clock_time", "subject": "self", "operator": "equals", "value": "0" }
+    { "test": "clock_time", "value": "0" }
+    Back to top
+
+    has_ability
+
+
+    Description
+
+    Returns true when the subject entity has the named ability.
+    Parameters
+
+    Name Type    Default Description
+    operator	String equals  (Optional) The comparison to apply with 'value'.
+    Options Description
+    !=	Test for inequality.
+    <	Test for less-than the value.
+    <=	Test for less-than or equal to the value.
+    <>	Test for inequality.
+    = Test for equality.
+    ==	Test for equality.
+    >	Test for greater-than the value.
+    >=	Test for greater-than or equal to the value.
+    equals Test for equality.
+    not Test for inequality.
+    subject {get; set;} // String   self    (Optional) The subject of this filter test.
+    Options Description
+    other The other member of an interaction, not the caller.
+    parent The caller's current parent.
+    player The player involved with the interaction.
+    self The entity or object calling the test
+    target The caller's current target.
+    value {get; set;} // String       (Required) The Ability type to test
+    Options Description
+    flySpeed
+    flying
+    instabuild
+    invulnerable
+    lightning
+    mayfly
+    mute
+    noclip
+    walkSpeed
+    worldbuilder
+    Examples
+
+    { "test": "has_ability", "subject": "self", "operator": "equals", "value": "instabuild" }
+    { "test": "has_ability", "value": "instabuild" }
+    Back to top
+
+    has_component
+
+
+    Description
+
+    Returns true when the subject entity contains the named component.
+    Parameters
+
+    Name Type    Default Description
+    operator	String equals  (Optional) The comparison to apply with 'value'.
+    Options Description
+    !=	Test for inequality.
+    <	Test for less-than the value.
+    <=	Test for less-than or equal to the value.
+    <>	Test for inequality.
+    = Test for equality.
+    ==	Test for equality.
+    >	Test for greater-than the value.
+    >=	Test for greater-than or equal to the value.
+    equals Test for equality.
+    not Test for inequality.
+    subject {get; set;} // String   self    (Optional) The subject of this filter test.
+    Options Description
+    other The other member of an interaction, not the caller.
+    parent The caller's current parent.
+    player The player involved with the interaction.
+    self The entity or object calling the test
+    target The caller's current target.
+    value {get; set;} // String       (Required) The component name to look for
+    Examples
+
+    { "test": "has_component", "subject": "self", "operator": "equals", "value": "public class Minecraft_explode" }
+    { "test": "has_component", "value": "public class Minecraft_explode" }
+    Back to top
+
+    has_damage
+
+
+    Description
+
+    Returns true when the subject entity receives the named damage type.
+    Parameters
+
+    Name    Type Default Description
+    operator    {get; set;} // String 	equals  (Optional) The comparison to apply with 'value'.
+    Options Description
+    !=	Test for inequality.
+    <	Test for less-than the value.
+    <=	Test for less-than or equal to the value.
+    <>	Test for inequality.
+    = Test for equality.
+    ==	Test for equality.
+    >	Test for greater-than the value.
+    >=	Test for greater-than or equal to the value.
+    equals Test for equality.
+    not Test for inequality.
+    subject {get; set;} // String   self    (Optional) The subject of this filter test.
+    Options Description
+    other The other member of an interaction, not the caller.
+    parent The caller's current parent.
+    player The player involved with the interaction.
+    self The entity or object calling the test
+    target The caller's current target.
+    value {get; set;} // String       (Required) The Damage type to test
+    Options Description
+    anvil
+    attack
+    block_explosion
+    contact
+    drowning
+    entity_explosion
+    fall
+    falling_block
+    fatal Any damage which kills the subject
+    fire
+    fire_tick
+    fly_into_wall
+    lava
+    magic
+    none
+    override	
+    piston
+    projectile
+    starve
+    suffocation
+    suicide
+    thorns
+    void
+    wither
+    Examples
+
+    { "test": "has_damage", "subject": "self", "operator": "equals", "value": "fatal" }
+    { "test": "has_damage", "value": "fatal" }
+    Back to top
+
+    has_equipment
+
+
+    Description
+
+    Tests for the presence of a named item in the designated slot of the subject entity.
+    Parameters
+
+    Name    Type Default Description
+    domain  {get; set;} // String  any(Optional) The equipment location to test
+    Options Description
+    any
+    armor
+    feet
+    hand
+    head
+    leg
+    torso
+    operator {get; set;} // String   equals  (Optional) The comparison to apply with 'value'.
+    Options Description
+    !=	Test for inequality.
+    <	Test for less-than the value.
+    <=	Test for less-than or equal to the value.
+    <>	Test for inequality.
+    = Test for equality.
+    ==	Test for equality.
+    >	Test for greater-than the value.
+    >=	Test for greater-than or equal to the value.
+    equals Test for equality.
+    not Test for inequality.
+    subject {get; set;} // String   self    (Optional) The subject of this filter test.
+    Options Description
+    other The other member of an interaction, not the caller.
+    parent The caller's current parent.
+    player The player involved with the interaction.
+    self The entity or object calling the test
+    target The caller's current target.
+    value {get; set;} // String       (Required) The item name to look for
+    Examples
+
+    { "test": "has_equipment", "subject": "self", "domain": "any", "operator": "equals", "value": "dirt" }
+    { "test": "has_equipment", "value": "dirt" }
+    Back to top
+
+    in_caravan
+
+
+    Description
+
+    Returns true if the subject entity is in a caravan.
+    Parameters
+
+    Name Type    Default Description
+    operator	String equals  (Optional) The comparison to apply with 'value'.
+    Options Description
+    !=	Test for inequality.
+    <	Test for less-than the value.
+    <=	Test for less-than or equal to the value.
+    <>	Test for inequality.
+    = Test for equality.
+    ==	Test for equality.
+    >	Test for greater-than the value.
+    >=	Test for greater-than or equal to the value.
+    equals Test for equality.
+    not Test for inequality.
+    subject {get; set;} // String   self    (Optional) The subject of this filter test.
+    Options Description
+    other The other member of an interaction, not the caller.
+    parent The caller's current parent.
+    player The player involved with the interaction.
+    self The entity or object calling the test
+    target The caller's current target.
+    value {get; set;} // Boolean	true	(Optional) true or false.
+    Examples
+
+    { "test": "in_caravan", "subject": "self", "operator": "equals", "value": "true" }
+    { "test": "in_caravan" }
+    Back to top
+
+    in_clouds
+
+
+    Description
+
+    Returns true when the subject entity is in the clouds.
+    Parameters
+
+    Name Type    Default Description
+    operator	String equals  (Optional) The comparison to apply with 'value'.
+    Options Description
+    !=	Test for inequality.
+    <	Test for less-than the value.
+    <=	Test for less-than or equal to the value.
+    <>	Test for inequality.
+    = Test for equality.
+    ==	Test for equality.
+    >	Test for greater-than the value.
+    >=	Test for greater-than or equal to the value.
+    equals Test for equality.
+    not Test for inequality.
+    subject {get; set;} // String   self    (Optional) The subject of this filter test.
+    Options Description
+    other The other member of an interaction, not the caller.
+    parent The caller's current parent.
+    player The player involved with the interaction.
+    self The entity or object calling the test
+    target The caller's current target.
+    value {get; set;} // Boolean	true	(Optional) true or false.
+    Examples
+
+    { "test": "in_clouds", "subject": "self", "operator": "equals", "value": "true" }
+    { "test": "in_clouds" }
+    Back to top
+
+    in_lava
+
+
+    Description
+
+    Returns true when the subject entity is in lava.
+    Parameters
+
+    Name    Type Default Description
+    operator    {get; set;} // String 	equals  (Optional) The comparison to apply with 'value'.
+    Options Description
+    !=	Test for inequality.
+    <	Test for less-than the value.
+    <=	Test for less-than or equal to the value.
+    <>	Test for inequality.
+    = Test for equality.
+    ==	Test for equality.
+    >	Test for greater-than the value.
+    >=	Test for greater-than or equal to the value.
+    equals Test for equality.
+    not Test for inequality.
+    subject {get; set;} // String   self    (Optional) The subject of this filter test.
+    Options Description
+    other The other member of an interaction, not the caller.
+    parent The caller's current parent.
+    player The player involved with the interaction.
+    self The entity or object calling the test
+    target The caller's current target.
+    value {get; set;} // Boolean	true	(Optional) true or false.
+    Examples
+
+    { "test": "in_lava", "subject": "self", "operator": "equals", "value": "true" }
+    { "test": "in_lava" }
+    Back to top
+
+    in_water
+
+
+    Description
+
+    Returns true when the subject entity is in water.
+    Parameters
+
+    Name    Type Default Description
+    operator    {get; set;} // String 	equals  (Optional) The comparison to apply with 'value'.
+    Options Description
+    !=	Test for inequality.
+    <	Test for less-than the value.
+    <=	Test for less-than or equal to the value.
+    <>	Test for inequality.
+    = Test for equality.
+    ==	Test for equality.
+    >	Test for greater-than the value.
+    >=	Test for greater-than or equal to the value.
+    equals Test for equality.
+    not Test for inequality.
+    subject {get; set;} // String   self    (Optional) The subject of this filter test.
+    Options Description
+    other The other member of an interaction, not the caller.
+    parent The caller's current parent.
+    player The player involved with the interaction.
+    self The entity or object calling the test
+    target The caller's current target.
+    value {get; set;} // Boolean	true	(Optional) true or false.
+    Examples
+
+    { "test": "in_water", "subject": "self", "operator": "equals", "value": "true" }
+    { "test": "in_water" }
+    Back to top
+
+    is_altitude
+
+
+    Description
+
+    Tests the current altitude against a provided value. 0= bedrock elevation.
+    Parameters
+
+    Name Type    Default Description
+    operator	String equals  (Optional) The comparison to apply with 'value'.
+    Options Description
+    !=	Test for inequality.
+    <	Test for less-than the value.
+    <=	Test for less-than or equal to the value.
+    <>	Test for inequality.
+    = Test for equality.
+    ==	Test for equality.
+    >	Test for greater-than the value.
+    >=	Test for greater-than or equal to the value.
+    equals Test for equality.
+    not Test for inequality.
+    subject {get; set;} // String   self    (Optional) The subject of this filter test.
+    Options Description
+    other The other member of an interaction, not the caller.
+    parent The caller's current parent.
+    player The player involved with the interaction.
+    self The entity or object calling the test
+    target The caller's current target.
+    value {get; set;} // Integer      (Required) The altitude value to compare with
+    Examples
+
+    { "test": "is_altitude", "subject": "self", "operator": "equals", "value": "0" }
+    { "test": "is_altitude", "value": "0" }
+    Back to top
+
+    is_biome
+
+
+    Description
+
+    Tests whether the Subject is currently in the named biome.
+    Parameters
+
+    Name    Type Default Description
+    operator    {get; set;} // String 	equals  (Optional) The comparison to apply with 'value'.
+    Options Description
+    !=	Test for inequality.
+    <	Test for less-than the value.
+    <=	Test for less-than or equal to the value.
+    <>	Test for inequality.
+    = Test for equality.
+    ==	Test for equality.
+    >	Test for greater-than the value.
+    >=	Test for greater-than or equal to the value.
+    equals Test for equality.
+    not Test for inequality.
+    subject {get; set;} // String   self    (Optional) The subject of this filter test.
+    Options Description
+    other The other member of an interaction, not the caller.
+    parent The caller's current parent.
+    player The player involved with the interaction.
+    self The entity or object calling the test
+    target The caller's current target.
+    value {get; set;} // String       (Required) The Biome type to test
+    Options Description
+    beach
+    desert
+    extreme_hills
+    flat
+    forest
+    ice
+    jungle
+    mesa
+    mushroom_island
+    ocean
+    plain
+    river
+    savanna
+    stone_beach
+    swamp
+    taiga
+    the_end
+    the_nether
+    Examples
+
+    { "test": "is_biome", "subject": "self", "operator": "equals", "value": "beach" }
+    { "test": "is_biome", "value": "beach" }
+    Back to top
+
+    is_brightness
+
+
+    Description
+
+    Tests the current brightness against a provided value in the range(0.0f, 1.0f).
+    Parameters
+
+    Name    Type Default Description
+    operator    {get; set;} // String 	equals  (Optional) The comparison to apply with 'value'.
+    Options Description
+    !=	Test for inequality.
+    <	Test for less-than the value.
+    <=	Test for less-than or equal to the value.
+    <>	Test for inequality.
+    = Test for equality.
+    ==	Test for equality.
+    >	Test for greater-than the value.
+    >=	Test for greater-than or equal to the value.
+    equals Test for equality.
+    not Test for inequality.
+    subject {get; set;} // String   self    (Optional) The subject of this filter test.
+    Options Description
+    other The other member of an interaction, not the caller.
+    parent The caller's current parent.
+    player The player involved with the interaction.
+    self The entity or object calling the test
+    target The caller's current target.
+    public float Value {get; set;} //     (Required) The brightness value to compare with.
+    Examples
+
+    { "test": "is_brightness", "subject": "self", "operator": "equals", "value": "0.5" }
+    { "test": "is_brightness", "value": "0.5" }
+    Back to top
+
+    is_climbing
+
+
+    Description
+
+    Returns true if the subject entity is climbing.
+    Parameters
+
+    Name    Type Default Description
+    operator    {get; set;} // String 	equals  (Optional) The comparison to apply with 'value'.
+    Options Description
+    !=	Test for inequality.
+    <	Test for less-than the value.
+    <=	Test for less-than or equal to the value.
+    <>	Test for inequality.
+    = Test for equality.
+    ==	Test for equality.
+    >	Test for greater-than the value.
+    >=	Test for greater-than or equal to the value.
+    equals Test for equality.
+    not Test for inequality.
+    subject {get; set;} // String   self    (Optional) The subject of this filter test.
+    Options Description
+    other The other member of an interaction, not the caller.
+    parent The caller's current parent.
+    player The player involved with the interaction.
+    self The entity or object calling the test
+    target The caller's current target.
+    value {get; set;} // Boolean	true	(Optional) true or false.
+    Examples
+
+    { "test": "is_climbing", "subject": "self", "operator": "equals", "value": "true" }
+    { "test": "is_climbing" }
+    Back to top
+
+    is_color
+
+
+    Description
+
+    Returns true if the subject entity is the named color.
+    Parameters
+
+    Name    Type Default Description
+    operator    {get; set;} // String 	equals  (Optional) The comparison to apply with 'value'.
+    Options Description
+    !=	Test for inequality.
+    <	Test for less-than the value.
+    <=	Test for less-than or equal to the value.
+    <>	Test for inequality.
+    = Test for equality.
+    ==	Test for equality.
+    >	Test for greater-than the value.
+    >=	Test for greater-than or equal to the value.
+    equals Test for equality.
+    not Test for inequality.
+    subject {get; set;} // String   self    (Optional) The subject of this filter test.
+    Options Description
+    other The other member of an interaction, not the caller.
+    parent The caller's current parent.
+    player The player involved with the interaction.
+    self The entity or object calling the test
+    target The caller's current target.
+    value {get; set;} // String       (Required) The Palette Color to test
+    Options Description
+    black
+    blue
+    brown
+    cyan
+    gray
+    green
+    light_blue
+    light_green
+    magenta
+    orange
+    pink
+    purple
+    red
+    silver
+    white
+    yellow
+    Examples
+
+    { "test": "is_color", "subject": "self", "operator": "equals", "value": "white" }
+    { "test": "is_color", "value": "white" }
+    Back to top
+
+    is_daytime
+
+
+    Description
+
+    Returns true during the daylight hours.
+    Parameters
+
+    Name Type    Default Description
+    operator	String equals  (Optional) The comparison to apply with 'value'.
+    Options Description
+    !=	Test for inequality.
+    <	Test for less-than the value.
+    <=	Test for less-than or equal to the value.
+    <>	Test for inequality.
+    = Test for equality.
+    ==	Test for equality.
+    >	Test for greater-than the value.
+    >=	Test for greater-than or equal to the value.
+    equals Test for equality.
+    not Test for inequality.
+    subject {get; set;} // String   self    (Optional) The subject of this filter test.
+    Options Description
+    other The other member of an interaction, not the caller.
+    parent The caller's current parent.
+    player The player involved with the interaction.
+    self The entity or object calling the test
+    target The caller's current target.
+    value {get; set;} // Boolean	true	(Optional) true or false.
+    Examples
+
+    { "test": "is_daytime", "subject": "self", "operator": "equals", "value": "true" }
+    { "test": "is_daytime" }
+    Back to top
+
+    is_difficulty
+
+
+    Description
+
+    Tests the current difficulty level of the game.
+    Parameters
+
+    Name    Type Default Description
+    operator    {get; set;} // String 	equals  (Optional) The comparison to apply with 'value'.
+    Options Description
+    !=	Test for inequality.
+    <	Test for less-than the value.
+    <=	Test for less-than or equal to the value.
+    <>	Test for inequality.
+    = Test for equality.
+    ==	Test for equality.
+    >	Test for greater-than the value.
+    >=	Test for greater-than or equal to the value.
+    equals Test for equality.
+    not Test for inequality.
+    subject {get; set;} // String   self    (Optional) The subject of this filter test.
+    Options Description
+    other The other member of an interaction, not the caller.
+    parent The caller's current parent.
+    player The player involved with the interaction.
+    self The entity or object calling the test
+    target The caller's current target.
+    value {get; set;} // String       (Required) The game's difficulty level to test
+    Options Description
+    easy
+    hard
+    normal
+    peaceful
+    Examples
+
+    { "test": "is_difficulty", "subject": "self", "operator": "equals", "value": "normal" }
+    { "test": "is_difficulty", "value": "normal" }
+    Back to top
+
+    is_family
+
+
+    Description
+
+    Returns true when the subject entity is a member of the named family.
+    Parameters
+
+    Name Type    Default Description
+    operator	String equals  (Optional) The comparison to apply with 'value'.
+    Options Description
+    !=	Test for inequality.
+    <	Test for less-than the value.
+    <=	Test for less-than or equal to the value.
+    <>	Test for inequality.
+    = Test for equality.
+    ==	Test for equality.
+    >	Test for greater-than the value.
+    >=	Test for greater-than or equal to the value.
+    equals Test for equality.
+    not Test for inequality.
+    subject {get; set;} // String   self    (Optional) The subject of this filter test.
+    Options Description
+    other The other member of an interaction, not the caller.
+    parent The caller's current parent.
+    player The player involved with the interaction.
+    self The entity or object calling the test
+    target The caller's current target.
+    value {get; set;} // String       (Required) The Family name to look for
+    Examples
+
+    { "test": "is_family", "subject": "self", "operator": "equals", "value": "player" }
+    { "test": "is_family", "value": "player" }
+    Back to top
+
+    is_game_rule
+
+
+    Description
+
+    Tests whether a named game rule is active.
+    Parameters
+
+    Name    Type Default Description
+    domain  {get; set;} // String (Required) The Game Rule to test.
+    operator    {get; set;} // String 	equals  (Optional) The comparison to apply with 'value'.
+    Options Description
+    !=	Test for inequality.
+    <	Test for less-than the value.
+    <=	Test for less-than or equal to the value.
+    <>	Test for inequality.
+    = Test for equality.
+    ==	Test for equality.
+    >	Test for greater-than the value.
+    >=	Test for greater-than or equal to the value.
+    equals Test for equality.
+    not Test for inequality.
+    subject {get; set;} // String   self    (Optional) The subject of this filter test.
+    Options Description
+    other The other member of an interaction, not the caller.
+    parent The caller's current parent.
+    player The player involved with the interaction.
+    self The entity or object calling the test
+    target The caller's current target.
+    value {get; set;} // Boolean	true	(Optional) true or false.
+    Examples
+
+    { "test": "is_game_rule", "subject": "self", "domain": "domobspawning", "operator": "equals", "value": "true" }
+    { "test": "is_game_rule", "domain": "domobspawning" }
+    Back to top
+
+    is_humid
+
+
+    Description
+
+    Tests whether the Subject is in an area with humidity
+    Parameters
+
+    Name    Type Default Description
+    operator    {get; set;} // String 	equals  (Optional) The comparison to apply with 'value'.
+    Options Description
+    !=	Test for inequality.
+    <	Test for less-than the value.
+    <=	Test for less-than or equal to the value.
+    <>	Test for inequality.
+    = Test for equality.
+    ==	Test for equality.
+    >	Test for greater-than the value.
+    >=	Test for greater-than or equal to the value.
+    equals Test for equality.
+    not Test for inequality.
+    subject {get; set;} // String   self    (Optional) The subject of this filter test.
+    Options Description
+    other The other member of an interaction, not the caller.
+    parent The caller's current parent.
+    player The player involved with the interaction.
+    self The entity or object calling the test
+    target The caller's current target.
+    value {get; set;} // Boolean	true	(Optional) true or false.
+    Examples
+
+    { "test": "is_humid", "subject": "self", "operator": "equals", "value": "true" }
+    { "test": "is_humid" }
+    Back to top
+
+    is_immobile
+
+
+    Description
+
+    Returns true if the subject entity is immobile.An entity is immobile if it lacks AI goals, has just changed dimensions or if it is a mob and has no health.
+    Parameters
+
+
+    Name Type    Default Description
+    operator	String equals  (Optional) The comparison to apply with 'value'.
+    Options Description
+    !=	Test for inequality.
+    <	Test for less-than the value.
+    <=	Test for less-than or equal to the value.
+    <>	Test for inequality.
+    = Test for equality.
+    ==	Test for equality.
+    >	Test for greater-than the value.
+    >=	Test for greater-than or equal to the value.
+    equals Test for equality.
+    not Test for inequality.
+    subject {get; set;} // String   self    (Optional) The subject of this filter test.
+    Options Description
+    other The other member of an interaction, not the caller.
+    parent The caller's current parent.
+    player The player involved with the interaction.
+    self The entity or object calling the test
+    target The caller's current target.
+    value {get; set;} // Boolean	true	(Optional) true or false.
+    Examples
+
+    { "test": "is_immobile", "subject": "self", "operator": "equals", "value": "true" }
+    { "test": "is_immobile" }
+    Back to top
+
+    is_moving
+
+
+    Description
+
+    Returns true if the subject entity is moving.
+    Parameters
+
+    Name    Type Default Description
+    operator    {get; set;} // String 	equals  (Optional) The comparison to apply with 'value'.
+    Options Description
+    !=	Test for inequality.
+    <	Test for less-than the value.
+    <=	Test for less-than or equal to the value.
+    <>	Test for inequality.
+    = Test for equality.
+    ==	Test for equality.
+    >	Test for greater-than the value.
+    >=	Test for greater-than or equal to the value.
+    equals Test for equality.
+    not Test for inequality.
+    subject {get; set;} // String   self    (Optional) The subject of this filter test.
+    Options Description
+    other The other member of an interaction, not the caller.
+    parent The caller's current parent.
+    player The player involved with the interaction.
+    self The entity or object calling the test
+    target The caller's current target.
+    value {get; set;} // Boolean	true	(Optional) true or false.
+    Examples
+
+    { "test": "is_moving", "subject": "self", "operator": "equals", "value": "true" }
+    { "test": "is_moving" }
+    Back to top
+
+    is_owner
+
+
+    Description
+
+    Returns true if the subject entity is the owner of the calling entity.
+    Parameters
+
+    Name Type    Default Description
+    operator	String equals  (Optional) The comparison to apply with 'value'.
+    Options Description
+    !=	Test for inequality.
+    <	Test for less-than the value.
+    <=	Test for less-than or equal to the value.
+    <>	Test for inequality.
+    = Test for equality.
+    ==	Test for equality.
+    >	Test for greater-than the value.
+    >=	Test for greater-than or equal to the value.
+    equals Test for equality.
+    not Test for inequality.
+    subject {get; set;} // String   self    (Optional) The subject of this filter test.
+    Options Description
+    other The other member of an interaction, not the caller.
+    parent The caller's current parent.
+    player The player involved with the interaction.
+    self The entity or object calling the test
+    target The caller's current target.
+    value {get; set;} // Boolean	true	(Optional) true or false.
+    Examples
+
+    { "test": "is_owner", "subject": "self", "operator": "equals", "value": "true" }
+    { "test": "is_owner" }
+    Back to top
+
+    is_riding
+
+
+    Description
+
+    Returns true if the subject entity is riding on another entity.
+    Parameters
+
+    Name Type    Default Description
+    operator	String equals  (Optional) The comparison to apply with 'value'.
+    Options Description
+    !=	Test for inequality.
+    <	Test for less-than the value.
+    <=	Test for less-than or equal to the value.
+    <>	Test for inequality.
+    = Test for equality.
+    ==	Test for equality.
+    >	Test for greater-than the value.
+    >=	Test for greater-than or equal to the value.
+    equals Test for equality.
+    not Test for inequality.
+    subject {get; set;} // String   self    (Optional) The subject of this filter test.
+    Options Description
+    other The other member of an interaction, not the caller.
+    parent The caller's current parent.
+    player The player involved with the interaction.
+    self The entity or object calling the test
+    target The caller's current target.
+    value {get; set;} // Boolean	true	(Optional) true or false.
+    Examples
+
+    { "test": "is_riding", "subject": "self", "operator": "equals", "value": "true" }
+    { "test": "is_riding" }
+    Back to top
+
+    is_sneaking
+
+
+    Description
+
+    Returns true if the subject entity is sneaking.
+    Parameters
+
+    Name    Type Default Description
+    operator    {get; set;} // String 	equals  (Optional) The comparison to apply with 'value'.
+    Options Description
+    !=	Test for inequality.
+    <	Test for less-than the value.
+    <=	Test for less-than or equal to the value.
+    <>	Test for inequality.
+    = Test for equality.
+    ==	Test for equality.
+    >	Test for greater-than the value.
+    >=	Test for greater-than or equal to the value.
+    equals Test for equality.
+    not Test for inequality.
+    subject {get; set;} // String   self    (Optional) The subject of this filter test.
+    Options Description
+    other The other member of an interaction, not the caller.
+    parent The caller's current parent.
+    player The player involved with the interaction.
+    self The entity or object calling the test
+    target The caller's current target.
+    value {get; set;} // Boolean	true	(Optional) true or false.
+    Examples
+
+    { "test": "is_sneaking", "subject": "self", "operator": "equals", "value": "true" }
+    { "test": "is_sneaking" }
+    Back to top
+
+    is_snow_covered
+
+
+    Description
+
+    Tests whether the Subject is in an area with snow cover
+    Parameters
+
+    Name Type    Default Description
+    operator {get; set;} // String   equals  (Optional) The comparison to apply with 'value'.
+    Options Description
+    !=	Test for inequality.
+    <	Test for less-than the value.
+    <=	Test for less-than or equal to the value.
+    <>	Test for inequality.
+    = Test for equality.
+    ==	Test for equality.
+    >	Test for greater-than the value.
+    >=	Test for greater-than or equal to the value.
+    equals Test for equality.
+    not Test for inequality.
+    subject {get; set;} // String   self    (Optional) The subject of this filter test.
+    Options Description
+    other The other member of an interaction, not the caller.
+    parent The caller's current parent.
+    player The player involved with the interaction.
+    self The entity or object calling the test
+    target The caller's current target.
+    value {get; set;} // Boolean	true	(Optional) true or false.
+    Examples
+
+    { "test": "is_snow_covered", "subject": "self", "operator": "equals", "value": "true" }
+    { "test": "is_snow_covered" }
+    Back to top
+
+    is_target
+
+
+    Description
+
+    Returns true if the subject entity is the target of the calling entity.
+    Parameters
+
+    Name Type    Default Description
+    operator	String equals  (Optional) The comparison to apply with 'value'.
+    Options Description
+    !=	Test for inequality.
+    <	Test for less-than the value.
+    <=	Test for less-than or equal to the value.
+    <>	Test for inequality.
+    = Test for equality.
+    ==	Test for equality.
+    >	Test for greater-than the value.
+    >=	Test for greater-than or equal to the value.
+    equals Test for equality.
+    not Test for inequality.
+    subject {get; set;} // String   self    (Optional) The subject of this filter test.
+    Options Description
+    other The other member of an interaction, not the caller.
+    parent The caller's current parent.
+    player The player involved with the interaction.
+    self The entity or object calling the test
+    target The caller's current target.
+    value {get; set;} // Boolean	true	(Optional) true or false.
+    Examples
+
+    { "test": "is_target", "subject": "self", "operator": "equals", "value": "true" }
+    { "test": "is_target" }
+    Back to top
+
+    is_temperature_type
+
+
+    Description
+
+    Tests whether the current temperature is a given type.
+    Parameters
+
+    Name    Type Default Description
+    operator    {get; set;} // String 	equals  (Optional) The comparison to apply with 'value'.
+    Options Description
+    !=	Test for inequality.
+    <	Test for less-than the value.
+    <=	Test for less-than or equal to the value.
+    <>	Test for inequality.
+    = Test for equality.
+    ==	Test for equality.
+    >	Test for greater-than the value.
+    >=	Test for greater-than or equal to the value.
+    equals Test for equality.
+    not Test for inequality.
+    subject {get; set;} // String   self    (Optional) The subject of this filter test.
+    Options Description
+    other The other member of an interaction, not the caller.
+    parent The caller's current parent.
+    player The player involved with the interaction.
+    self The entity or object calling the test
+    target The caller's current target.
+    value {get; set;} // String       (Required) The Biome temperature catagory to test
+    Options Description
+    cold
+    mild
+    ocean
+    warm
+    Examples
+
+    { "test": "is_temperature_type", "subject": "self", "operator": "equals", "value": "cold" }
+    { "test": "is_temperature_type", "value": "cold" }
+    Back to top
+
+    is_temperature_value
+
+
+    Description
+
+    Tests the current temperature against a provided value in the range(0.0, 1.0) where 0.0f is the coldest temp and 1.0f is the hottest.
+    Parameters
+
+    Name    Type    Default Description
+    operator	String  equals	(Optional) The comparison to apply with 'value'.
+    Options Description
+    !=	Test for inequality.
+    <	Test for less-than the value.
+    <=	Test for less-than or equal to the value.
+    <>	Test for inequality.
+    =	Test for equality.
+    ==	Test for equality.
+    >	Test for greater-than the value.
+    >=	Test for greater-than or equal to the value.
+    equals  Test for equality.
+    not Test for inequality.
+    subject {get; set;} // String   self	(Optional) The subject of this filter test.
+    Options Description
+    other   The other member of an interaction, not the caller.
+    parent  The caller's current parent.
+    player  The player involved with the interaction.
+    self    The entity or object calling the test
+    target  The caller's current target.
+    value   {get; set;} //		(Required) The Biome temperature value to compare with.
+    Examples
+
+    { "test": "is_temperature_value", "subject": "self", "operator": "equals", "value": "0.5" }
+    { "test": "is_temperature_value", "value": "0.5" }
+    Back to top
+
+    is_underground
+
+
+    Description
+
+    Returns true when the subject entity is underground.An entity is considered underground if there are non-solid blocks above it.
+    Parameters
+
+
+    Name Type    Default Description
+    operator	String equals  (Optional) The comparison to apply with 'value'.
+    Options Description
+    !=	Test for inequality.
+    <	Test for less-than the value.
+    <=	Test for less-than or equal to the value.
+    <>	Test for inequality.
+    = Test for equality.
+    ==	Test for equality.
+    >	Test for greater-than the value.
+    >=	Test for greater-than or equal to the value.
+    equals Test for equality.
+    not Test for inequality.
+    subject {get; set;} // String   self    (Optional) The subject of this filter test.
+    Options Description
+    other The other member of an interaction, not the caller.
+    parent The caller's current parent.
+    player The player involved with the interaction.
+    self The entity or object calling the test
+    target The caller's current target.
+    value {get; set;} // Boolean	true	(Optional) true or false.
+    Examples
+
+    { "test": "is_underground", "subject": "self", "operator": "equals", "value": "true" }
+    { "test": "is_underground" }
+    Back to top
+
+    is_underwater
+
+
+    Description
+
+    Returns true when the subject entity is under water.An entity is considered underwater if it is completely submerged in water blocks.
+    Parameters
+
+    Name    Type Default Description
+    operator	String equals  (Optional) The comparison to apply with 'value'.
+    Options Description
+    !=	Test for inequality.
+    <	Test for less-than the value.
+    <=	Test for less-than or equal to the value.
+    <>	Test for inequality.
+    = Test for equality.
+    ==	Test for equality.
+    >	Test for greater-than the value.
+    >=	Test for greater-than or equal to the value.
+    equals Test for equality.
+    not Test for inequality.
+    subject {get; set;} // String   self    (Optional) The subject of this filter test.
+    Options Description
+    other The other member of an interaction, not the caller.
+    parent The caller's current parent.
+    player The player involved with the interaction.
+    self The entity or object calling the test
+    target The caller's current target.
+    value {get; set;} // Boolean	true	(Optional) true or false.
+    Examples
+
+    { "test": "is_underwater", "subject": "self", "operator": "equals", "value": "true" }
+    { "test": "is_underwater" }
+    Back to top
+
+    is_variant
+
+
+    Description
+
+    Returns true if the subject entity is the variant number provided.
+    Parameters
+
+    Name Type    Default Description
+    operator	String equals  (Optional) The comparison to apply with 'value'.
+    Options Description
+    !=	Test for inequality.
+    <	Test for less-than the value.
+    <=	Test for less-than or equal to the value.
+    <>	Test for inequality.
+    = Test for equality.
+    ==	Test for equality.
+    >	Test for greater-than the value.
+    >=	Test for greater-than or equal to the value.
+    equals Test for equality.
+    not Test for inequality.
+    subject {get; set;} // String   self    (Optional) The subject of this filter test.
+    Options Description
+    other The other member of an interaction, not the caller.
+    parent The caller's current parent.
+    player The player involved with the interaction.
+    self The entity or object calling the test
+    target The caller's current target.
+    value {get; set;} // Integer      (Required) An integer value.
+    Examples
+
+    { "test": "is_variant", "subject": "self", "operator": "equals", "value": "0" }
+    { "test": "is_variant", "value": "0" }
+    Back to top
+
+    moon_intensity
+
+
+    Description
+
+    Compares the current moon intensity with a float value in the range(0.0, 1.0)
+    Parameters
+
+    Name    Type Default Description
+    operator    {get; set;} // String 	equals  (Optional) The comparison to apply with 'value'.
+    Options Description
+    !=	Test for inequality.
+    <	Test for less-than the value.
+    <=	Test for less-than or equal to the value.
+    <>	Test for inequality.
+    = Test for equality.
+    ==	Test for equality.
+    >	Test for greater-than the value.
+    >=	Test for greater-than or equal to the value.
+    equals Test for equality.
+    not Test for inequality.
+    subject {get; set;} // String   self    (Optional) The subject of this filter test.
+    Options Description
+    other The other member of an interaction, not the caller.
+    parent The caller's current parent.
+    player The player involved with the interaction.
+    self The entity or object calling the test
+    target The caller's current target.
+    public float Value {get; set;} //     (Required) A floating point value.
+    Examples
+
+    { "test": "moon_intensity", "subject": "self", "operator": "equals", "value": "0" }
+    { "test": "moon_intensity", "value": "0" }
+    Back to top
+
+    moon_phase
+
+
+    Description
+
+    Compares the current moon phase with an integer value in the range(0, 7).
+    Parameters
+
+    Name    Type Default Description
+    operator    {get; set;} // String 	equals  (Optional) The comparison to apply with 'value'.
+    Options Description
+    !=	Test for inequality.
+    <	Test for less-than the value.
+    <=	Test for less-than or equal to the value.
+    <>	Test for inequality.
+    = Test for equality.
+    ==	Test for equality.
+    >	Test for greater-than the value.
+    >=	Test for greater-than or equal to the value.
+    equals Test for equality.
+    not Test for inequality.
+    subject {get; set;} // String   self    (Optional) The subject of this filter test.
+    Options Description
+    other The other member of an interaction, not the caller.
+    parent The caller's current parent.
+    player The player involved with the interaction.
+    self The entity or object calling the test
+    target The caller's current target.
+    value {get; set;} // Integer      (Required) An integer value.
+    Examples
+
+    { "test": "moon_phase", "subject": "self", "operator": "equals", "value": "0" }
+    { "test": "moon_phase", "value": "0" }
+    Back to top
+
+    on_ladder
+
+
+    Description
+
+    Returns true when the subject entity is on a ladder.
+    Parameters
+
+    Name    Type Default Description
+    operator    {get; set;} // String 	equals  (Optional) The comparison to apply with 'value'.
+    Options Description
+    !=	Test for inequality.
+    <	Test for less-than the value.
+    <=	Test for less-than or equal to the value.
+    <>	Test for inequality.
+    = Test for equality.
+    ==	Test for equality.
+    >	Test for greater-than the value.
+    >=	Test for greater-than or equal to the value.
+    equals Test for equality.
+    not Test for inequality.
+    subject {get; set;} // String   self    (Optional) The subject of this filter test.
+    Options Description
+    other The other member of an interaction, not the caller.
+    parent The caller's current parent.
+    player The player involved with the interaction.
+    self The entity or object calling the test
+    target The caller's current target.
+    value {get; set;} // Boolean	true	(Optional) true or false.
+    Examples
+
+    { "test": "on_ladder", "subject": "self", "operator": "equals", "value": "true" }
+    { "test": "on_ladder" }
+    Back to top
+
+
+
+    Triggers
+
+
+    public class Minecraft_on_death
+
+
+    Description
+
+    Only usable by the Ender Dragon.Adds a trigger to call on this entity's death.
+    Parameters
+
+    Name    Type Default Value Description
+    event	String The event to run when the conditions for this trigger are met
+    filters Minecraft Filter        The list of conditions for this trigger
+    target  {get; set;} // String  self    The target of the event
+    Back to top
+
+    public class Minecraft_on_friendly_anger
+
+
+    Description
+
+    Adds a trigger that will run when a nearby entity of the same type as this entity becomes Angry.
+    Parameters
+
+    Name    Type Default Value Description
+    event	String The event to run when the conditions for this trigger are met
+    filters Minecraft Filter        The list of conditions for this trigger
+    target  {get; set;} // String  self    The target of the event
+    Back to top
+
+    public class Minecraft_on_hurt
+
+
+    Description
+
+    Adds a trigger to call when this entity takes damage.
+    Parameters
+
+    Name    Type Default Value Description
+    event	String The event to run when the conditions for this trigger are met
+    filters Minecraft Filter        The list of conditions for this trigger
+    target  {get; set;} // String  self    The target of the event
+    Back to top
+
+    public class Minecraft_on_hurt_by_player
+
+
+    Description
+
+    Adds a trigger to call when this entity is attacked by the player.
+    Parameters
+
+    Name    Type Default Value Description
+    event	String The event to run when the conditions for this trigger are met
+    filters Minecraft Filter        The list of conditions for this trigger
+    target  {get; set;} // String  self    The target of the event
+    Back to top
+
+    public class Minecraft_on_ignite
+
+
+    Description
+
+    Adds a trigger to call when this entity is set on fire.
+    Parameters
+
+    Name    Type Default Value Description
+    event	String The event to run when the conditions for this trigger are met
+    filters Minecraft Filter        The list of conditions for this trigger
+    target  {get; set;} // String  self    The target of the event
+    Back to top
+
+    public class Minecraft_on_start_landing
+
+
+    Description
+
+    Only usable by the Ender Dragon. Adds a trigger to call when this entity lands.
+    Parameters
+
+    Name    Type Default Value Description
+    event	String The event to run when the conditions for this trigger are met
+    filters Minecraft Filter        The list of conditions for this trigger
+    target  {get; set;} // String  self    The target of the event
+    Back to top
+
+    public class Minecraft_on_start_takeoff
+
+
+    Description
+
+    Only usable by the Ender Dragon. Adds a trigger to call when this entity starts flying.
+    Parameters
+
+    Name    Type Default Value Description
+    event	String The event to run when the conditions for this trigger are met
+    filters Minecraft Filter        The list of conditions for this trigger
+    target  {get; set;} // String  self    The target of the event
+    Back to top
+
+    public class Minecraft_on_target_acquired
+
+
+    Description
+
+    Adds a trigger to call when this entity finds a target.
+    Parameters
+
+    Name    Type Default Value Description
+    event	String The event to run when the conditions for this trigger are met
+    filters Minecraft Filter        The list of conditions for this trigger
+    target  {get; set;} // String  self    The target of the event
+    Back to top
+
+    public class Minecraft_on_target_escape
+
+
+    Description
+
+    Adds a trigger to call when this entity loses the target it currently has.
+    Parameters
+
+    Name    Type Default Value Description
+    event	String The event to run when the conditions for this trigger are met
+    filters Minecraft Filter        The list of conditions for this trigger
+    target  {get; set;} // String  self    The target of the event
+    Back to top
+
+
+
+    Built-in Events
+
+
+    Name    Description
+    public class Minecraft_entity_born Event called on an entity that is spawned through two entities breeding.
+    public class Minecraft_entity_spawned Event called on an entity that is placed in the level.
+    public class Minecraft_entity_transformed Event called on an entity that transforms into another entity.
+    public class Minecraft_on_prime Event called on an entity whose fuse is lit and is ready to explode.
+    Back to top
+
+    Entities
+
+
+    Identifier Full ID Short ID
+    agent	312	56
+    area_effect_cloud   95	95
+    armor_stand 317	61
+    arrow   4194384	80
+    bat 33043	19
+    blaze   2859	43
+    boat    90	90
+    cave_spider 265000	40
+    chest_minecart  524386	98
+    chicken 4874	10
+    command_block_minecart  524388	100
+    cow 4875	11
+    creeper 2849	33
+    donkey  2118424	24
+    dragon_fireball 4194383	79
+    egg 4194386	82
+    elder_guardian  2866	50
+    ender_crystal   71	71
+    ender_dragon    2869	53
+    ender_pearl 4194391	87
+    enderman    2854	38
+    endermite   265015	55
+    evocation_fang  4194407	103
+    evocation_illager   2920	104
+    eye_of_ender_signal 70	70
+    falling_block   66	66
+    fireball    4194389	85
+    fireworks_rocket    72	72
+    fishing_hook    77	77
+    ghast   2857	41
+    guardian    2865	49
+    hopper_minecart 524384	96
+    horse   2118423	23
+    husk    199471	47
+    iron_golem  788	20
+    item    64	64
+    leash_knot  88	88
+    lightning_bolt  93	93
+    lingering_potion    4194405	101
+    llama   4893	29
+    llama_spit  4194406	102
+    magma_cube  2858	42
+    minecart    524372	84
+    mooshroom   4880	16
+    moving_block    67	67
+    mule    2118425	25
+    ocelot  21270	22
+    painting    83	83
+    parrot  21278	30
+    pig 4876	12
+    player  319	63
+    polar_bear  4892	28
+    rabbit  4882	18
+    sheep   4877	13
+    shulker 2870	54
+    shulker_bullet  4194380	76
+    silverfish  264999	39
+    skeleton    1116962	34
+    skeleton_horse  2186010	26
+    slime   2853	37
+    small_fireball  4194398	94
+    snow_golem  789	21
+    snowball    4194385	81
+    spider  264995	35
+    splash_potion   4194390	86
+    squid   8977	17
+    stray   1116974	46
+    tnt 65	65
+    tnt_minecart    524385	97
+    vex 2921	105
+    villager    783	15
+    vindicator  2873	57
+    witch   2861	45
+    wither  68404	52
+    wither_skeleton 1116976	48
+    wither_skull    4194393	89
+    wither_skull_dangerous  4194395	91
+    wolf    21262	14
+    xp_bottle   4194372	68
+    xp_orb  69	69
+    zombie  199456	32
+    zombie_horse    2186011	27
+    zombie_pigman   68388	36
+    zombie_villager 199468	44
+    Back to top
+
+    Blocks
+
+
+    Name ID
+    acacia_door 196
+    acacia_fence_gate   187
+    acacia_stairs   163
+    activator_rail  126
+    air 0
+    anvil   145
+    beacon  138
+    bed 26
+    bedrock 7
+    beetroot    244
+    birch_door  194
+    birch_fence_gate    184
+    birch_stairs    135
+    black_glazed_terracotta 235
+    blue_glazed_terracotta  231
+    bone_block  216
+    bookshelf   47
+    brewing_stand   117
+    brick_block 45
+    brick_stairs    108
+    brown_glazed_terracotta 232
+    brown_mushroom  39
+    brown_mushroom_block    99
+    cactus  81
+    cake    92
+    carpet  171
+    carrots 141
+    cauldron    118
+    chain_command_block 189
+    chest   54
+    chorus_flower   200
+    chorus_plant    240
+    clay    82
+    coal_block  173
+    coal_ore    16
+    cobblestone 4
+    cobblestone_wall    139
+    cocoa   127
+    command_block   137
+    concrete    236
+    concretePowder  237
+    crafting_table  58
+    cyan_glazed_terracotta  229
+    dark_oak_door   197
+    dark_oak_fence_gate 186
+    dark_oak_stairs 164
+    daylight_detector   151
+    daylight_detector_inverted  178
+    deadbush    32
+    detector_rail   28
+    diamond_block   57
+    diamond_ore 56
+    dirt    3
+    dispenser   23
+    double_plant    175
+    double_stone_slab   43
+    double_stone_slab2  181
+    double_wooden_slab  157
+    dragon_egg  122
+    dropper 125
+    emerald_block   133
+    emerald_ore 129
+    enchanting_table    116
+    end_bricks  206
+    end_gateway 209
+    end_portal  119
+    end_portal_frame    120
+    end_rod 208
+    end_stone   121
+    ender_chest 130
+    farmland    60
+    fence   85
+    fence_gate  107
+    fire    51
+    flower_pot  140
+    flowing_lava    10
+    flowing_water   8
+    frame   199
+    frosted_ice 207
+    furnace 61
+    glass   20
+    glass_pane  102
+    glowingobsidian 246
+    glowstone   89
+    gold_block  41
+    gold_ore    14
+    golden_rail 27
+    grass   2
+    grass_path  198
+    gravel  13
+    gray_glazed_terracotta  227
+    green_glazed_terracotta 233
+    hardened_clay   172
+    hay_block   170
+    heavy_weighted_pressure_plate   148
+    hopper  154
+    ice 79
+    info_update 248
+    info_update2    249
+    invisibleBedrock    95
+    iron_bars   101
+    iron_block  42
+    iron_door   71
+    iron_ore    15
+    iron_trapdoor   167
+    jukebox 84
+    jungle_door 195
+    jungle_fence_gate   185
+    jungle_stairs   136
+    ladder  65
+    lapis_block 22
+    lapis_ore   21
+    lava    11
+    leaves  18
+    leaves2 161
+    lever   69
+    light_blue_glazed_terracotta    223
+    light_weighted_pressure_plate   147
+    lime_glazed_terracotta  225
+    lit_furnace 62
+    lit_pumpkin 91
+    lit_redstone_lamp   124
+    lit_redstone_ore    74
+    log 17
+    log2    162
+    magenta_glazed_terracotta   222
+    magma   213
+    melon_block 103
+    melon_stem  105
+    mob_spawner 52
+    monster_egg 97
+    mossy_cobblestone   48
+    movingBlock 250
+    mycelium    110
+    nether_brick    112
+    nether_brick_fence  113
+    nether_brick_stairs 114
+    nether_wart 115
+    nether_wart_block   214
+    netherrack  87
+    netherreactor   247
+    noteblock   25
+    oak_stairs  53
+    observer    251
+    obsidian    49
+    orange_glazed_terracotta    221
+    packed_ice  174
+    pink_glazed_terracotta  226
+    piston  33
+    pistonArmCollision  34
+    planks  5
+    podzol  243
+    portal  90
+    potatoes    142
+    powered_comparator  150
+    powered_repeater    94
+    prismarine  168
+    pumpkin 86
+    pumpkin_stem    104
+    purple_glazed_terracotta    219
+    purpur_block    201
+    purpur_stairs   203
+    quartz_block    155
+    quartz_ore  153
+    quartz_stairs   156
+    rail    66
+    red_flower  38
+    red_glazed_terracotta   234
+    red_mushroom    40
+    red_mushroom_block  100
+    red_nether_brick    215
+    red_sandstone   179
+    red_sandstone_stairs    180
+    redstone_block  152
+    redstone_lamp   123
+    redstone_ore    73
+    redstone_torch  76
+    redstone_wire   55
+    reeds   83
+    repeating_command_block 188
+    reserved6   255
+    sand    12
+    sandstone   24
+    sandstone_stairs    128
+    sapling 6
+    seaLantern  169
+    shulker_box 218
+    silver_glazed_terracotta    228
+    skull   144
+    slime   165
+    snow    80
+    snow_layer  78
+    soul_sand   88
+    sponge  19
+    spruce_door 193
+    spruce_fence_gate   183
+    spruce_stairs   134
+    stained_glass   241
+    stained_glass_pane  160
+    stained_hardened_clay   159
+    standing_banner 176
+    standing_sign   63
+    sticky_piston   29
+    stone   1
+    stone_brick_stairs  109
+    stone_button    77
+    stone_pressure_plate    70
+    stone_slab  44
+    stone_slab2 182
+    stone_stairs    67
+    stonebrick  98
+    stonecutter 245
+    structure_block 252
+    tallgrass   31
+    tnt 46
+    torch   50
+    trapdoor    96
+    trapped_chest   146
+    tripWire    132
+    tripwire_hook   131
+    undyed_shulker_box  205
+    unlit_redstone_torch    75
+    unpowered_comparator    149
+    unpowered_repeater  93
+    vine    106
+    wall_banner 177
+    wall_sign   68
+    water   9
+    waterlily   111
+    web 30
+    wheat   59
+    white_glazed_terracotta 220
+    wooden_button   143
+    wooden_door 64
+    wooden_pressure_plate   72
+    wooden_slab 158
+    wool    35
+    yellow_flower   37
+    yellow_glazed_terracotta    224
+    Back to top
+
+    Items
+
+
+    Name ID  Aux Values
+    acacia_door 430	
+    anvil   145	
+    apple   260	
+    appleEnchanted  466	
+    armor_stand 425	
+    arrow   262	
+    baked_potato    393	
+    banner  446	
+    beacon  138	
+    bed 355	
+    beef    363	
+    beetroot    457	
+    beetroot_seeds  458	
+    beetroot_soup   459	
+    birch_door  428	
+    blaze_powder    377	
+    blaze_rod   369	
+    boat    333	
+    bone    352	
+    book    340	
+    bow 261	
+    bowl    281	
+    bread   297	
+    brewingStandBlock   117	
+    brewing_stand   379	
+    brick   336	
+    brown_mushroom_block    99	
+    bucket  325	0 = Empty Bucket
+
+    1 = Milk
+
+    10 = Lava
+
+    8 = Water
+    cake	354	
+    carpet  171	
+    carrot  391	
+    carrotOnAStick  398	
+    cauldron    380	
+    chainmail_boots 305	
+    chainmail_chestplate    303	
+    chainmail_helmet    302	
+    chainmail_leggings  304	
+    chest_minecart  342	
+    chicken 365	
+    chorus_fruit    432	
+    chorus_fruit_popped 433	
+    clay_ball   337	
+    clock   347	
+    clownfish   461	
+    coal    263	
+    cobblestone_wall    139	
+    command_block_minecart  443	
+    comparator  404	
+    compass 345	
+    concrete    236	
+    concrete_powder 237	
+    cooked_beef 364	
+    cooked_chicken  366	
+    cooked_fish 350	
+    cooked_porkchop 320	
+    cooked_rabbit   412	
+    cooked_salmon   463	
+    cookie  357	
+    dark_oak_door   431	
+    diamond 264	
+    diamond_axe 279	
+    diamond_boots   313	
+    diamond_chestplate  311	
+    diamond_helmet  310	
+    diamond_hoe 293	
+    diamond_leggings    312	
+    diamond_pickaxe 278	
+    diamond_shovel  277	
+    diamond_sword   276	
+    dirt    3	
+    double_plant    175	
+    double_stone_slab   44	
+    double_stone_slab2  182	
+    dragon_breath   437	
+    dye 351	
+    egg 344	
+    elytra  444	
+    emerald 388	
+    emptyMap    395	
+    enchanted_book  403	
+    end_crystal 426	
+    end_portal_frame    120	
+    ender_eye   381	
+    ender_pearl 368	
+    experience_bottle   384	
+    feather 288	
+    fence   85	
+    fermented_spider_eye    376	
+    fireball    385	
+    fireworks   401	
+    fireworksCharge 402	
+    fish    349	
+    fishing_rod 346	
+    flint   318	
+    flint_and_steel 259	
+    flower_pot  390	
+    frame   389	
+    ghast_tear  370	
+    glass_bottle    374	
+    glowstone_dust  348	
+    gold_ingot  266	
+    gold_nugget 371	
+    golden_apple    322	
+    golden_axe  286	
+    golden_boots    317	
+    golden_carrot   396	
+    golden_chestplate   315	
+    golden_helmet   314	
+    golden_hoe  294	
+    golden_leggings 316	
+    golden_pickaxe  285	
+    golden_shovel   284	
+    golden_sword    283	
+    gunpowder   289	
+    hopper  410	
+    hopper_minecart 408	
+    horsearmordiamond   419	
+    horsearmorgold  418	
+    horsearmoriron  417	
+    horsearmorleather   416	
+    iron_axe    258	
+    iron_boots  309	
+    iron_chestplate 307	
+    iron_door   330	
+    iron_helmet 306	
+    iron_hoe    292	
+    iron_ingot  265	
+    iron_leggings   308	
+    iron_nugget 452	
+    iron_pickaxe    257	
+    iron_shovel 256	
+    iron_sword  267	
+    jungle_door 429	
+    lead    420	
+    leather 334	
+    leather_boots   301	
+    leather_chestplate  299	
+    leather_helmet  298	
+    leather_leggings    300	
+    leaves  18	
+    leaves2 161	
+    lingering_potion    441	
+    log 17	
+    log2    162	
+    magma   213	
+    magma_cream 378	
+    map 358	
+    melon   360	
+    melon_seeds 362	
+    minecart    328	
+    monster_egg 97	
+    mushroom_stew   282	
+    muttonCooked    424	
+    muttonRaw   423	
+    nameTag 421	
+    netherStar  399	
+    nether_wart 372	
+    netherbrick 405	
+    painting    321	
+    paper   339	
+    planks  5	
+    poisonous_potato    394	
+    porkchop    319	
+    potato  392	
+    potion  373	
+    prismarine  168	
+    prismarine_crystals 422	
+    prismarine_shard    409	
+    pufferfish  462	
+    pumpkin_pie 400	
+    pumpkin_seeds   361	
+    purpur_block    201	
+    quartz  406	
+    quartz_block    155	
+    rabbit  411	
+    rabbit_foot 414	
+    rabbit_hide 415	
+    rabbit_stew 413	
+    record_11   510	
+    record_13   500	
+    record_blocks   502	
+    record_cat  501	
+    record_chirp    503	
+    record_far  504	
+    record_mall 505	
+    record_mellohi  506	
+    record_stal 507	
+    record_strad    508	
+    record_wait 511	
+    record_ward 509	
+    red_flower  38	
+    red_mushroom_block  100	
+    red_sandstone   179	
+    redstone    331	
+    reeds   338	
+    repeater    356	
+    rotten_flesh    367	
+    saddle  329	
+    salmon  460	
+    sand    12	
+    sandstone   24	
+    sapling 6	
+    seaLantern  169	
+    shears  359	
+    shulker_box 218	
+    shulker_shell   445	
+    sign    323	
+    skull   397	0 = Skeleton
+
+    1 = Wither
+
+    2 = Zombie
+
+    3 = Steve
+
+    4 = Creeper
+
+    5 = Dragon
+    slime_ball	341	
+    snow_layer  78	
+    snowball    332	
+    spawn_egg   383	
+    speckled_melon  382	
+    spider_eye  375	
+    splash_potion   438	
+    sponge  19	
+    spruce_door 427	
+    stained_glass   241	
+    stained_glass_pane  160	
+    stained_hardened_clay   159	
+    stick   280	
+    stone   1	
+    stone_axe   275	
+    stone_hoe   291	
+    stone_pickaxe   274	
+    stone_shovel    273	
+    stone_sword 272	
+    stonebrick  98	
+    string  287	
+    sugar   353	
+    tallgrass   31	
+    tnt_minecart    407	
+    totem   450	
+    undyed_shulker_box  205	
+    waterlily   111	
+    wheat   296	
+    wheat_seeds 295	
+    wooden_axe  271	
+    wooden_door 324	
+    wooden_hoe  290	
+    wooden_pickaxe  270	
+    wooden_shovel   269	
+    wooden_slab 158	
+    wooden_sword    268	
+    wool    35	
+    writable_book   386	
+    written_book    387	
+    yellow_flower   37	
+    Back to top
+    */
+}
+
