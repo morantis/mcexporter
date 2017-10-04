@@ -1,11 +1,11 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 15
-VisualStudioVersion = 15.0.26730.16
+VisualStudioVersion = 15.0.26730.15
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Exporter", "Exporter\Exporter.csproj", "{EFD5E52F-A0A0-40B2-8F58-36BEA4F475D5}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Newtonsoft.Json", "..\Newtonsoft.Json-master\Src\Newtonsoft.Json\Newtonsoft.Json.csproj", "{A624D124-7406-4FC1-ADAF-E6D8CFCF658C}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Newtonsoft.Json", "..\..\Newtonsoft.Json\Src\Newtonsoft.Json\Newtonsoft.Json.csproj", "{813AFA63-03A6-46BE-B536-57D911E974BB}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -17,10 +17,10 @@ Global
 		{EFD5E52F-A0A0-40B2-8F58-36BEA4F475D5}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{EFD5E52F-A0A0-40B2-8F58-36BEA4F475D5}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{EFD5E52F-A0A0-40B2-8F58-36BEA4F475D5}.Release|Any CPU.Build.0 = Release|Any CPU
-		{A624D124-7406-4FC1-ADAF-E6D8CFCF658C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{A624D124-7406-4FC1-ADAF-E6D8CFCF658C}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{A624D124-7406-4FC1-ADAF-E6D8CFCF658C}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{A624D124-7406-4FC1-ADAF-E6D8CFCF658C}.Release|Any CPU.Build.0 = Release|Any CPU
+		{813AFA63-03A6-46BE-B536-57D911E974BB}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{813AFA63-03A6-46BE-B536-57D911E974BB}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{813AFA63-03A6-46BE-B536-57D911E974BB}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{813AFA63-03A6-46BE-B536-57D911E974BB}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

@@ -14,7 +14,7 @@ namespace Exporter
 
         internal void Save(string packDirectory)
         {
-            string subDirectory = packDirectory + "\\chests";
+            string subDirectory = packDirectory + "\\loot_tables\\chests";
             Directory.CreateDirectory(subDirectory);
             foreach (var chest in Chests)
             {
@@ -22,7 +22,7 @@ namespace Exporter
                 File.WriteAllText(subDirectory + "\\" + chest.Name + ".json", json);
             }
 
-            subDirectory = packDirectory + "\\entities";
+            subDirectory = packDirectory + "\\loot_tables\\entities";
             Directory.CreateDirectory(subDirectory);
             foreach (var entity in Entities)
             {
@@ -30,7 +30,7 @@ namespace Exporter
                 File.WriteAllText(subDirectory + "\\" + entity.Name + ".json", json);
             }
 
-            subDirectory = packDirectory + "\\equipment";
+            subDirectory = packDirectory + "\\loot_tables\\equipment";
             Directory.CreateDirectory(subDirectory);
             foreach (var equipment in Equipment)
             {
@@ -38,14 +38,15 @@ namespace Exporter
                 File.WriteAllText(subDirectory + "\\" + equipment.Name + ".json", json);
             }
 
-            subDirectory = packDirectory + "\\gameplay";
+            subDirectory = packDirectory + "\\loot_tables\\gameplay";
             Directory.CreateDirectory(subDirectory);
             {
                 var json = JsonConvert.SerializeObject(Gameplay.FishingJson, Formatting.Indented);
                 File.WriteAllText(subDirectory + "\\fishing.json", json);
             }
 
-            subDirectory = packDirectory + "\\gameplay\\fishing";
+            subDirectory = packDirectory + "\\loot_tables\\gameplay\\fishing";
+            Directory.CreateDirectory(subDirectory);
             foreach (var fishing in Gameplay.Fishing)
             {
                 var json = JsonConvert.SerializeObject(fishing, Formatting.Indented);
