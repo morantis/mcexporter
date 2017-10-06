@@ -43,7 +43,7 @@ namespace Exporter
             // Chests
             foreach (var file in Directory.EnumerateFiles(Root + "/loot_tables/chests", "*.json"))
             {
-                var chest = JsonConvert.DeserializeObject<LootTable>(File.ReadAllText(file));
+                dynamic chest = JsonConvert.DeserializeObject<LootTable>(File.ReadAllText(file));
                 chest.Name = Path.GetFileNameWithoutExtension(file);
                 lootTables.Chests.Add(chest);
             }
