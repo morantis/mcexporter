@@ -48,16 +48,16 @@ namespace Exporter
 
                     [JsonProperty(PropertyName = "functions", NullValueHandling = NullValueHandling.Ignore)]
                     [JsonConverter(typeof(SingleOrArrayConverter<Function>))]
-                    public Function Functions { get; set; }
+                    public List<Function> Functions { get; set; }
                 }
 
                 [JsonProperty(PropertyName = "wants", NullValueHandling = NullValueHandling.Ignore)]
                 [JsonConverter(typeof(SingleOrArrayConverter<Item>))]
-                public Item Wants { get; set; }
+                public List<Item> Wants { get; set; }
 
                 [JsonProperty(PropertyName = "gives", NullValueHandling = NullValueHandling.Ignore)]
                 [JsonConverter(typeof(SingleOrArrayConverter<Item>))]
-                public Item Gives { get; set; }
+                public List<Item> Gives { get; set; }
             }
 
             [JsonProperty(PropertyName = "trades", NullValueHandling = NullValueHandling.Ignore)]

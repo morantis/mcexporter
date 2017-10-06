@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Text;
 using Newtonsoft.Json;
+using Newtonsoft.Json.Linq;
 
 namespace Exporter
 {
@@ -92,6 +93,7 @@ namespace Exporter
 
                 //Defines what mob effects to add and remove to the entity when adding this component.
                 [JsonProperty(PropertyName = "add_effects", NullValueHandling = NullValueHandling.Ignore)]
+                [JsonConverter(typeof(SingleOrArrayConverter<string>))]
                 public List<string> add_effects { get; set; } //List of effects to add to this entity after adding this component
 
                 [JsonProperty(PropertyName = "effect", NullValueHandling = NullValueHandling.Ignore)]
@@ -122,6 +124,45 @@ namespace Exporter
 
         public class Properties
         {
+            public class PoorlyImplementedBooleanConverter : JsonConverter
+            {
+                public override bool CanConvert(Type objectType)
+                {
+                    return (objectType == typeof(PoorlyImplementedBooleanProperty) || objectType == typeof(System.Boolean));
+                }
+
+                public override object ReadJson(JsonReader reader, Type objectType, object existingValue, JsonSerializer serializer)
+                {
+                    JToken token = JToken.Load(reader);
+                    if (token.Type == JTokenType.Object)
+                    {
+                        return token.ToObject<PoorlyImplementedBooleanProperty>();
+                    }
+
+                    return new PoorlyImplementedBooleanProperty() { Value = token.ToObject<bool>() };
+                }
+
+                public override bool CanWrite
+                {
+                    get { return false; }
+                }
+
+                public override void WriteJson(JsonWriter writer, object value, JsonSerializer serializer)
+                {
+                    throw new NotImplementedException();
+                }
+            }
+
+            public class PoorlyImplementedBooleanProperty
+            {
+                public static implicit operator PoorlyImplementedBooleanProperty(bool value)
+                {
+                    return new PoorlyImplementedBooleanProperty() { Value = value };
+                }
+
+                [JsonProperty(PropertyName = "value", NullValueHandling = NullValueHandling.Ignore)]
+                public bool Value { get; set; } = true; // this appears to be the default in json files because nothign is specified on properties I know to be true. 
+            }
 
             public class Minecraft_ambient_sound_interval
             {
@@ -132,30 +173,6 @@ namespace Exporter
                 [JsonProperty(PropertyName = "value", NullValueHandling = NullValueHandling.Ignore)]
                 public float value { get; set; } // {get; set;} //   8.0	Minimum time in seconds before the entity plays its ambient sound again
             }
-
-            public class Minecraft_burns_in_daylight
-            {
-                //Sets that this entity burns if exposed to daylight.
-
-            }
-
-            public class Minecraft_can_climb
-            {
-                //Allows this entity to climb up ladders.
-            }
-
-            public class Minecraft_can_fly
-            {
-                //Marks the entity as being able to fly, the pathfinder won't be restricted to paths where a solid block is required underneath it.
-            }
-
-
-
-            public class Minecraft_can_power_jump
-            {
-                //Allows the entity to power jump like the horse does in vanilla.
-            }
-
 
             public class Minecraft_collision_box
             {
@@ -188,16 +205,6 @@ namespace Exporter
                 public string Table { get; set; } // The path to the equipment table, relative to the Behavior Pack's root
             }
 
-            public class Minecraft_fire_immune
-            {
-                //Sets that this entity doesn't take damage from fire.
-            }
-
-            public class Minecraft_floats_in_liquid
-            {
-                //Sets that this entity can float in liquid blocks.
-            }
-
             public class Minecraft_flying_speed
             {
                 //Speed in Blocks that this entity flies at.
@@ -225,32 +232,6 @@ namespace Exporter
                 [JsonProperty(PropertyName = "value", NullValueHandling = NullValueHandling.Ignore)]
                 public float Value { get; set; } //	0.0	The value of the entity's offset from the terrain, in blocks
             }
-
-            public class Minecraft_hurt_when_wet
-            {
-                //Sets that this entity will take damage when it is wet.
-            }
-
-            public class Minecraft_input_ground_controlled
-            {
-                //When configured as a rideable entity, the entity will be controlled using WASD controls.
-            }
-
-            public class Minecraft_is_baby
-            {
-                //Sets that this entity is a baby.
-            }
-
-            public class Minecraft_is_charged
-            {
-                //Sets that this entity is charged.
-            }
-
-            public class Minecraft_is_chested
-            {
-                //Sets that this entity is currently carrying a chest.
-            }
-
             public class Minecraft_is_dyeable
             {
                 //Allows dyes to be used on this entity to change its color.
@@ -259,40 +240,121 @@ namespace Exporter
             }
 
 
-            public class Minecraft_is_ignited
-            {
-                //Sets that this entity is currently on fire.
-            }
+            //public class Minecraft_item_hopper
+            //{
+            //    //Determines that this entity is an item hopper
+            //}
 
-            public class Minecraft_is_saddled
-            {
-                //Sets that this entity is currently saddled.
-            }
+            //public class Minecraft_jump_dynamic
+            //{
+            //    //Defines a dynamic type jump control that will change jump properties based on the speed modifier of the mob.
+            //}
 
-            public class Minecraft_is_shaking
-            {
-                //Sets that this entity is currently shaking.
-            }
+            //public class Minecraft_jump_static
+            //{
+            //    //Gives the entity the ability to jump.
+            //}
 
-            public class Minecraft_is_sheared
-            {
-                //Sets that this entity is currently sheared.
-            }
+            //public class Minecraft_fire_immune
+            //{
+            //    //Sets that this entity doesn't take damage from fire.
+            //}
 
-            public class Minecraft_is_stackable
-            {
-                //Sets that this entity can be stacked.
-            }
+            //public class Minecraft_floats_in_liquid
+            //{
+            //    //Sets that this entity can float in liquid blocks.
+            //}
 
-            public class Minecraft_is_tamed
-            {
-                //Sets that this entity is currently tamed.
-            }
+
+            //public class Minecraft_burns_in_daylight
+            //{
+            //    //Sets that this entity burns if exposed to daylight.
+
+            //}
+
+            //public class Minecraft_can_climb
+            //{
+            //    //Allows this entity to climb up ladders.
+            //}
+
+            //public class Minecraft_can_fly
+            //{
+            //    //Marks the entity as being able to fly, the pathfinder won't be restricted to paths where a solid block is required underneath it.
+            //}
+
+
+
+            //public class Minecraft_can_power_jump
+            //{
+            //    //Allows the entity to power jump like the horse does in vanilla.
+            //}
+
+            //public class Minecraft_hurt_when_wet
+            //{
+            //    //Sets that this entity will take damage when it is wet.
+            //}
+
+            //public class Minecraft_input_ground_controlled
+            //{
+            //    //When configured as a rideable entity, the entity will be controlled using WASD controls.
+            //}
+
+            //public class Minecraft_is_baby
+            //{
+            //    //Sets that this entity is a baby.
+            //}
+
+            //public class Minecraft_is_charged
+            //{
+            //    //Sets that this entity is charged.
+            //}
+
+            //public class Minecraft_is_chested
+            //{
+            //    //Sets that this entity is currently carrying a chest.
+            //}
+
+            //public class Minecraft_is_ignited
+            //{
+            //    //Sets that this entity is currently on fire.
+            //}
+
+            //public class Minecraft_is_saddled
+            //{
+            //    //Sets that this entity is currently saddled.
+            //}
+
+            //public class Minecraft_is_shaking
+            //{
+            //    //Sets that this entity is currently shaking.
+            //}
+
+            //public class Minecraft_is_sheared
+            //{
+            //    //Sets that this entity is currently sheared.
+            //}
+
+            //public class Minecraft_is_stackable
+            //{
+            //    //Sets that this entity can be stacked.
+            //}
+
+            //public class Minecraft_is_tamed
+            //{
+            //    //Sets that this entity is currently tamed.
+            //}
+
+
+            //public class Minecraft_wants_jockey
+            //{
+            //    //Sets that this entity wants to become a jockey.
+            //}
 
             public class Minecraft_item_controllable
             {
                 //Defines what items can be used to control this entity while ridden
                 [JsonProperty(PropertyName = "control_items", NullValueHandling = NullValueHandling.Ignore)]
+                [JsonConverter(typeof(SingleOrArrayConverter<string>))]
                 public List<string> Control_items { get; set; } // List List of items that can be used to control this entity
             }
 
@@ -336,6 +398,7 @@ namespace Exporter
             {
                 //Defines the families this entity belongs to.
                 [JsonProperty(PropertyName = "family", NullValueHandling = NullValueHandling.Ignore)]
+                [JsonConverter(typeof(SingleOrArrayConverter<string>))]
                 public List<string> Family { get; set; } // List        List of family names
             }
 
@@ -352,11 +415,6 @@ namespace Exporter
                 //Sets the speed multiplier for this entity's walk animation speed.
                 [JsonProperty(PropertyName = "value", NullValueHandling = NullValueHandling.Ignore)]
                 public float Value { get; set; } //	1.0	The higher the number, the faster the animation for walking plays. A value of 1.0 means normal speed, while 2.0 means twice as fast
-            }
-
-            public class Minecraft_wants_jockey
-            {
-                //Sets that this entity wants to become a jockey.
             }
         }
 
@@ -377,6 +435,7 @@ namespace Exporter
                 public float Duration { get; set; } // 	1200.0	Amount of time before the entity grows
 
                 [JsonProperty(PropertyName = "feedItems", NullValueHandling = NullValueHandling.Ignore)]
+                [JsonConverter(typeof(SingleOrArrayConverter<string>))]
                 public List<string> FeedItems { get; set; } //  List List of items that can be fed to the entity.Includes 'item' for the item name and 'growth' to define how much time it grows up by
 
                 [JsonProperty(PropertyName = "grow_up", NullValueHandling = NullValueHandling.Ignore)]
@@ -415,6 +474,7 @@ namespace Exporter
 
                 //Defines the conditions and behavior of a rideable entity's boost
                 [JsonProperty(PropertyName = "boost_items", NullValueHandling = NullValueHandling.Ignore)]
+                [JsonConverter(typeof(SingleOrArrayConverter<string>))]
                 public List<Boost_items> boost_items { get; set; } // List        List of items that can be used to boost while riding this entity.Each item has the following properties:
 
                 [JsonProperty(PropertyName = "duration", NullValueHandling = NullValueHandling.Ignore)]
@@ -428,6 +488,7 @@ namespace Exporter
             {
                 //Defines what blocks this entity can breathe in and gives them the ability to suffocate
                 [JsonProperty(PropertyName = "breathBlocks", NullValueHandling = NullValueHandling.Ignore)]
+                [JsonConverter(typeof(SingleOrArrayConverter<string>))]
                 public List<string> BreatheBlocks { get; set; } // List List of blocks this entity can breathe in, in addition to the above
 
                 [JsonProperty(PropertyName = "breathesAir", NullValueHandling = NullValueHandling.Ignore)]
@@ -446,6 +507,7 @@ namespace Exporter
                 public bool GeneratesBubbles { get; set; } //		If true, this entity will have visible bubbles while in water
 
                 [JsonProperty(PropertyName = "nonBreatheBlocks", NullValueHandling = NullValueHandling.Ignore)]
+                [JsonConverter(typeof(SingleOrArrayConverter<string>))]
                 public List<string> nonBreatheBlocks { get; set; } // List List of blocks this entity can't breathe in, in addition to the above
 
                 [JsonProperty(PropertyName = "suffocateTime", NullValueHandling = NullValueHandling.Ignore)]
@@ -465,6 +527,7 @@ namespace Exporter
                 public float breedCooldown { get; set; } // {get; set;} // 60.0	Time in seconds before the Entity can breed again
 
                 [JsonProperty(PropertyName = "breedItems", NullValueHandling = NullValueHandling.Ignore)]
+                [JsonConverter(typeof(SingleOrArrayConverter<string>))]
                 public List<string> breedItems { get; set; } // List The list of items that can be used to get the entity into the 'love' state
 
                 public class BreedsWithSub
@@ -480,6 +543,7 @@ namespace Exporter
                 }
 
                 [JsonProperty(PropertyName = "breedsWith", NullValueHandling = NullValueHandling.Ignore)]
+                [JsonConverter(typeof(SingleOrArrayConverter<string>))]
                 public List<BreedsWithSub> breedsWith { get; set; } // List The list of entity definitions that this entity can breed with
 
                 [JsonProperty(PropertyName = "extraBabyChance", NullValueHandling = NullValueHandling.Ignore)]
@@ -525,6 +589,7 @@ namespace Exporter
             {
                 //Creates a trigger based on environment conditions.
                 [JsonProperty(PropertyName = "on_environment", NullValueHandling = NullValueHandling.Ignore)]
+                [JsonConverter(typeof(SingleOrArrayConverter<string>))]
                 public List<string> on_environment { get; set; } // List        The list of triggers that fire when the environment conditions match the given filter criteria.
             }
 
@@ -534,6 +599,7 @@ namespace Exporter
                 public class EquippableSub
                 {
                     [JsonProperty(PropertyName = "accepted_items", NullValueHandling = NullValueHandling.Ignore)]
+                    [JsonConverter(typeof(SingleOrArrayConverter<string>))]
                     List<string> accepted_items { get; set; } // List The list of items that can go in this slot
 
                     [JsonProperty(PropertyName = "interact_text", NullValueHandling = NullValueHandling.Ignore)]
@@ -553,6 +619,7 @@ namespace Exporter
                 }
 
                 [JsonProperty(PropertyName = "slots", NullValueHandling = NullValueHandling.Ignore)]
+                [JsonConverter(typeof(SingleOrArrayConverter<EquippableSub>))]
                 public List<EquippableSub> slots { get; set; } // List        List of slots and the item that can be equipped
             }
 
@@ -630,7 +697,14 @@ namespace Exporter
                 }
 
                 [JsonProperty(PropertyName = "items", NullValueHandling = NullValueHandling.Ignore)]
+                [JsonConverter(typeof(SingleOrArrayConverter<HealableSub>))]
                 public List<HealableSub> items { get; set; } // List        The list of items that can be used to heal this entity
+            }
+
+            public class Minecraft_identity
+            {
+                [JsonProperty(PropertyName = "id", NullValueHandling = NullValueHandling.Ignore)]
+                public string ID { get; set; }
             }
 
             public class Minecraft_interact
@@ -695,20 +769,6 @@ namespace Exporter
 
                 [JsonProperty(PropertyName = "restrict_to_owner", NullValueHandling = NullValueHandling.Ignore)]
                 public bool restrict_to_owner { get; set; } // Boolean	false	If true, the entity's inventory can only be accessed by its owner or itself
-            }
-            public class Minecraft_item_hopper
-            {
-                //Determines that this entity is an item hopper
-            }
-
-            public class Minecraft_jump_dynamic
-            {
-                //Defines a dynamic type jump control that will change jump properties based on the speed modifier of the mob.
-            }
-
-            public class Minecraft_jump_static
-            {
-                //Gives the entity the ability to jump.
             }
 
             public class Minecraft_leashable
@@ -938,6 +998,12 @@ namespace Exporter
                 public MinecraftEvent on_target_open { get; set; } // String  Event to call when the entity's target entity starts peeking
             }
 
+            public class Minecraft_physics
+            {
+                [JsonProperty(PropertyName = "has_collision", NullValueHandling = NullValueHandling.Ignore)]
+                public bool HasCollision { get; set; }
+            }
+
             public class Minecraft_projectile
             {
                 //Allows the entity to be a thrown entity.
@@ -1065,6 +1131,7 @@ namespace Exporter
                 public bool crouching_skip_interact { get; set; } // Boolean	true	If true, this entity can't be interacted with if the entity interacting with it is crouching
 
                 [JsonProperty(PropertyName = "family_types", NullValueHandling = NullValueHandling.Ignore)]
+                [JsonConverter(typeof(SingleOrArrayConverter<string>))]
                 public List<string> family_types { get; set; } // List List of entities that can ride this entity
 
                 [JsonProperty(PropertyName = "interact_text", NullValueHandling = NullValueHandling.Ignore)]
@@ -1177,6 +1244,7 @@ namespace Exporter
                 public float probability { get; set; } //	1.0	The chance of taming the entity with each item use between 0.0 and 1.0, where 1.0 is 100%
 
                 [JsonProperty(PropertyName = "tameItems", NullValueHandling = NullValueHandling.Ignore)]
+                [JsonConverter(typeof(SingleOrArrayConverter<string>))]
                 public List<string> tameItems { get; set; }// List The list of items that can be used to tame this entity
 
                 [JsonProperty(PropertyName = "tame_event", NullValueHandling = NullValueHandling.Ignore)]
@@ -1192,6 +1260,7 @@ namespace Exporter
                 public class AutoRejectSub
                 {
                     [JsonProperty(PropertyName = "item", NullValueHandling = NullValueHandling.Ignore)]
+                    [JsonConverter(typeof(SingleOrArrayConverter<string>))]
                     public List<string> item { get; set; } // String  Name of the item this entity dislikes and will cause it to get angry if used while untamed
                 }
 
@@ -1201,11 +1270,13 @@ namespace Exporter
                 public class FeedItemsSub
                 {
                     [JsonProperty(PropertyName = "item", NullValueHandling = NullValueHandling.Ignore)]
+                    [JsonConverter(typeof(SingleOrArrayConverter<string>))]
                     public List<string> item { get; set; } // String  Name of the item this entity likes and can be used to increase this entity's temper
 
                 }
 
                 [JsonProperty(PropertyName = "feedItems", NullValueHandling = NullValueHandling.Ignore)]
+                [JsonConverter(typeof(SingleOrArrayConverter<FeedItemsSub>))]
                 public List<FeedItemsSub> feedItems { get; set; }// JSON Object The list of items that can be used to increase the entity's temper and speed up the taming process
 
                 [JsonProperty(PropertyName = "temperMod", NullValueHandling = NullValueHandling.Ignore)]
@@ -1317,6 +1388,7 @@ namespace Exporter
                 public class AddSub
                 {
                     [JsonProperty(PropertyName = "component_groups", NullValueHandling = NullValueHandling.Ignore)]
+                    [JsonConverter(typeof(SingleOrArrayConverter<string>))]
                     public List<string> component_groups { get; set; } // List        Names of component groups to add
 
                 }
@@ -1342,6 +1414,7 @@ namespace Exporter
                     public int block_radius { get; set; } // Integer  0   Distance in Blocks that the entity will search for blocks that can help the transformation
 
                     [JsonProperty(PropertyName = "block_types", NullValueHandling = NullValueHandling.Ignore)]
+                    [JsonConverter(typeof(SingleOrArrayConverter<string>))]
                     List<string> block_types { get; set; } // List        List of blocks that can help the transformation of this entity
 
                     [JsonProperty(PropertyName = "value", NullValueHandling = NullValueHandling.Ignore)]
@@ -1358,7 +1431,13 @@ namespace Exporter
                 public string transformation_sound { get; set; } // String       Sound to play when the entity is done transforming
             }
 
-            public class Minecraft_behavior_avoid_mob_type
+            public class Behavior
+            {
+                [JsonProperty(PropertyName = "priority", NullValueHandling = NullValueHandling.Ignore)]
+                public int Priority { get; set; }
+            }
+
+            public class Minecraft_behavior_avoid_mob_type : Behavior
             {
                 //Allows this entity to avoid certain mob types.
                 [JsonProperty(PropertyName = "entity_types", NullValueHandling = NullValueHandling.Ignore)]
@@ -1377,10 +1456,11 @@ namespace Exporter
                 public float walk_speed_multiplier { get; set; } // 1.0 Multiplier for walking speed. 1.0 means keep the regular speed, while higher numbers make the walking speed faster
             }
 
-            public class Minecraft_behavior_beg
+            public class Minecraft_behavior_beg : Behavior
             {
                 //Allows this mob to look at and follow the player that holds food they like.
                 [JsonProperty(PropertyName = "items", NullValueHandling = NullValueHandling.Ignore)]
+                [JsonConverter(typeof(SingleOrArrayConverter<string>))]
                 public List<string> items { get; set; } // List        List of items that this mob likes
 
                 [JsonProperty(PropertyName = "look_distance", NullValueHandling = NullValueHandling.Ignore)]
@@ -1390,29 +1470,29 @@ namespace Exporter
                 public float[] look_time { get; set; } // Range[a, b]    [2, 4] The range of time in seconds this mob will stare at the player holding a food they like, begging for it
             }
 
-            public class Minecraft_behavior_break_door
+            public class Minecraft_behavior_break_door : Behavior
             {
                 //Allows this mob to break doors.
             }
 
-            public class Minecraft_behavior_breed
+            public class Minecraft_behavior_breed : Behavior
             {
                 //Allows this mob to breed with other mobs.
                 [JsonProperty(PropertyName = "speed_multiplier", NullValueHandling = NullValueHandling.Ignore)]
                 public float speed_multiplier { get; set; } //	1.0	Movement speed multiplier of the mob when using this AI Goal
             }
 
-            public class Minecraft_behavior_charge_attack
+            public class Minecraft_behavior_charge_attack : Behavior
             {
                 //Allows the mob to attack its target by running at it.
             }
 
-            public class Minecraft_behavior_controlled_by_player
+            public class Minecraft_behavior_controlled_by_player : Behavior
             {
                 //Allows the mob to be controlled by the player.
             }
 
-            public class Minecraft_behavior_defend_village_target
+            public class Minecraft_behavior_defend_village_target : Behavior
             {
                 //Allows the mob to stay in the village and fight mobs hostile to the villagers.
                 [JsonProperty(PropertyName = "entity_types", NullValueHandling = NullValueHandling.Ignore)]
@@ -1420,69 +1500,69 @@ namespace Exporter
             }
 
 
-            public class Minecraft_behavior_door_interact
+            public class Minecraft_behavior_door_interact : Behavior
             {
                 //Allows the mob to open and close doors.
             }
 
-            public class Minecraft_behavior_dragonchargeplayer
+            public class Minecraft_behavior_dragonchargeplayer : Behavior
             {
                 //Allows the dragon to attack a player by flying fast at them.The player is chosen by the dragonscanning goal.Can only be used by the Ender Dragon.
             }
 
-            public class Minecraft_behavior_dragondeath
+            public class Minecraft_behavior_dragondeath : Behavior
             {
                 //Allows the dragon to go out with glory. This controls the Ender Dragon's death animation and can't be used by other mobs.
             }
 
-            public class Minecraft_behavior_dragonflaming
+            public class Minecraft_behavior_dragonflaming : Behavior
             {
                 //Allows the dragon to use its flame breath attack.Can only be used by the Ender Dragon.
             }
 
-            public class Minecraft_behavior_dragonholdingpattern
+            public class Minecraft_behavior_dragonholdingpattern : Behavior
             {
                 //Allows the Dragon to fly around in a circle around the center podium. Can only be used by the Ender Dragon.
             }
 
-            public class Minecraft_behavior_dragonlanding
+            public class Minecraft_behavior_dragonlanding : Behavior
             {
                 //Allows the Dragon to stop flying and transition into perching mode.Can only be used by the Ender Dragon.
             }
 
-            public class Minecraft_behavior_dragonscanning
+            public class Minecraft_behavior_dragonscanning : Behavior
             {
                 //Allows the dragon to look around for a player to attack while in perch mode. Can only be used by the Ender Dragon.
             }
 
-            public class Minecraft_behavior_dragonstrafeplayer
+            public class Minecraft_behavior_dragonstrafeplayer : Behavior
             {
                 //Allows the dragon to fly around looking for a player and shoot fireballs at them.Can only be used by the Ender Dragon.
             }
 
-            public class Minecraft_behavior_dragontakeoff
+            public class Minecraft_behavior_dragontakeoff : Behavior
             {
                 //Allows the dragon to leave perch mode and go back to flying around.Can only be used by the Ender Dragon.
             }
 
-            public class Minecraft_behavior_eat_block
+            public class Minecraft_behavior_eat_block : Behavior
             {
                 //Allows the mob to eat a block (for example, sheep eating grass).
                 [JsonProperty(PropertyName = "on_eat", NullValueHandling = NullValueHandling.Ignore)]
                 public Trigger on_eat { get; set; }// Trigger Trigger to fire when the mob eats a block of grass
             }
 
-            public class Minecraft_behavior_enderman_leave_block
+            public class Minecraft_behavior_enderman_leave_block : Behavior
             {
                 //Allows the enderman to drop a block they are carrying. Can only be used by Endermen.
             }
 
-            public class Minecraft_behavior_enderman_take_block
+            public class Minecraft_behavior_enderman_take_block : Behavior
             {
                 //Allows the enderman to take a block and carry it around. Can only be used by Endermen.
             }
 
-            public class Minecraft_behavior_find_mount
+            public class Minecraft_behavior_find_mount : Behavior
             {
                 //Allows the mob to look around for another mob to ride atop it.
                 [JsonProperty(PropertyName = "avoid_water", NullValueHandling = NullValueHandling.Ignore)]
@@ -1501,7 +1581,7 @@ namespace Exporter
                 public float within_radius { get; set; } //	0.0	Distance in blocks within which the mob will look for a mount
             }
 
-            public class Minecraft_behavior_flee_sun
+            public class Minecraft_behavior_flee_sun : Behavior
             {
                 //Allows the mob to run away from direct sunlight and seek shade.
             }
@@ -1509,12 +1589,12 @@ namespace Exporter
             [JsonProperty(PropertyName = "speed_multiplier", NullValueHandling = NullValueHandling.Ignore)]
             public float speed_multiplier { get; set; } //	1.0	Movement speed multiplier of the mob when using this AI Goal
 
-            public class Minecraft_behavior_float
+            public class Minecraft_behavior_float : Behavior
             {
                 //Allows the mob to stay afloat while swimming.
             }
 
-            public class Minecraft_behavior_float_wander
+            public class Minecraft_behavior_float_wander : Behavior
             {
                 //Allows the mob to float around like the Ghast.
                 [JsonProperty(PropertyName = "float_duration", NullValueHandling = NullValueHandling.Ignore)]
@@ -1536,7 +1616,7 @@ namespace Exporter
                 public float y_offset { get; set; } //	0.0	Height in blocks to add to the selected target position
             }
 
-            public class Minecraft_behavior_follow_caravan
+            public class Minecraft_behavior_follow_caravan : Behavior
             {
                 //Allows the mob to follow mobs that are in a caravan.
                 [JsonProperty(PropertyName = "entity_count", NullValueHandling = NullValueHandling.Ignore)]
@@ -1550,7 +1630,7 @@ namespace Exporter
                 public float speed_multiplier { get; set; } // 1.0	Movement speed multiplier of the mob when using this AI Goal
             }
 
-            public class Minecraft_behavior_follow_mob
+            public class Minecraft_behavior_follow_mob : Behavior
             {
                 //Allows the mob to follow other mobs.
                 [JsonProperty(PropertyName = "search_range", NullValueHandling = NullValueHandling.Ignore)]
@@ -1564,7 +1644,7 @@ namespace Exporter
             }
 
 
-            public class Minecraft_behavior_follow_owner
+            public class Minecraft_behavior_follow_owner : Behavior
             {
                 //Allows the mob to follow the player that owns them.
                 [JsonProperty(PropertyName = "speed_multiplier", NullValueHandling = NullValueHandling.Ignore)]
@@ -1577,26 +1657,26 @@ namespace Exporter
                 public float stop_distance { get; set; } //	2.0	The distance in blocks this mob will stop from its owner while following it
             }
 
-            public class Minecraft_behavior_follow_parent
+            public class Minecraft_behavior_follow_parent : Behavior
             {
                 //Allows the mob to follow their parent around.
                 [JsonProperty(PropertyName = "speed_multiplier", NullValueHandling = NullValueHandling.Ignore)]
                 public float speed_multiplier { get; set; } //	1.0	Movement speed multiplier of the mob when using this AI Goal
             }
 
-            public class Minecraft_behavior_guardian_attack
+            public class Minecraft_behavior_guardian_attack : Behavior
             {
                 //Allows the guardian to use its laser beam attack.Can only be used by Guardians and Elder Guardians.
             }
 
-            public class Minecraft_behavior_harvest_farm_block
+            public class Minecraft_behavior_harvest_farm_block : Behavior
             {
                 //Allows the villager to harvest nearby farms.Can only be used by Villagers.
                 [JsonProperty(PropertyName = "speed_multiplier", NullValueHandling = NullValueHandling.Ignore)]
                 public float speed_multiplier { get; set; } //	1.0	Movement speed multiplier of the mob when using this AI Goal
             }
 
-            public class Minecraft_behavior_hurt_by_target
+            public class Minecraft_behavior_hurt_by_target : Behavior
             {
                 //Allows the mob to target another mob that hurts them.
                 [JsonProperty(PropertyName = "alert_same_type", NullValueHandling = NullValueHandling.Ignore)]
@@ -1610,7 +1690,7 @@ namespace Exporter
                 public bool hurt_owner { get; set; } // Boolean false	If true, the mob will hurt its owner and other mobs with the same owner as itself
             }
 
-            public class Minecraft_behavior_leap_at_target
+            public class Minecraft_behavior_leap_at_target : Behavior
             {
                 //Allows monsters to jump at and attack their target.Can only be used by hostile mobs.
                 [JsonProperty(PropertyName = "must_be_on_ground", NullValueHandling = NullValueHandling.Ignore)]
@@ -1620,7 +1700,7 @@ namespace Exporter
                 public float yd { get; set; } //	0.0	The height in blocks the mob jumps when leaping at its target
             }
 
-            public class Minecraft_behavior_look_at_entity
+            public class Minecraft_behavior_look_at_entity : Behavior
             {
                 //Allows the mob to look at nearby entities.
                 [JsonProperty(PropertyName = "angle_of_view_horizontal", NullValueHandling = NullValueHandling.Ignore)]
@@ -1643,7 +1723,7 @@ namespace Exporter
                 public float probability { get; set; } //	0.02	The probability of looking at the target. A value of 1.00 is 100%
             }
 
-            public class Minecraft_behavior_look_at_player
+            public class Minecraft_behavior_look_at_player : Behavior
             {
                 //Allows the mob to look at the player when the player is nearby.
                 [JsonProperty(PropertyName = "angle_of_view_horizontal", NullValueHandling = NullValueHandling.Ignore)]
@@ -1662,7 +1742,7 @@ namespace Exporter
                 public float probability { get; set; } //	0.02	The probability of looking at the target. A value of 1.00 is 100%
             }
 
-            public class Minecraft_behavior_look_at_target
+            public class Minecraft_behavior_look_at_target : Behavior
             {
                 //Allows the mob to look at the entity they are targetting.
                 [JsonProperty(PropertyName = "angle_of_view_horizontal", NullValueHandling = NullValueHandling.Ignore)]
@@ -1681,7 +1761,7 @@ namespace Exporter
                 public float probability { get; set; } //	0.02	The probability of looking at the target. A value of 1.00 is 100%
             }
 
-            public class Minecraft_behavior_look_at_trading_player
+            public class Minecraft_behavior_look_at_trading_player : Behavior
             {
                 //Allows the mob to look at the player they are trading with.
                 [JsonProperty(PropertyName = "angle_of_view_horizontal", NullValueHandling = NullValueHandling.Ignore)]
@@ -1700,12 +1780,12 @@ namespace Exporter
                 public float probability { get; set; } //	0.02	The probability of looking at the target. A value of 1.00 is 100%
             }
 
-            public class Minecraft_behavior_make_love
+            public class Minecraft_behavior_make_love : Behavior
             {
                 //Allows the villager to look for a mate to spawn other villagers with. Can only be used by Villagers.
             }
 
-            public class Minecraft_behavior_melee_attack
+            public class Minecraft_behavior_melee_attack : Behavior
             {
                 //Allows the mob to use close combat melee attacks.
                 [JsonProperty(PropertyName = "attack_types", NullValueHandling = NullValueHandling.Ignore)]
@@ -1724,7 +1804,7 @@ namespace Exporter
                 public bool track_target { get; set; } // Boolean	false	If true, this mob will chase after the target as long as it's a valid target
             }
 
-            public class Minecraft_behavior_mount_pathing
+            public class Minecraft_behavior_mount_pathing : Behavior
             {
                 //Allows the mob to move around on its own while mounted seeking a target to attack.
                 [JsonProperty(PropertyName = "speed_multiplier", NullValueHandling = NullValueHandling.Ignore)]
@@ -1737,14 +1817,14 @@ namespace Exporter
                 public bool track_target { get; set; } // Boolean	false	If true, this mob will chase after the target as long as it's a valid target
             }
 
-            public class Minecraft_behavior_move_indoors
+            public class Minecraft_behavior_move_indoors : Behavior
             {
                 //Can only be used by Villagers.Allows them to seek shelter indoors.
                 [JsonProperty(PropertyName = "speed_multiplier", NullValueHandling = NullValueHandling.Ignore)]
                 public float speed_multiplier { get; set; } //	1.0	Movement speed multiplier of the mob when using this AI Goal
             }
 
-            public class Minecraft_behavior_move_through_village
+            public class Minecraft_behavior_move_through_village : Behavior
             {
                 //Can only be used by Villagers.Allows the villagers to create paths around the village.
                 [JsonProperty(PropertyName = "only_at_night", NullValueHandling = NullValueHandling.Ignore)]
@@ -1754,21 +1834,21 @@ namespace Exporter
                 public float speed_multiplier { get; set; } // 1.0	Movement speed multiplier of the mob when using this AI Goal
             }
 
-            public class Minecraft_behavior_move_towards_restriction
+            public class Minecraft_behavior_move_towards_restriction : Behavior
             {
                 //Allows Guardians, Iron Golems and Villagers to move within their pre-defined area that the mob should be restricted to.Other mobs don't have a restriction defined.
                 [JsonProperty(PropertyName = "speed_multiplier", NullValueHandling = NullValueHandling.Ignore)]
                 public float speed_multiplier { get; set; } //	1.0	Movement speed multiplier of the mob when using this AI Goal
             }
 
-            public class Minecraft_behavior_move_towards_target
+            public class Minecraft_behavior_move_towards_target : Behavior
             {
                 //Allows mob to move towards its current target.
                 [JsonProperty(PropertyName = "within_radius", NullValueHandling = NullValueHandling.Ignore)]
                 public float within_radius { get; set; } //	0.0	Defines the radius in blocks that the mob tries to be from the target. A value of 0 means it tries to occupy the same block as the target
             }
 
-            public class Minecraft_behavior_nearest_attackable_target
+            public class Minecraft_behavior_nearest_attackable_target : Behavior
             {
                 //Allows the mob to check for and pursue the nearest valid target.
                 [JsonProperty(PropertyName = "attack_interval", NullValueHandling = NullValueHandling.Ignore)]
@@ -1794,14 +1874,14 @@ namespace Exporter
                 public float within_radius { get; set; } //	0.0	Distance in blocks that the target can be within to launch an attack
             }
 
-            public class Minecraft_behavior_ocelot_sit_on_block
+            public class Minecraft_behavior_ocelot_sit_on_block : Behavior
             {
                 //Allows to mob to be able to sit in place like the ocelot.
                 [JsonProperty(PropertyName = "speed_multiplier", NullValueHandling = NullValueHandling.Ignore)]
                 public float speed_multiplier { get; set; } // 1.0	Movement speed multiplier of the mob when using this AI Goal
             }
 
-            public class Minecraft_behavior_ocelotattack
+            public class Minecraft_behavior_ocelotattack : Behavior
             {
                 //Can only be used by the Ocelot.Allows it to perform the sneak and pounce attack.
                 [JsonProperty(PropertyName = "sneak_speed_multiplier", NullValueHandling = NullValueHandling.Ignore)]
@@ -1814,12 +1894,12 @@ namespace Exporter
                 public float walk_speed_multiplier { get; set; } // 1.0	Multiplier for the walking speed while using this attack
             }
 
-            public class Minecraft_behavior_offer_flower
+            public class Minecraft_behavior_offer_flower : Behavior
             {
                 //Allows the mob to offer the player a flower like the Iron Golem does.
             }
 
-            public class Minecraft_behavior_open_door
+            public class Minecraft_behavior_open_door : Behavior
             {
                 //Allows the mob to open doors.Requires the mob to be able to path through doors, otherwise the mob won't even want to try opening them.
                 [JsonProperty(PropertyName = "close_door_after", NullValueHandling = NullValueHandling.Ignore)]
@@ -1827,7 +1907,7 @@ namespace Exporter
             }
 
 
-            public class Minecraft_behavior_owner_hurt_by_target
+            public class Minecraft_behavior_owner_hurt_by_target : Behavior
             {
                 //Allows the mob to target another mob that hurts their owner.
                 [JsonProperty(PropertyName = "entity_types", NullValueHandling = NullValueHandling.Ignore)]
@@ -1835,7 +1915,7 @@ namespace Exporter
                 public List<EntityTypesSub> entity_types { get; set; } // JSON Object List of entity types that this mob can target if they hurt their owner
             }
 
-            public class Minecraft_behavior_owner_hurt_target
+            public class Minecraft_behavior_owner_hurt_target : Behavior
             {
                 //Allows the mob to target a mob that is hurt by their owner.
                 [JsonProperty(PropertyName = "entity_types", NullValueHandling = NullValueHandling.Ignore)]
@@ -1843,7 +1923,7 @@ namespace Exporter
                 public List<EntityTypesSub> entity_types { get; set; } //  JSON Object List of entity types that this entity can target if the potential target is hurt by this mob's owner
             }
 
-            public class Minecraft_behavior_panic
+            public class Minecraft_behavior_panic : Behavior
             {
                 //Allows the mob to enter the panic state, which makes it run around and away from the damage source that made it enter this state.
                 [JsonProperty(PropertyName = "force", NullValueHandling = NullValueHandling.Ignore)]
@@ -1853,12 +1933,12 @@ namespace Exporter
                 public float speed_multiplier { get; set; } //	1.0	Movement speed multiplier of the mob when using this AI Goal
             }
 
-            public class Minecraft_behavior_peek
+            public class Minecraft_behavior_peek : Behavior
             {
                 //Allows the mob to peek out. This is what the shulker uses to look out of its shell.
             }
 
-            public class Minecraft_behavior_pickup_items
+            public class Minecraft_behavior_pickup_items : Behavior
             {
                 //Allows the mob to pick up items on the ground.
                 [JsonProperty(PropertyName = "goal_radius", NullValueHandling = NullValueHandling.Ignore)]
@@ -1874,22 +1954,23 @@ namespace Exporter
                 public bool track_target { get; set; } // Boolean	false	If true, this mob will chase after the target as long as it's a valid target
             }
 
-            public class Minecraft_behavior_play
+            public class Minecraft_behavior_play : Behavior
             {
                 //Allows the mob to play with other baby villagers.This can only be used by Villagers.
                 [JsonProperty(PropertyName = "speed_multiplier", NullValueHandling = NullValueHandling.Ignore)]
                 public float speed_multiplier { get; set; } //	1.0	Movement speed multiplier of the mob when using this AI Goal
             }
 
-            public class Minecraft_behavior_player_ride_tamed
+            public class Minecraft_behavior_player_ride_tamed : Behavior
             {
                 //Allows the mob to be ridden by the player after being tamed.
             }
 
-            public class Minecraft_behavior_raid_garden
+            public class Minecraft_behavior_raid_garden : Behavior
             {
                 //Allows the mob to eat crops out of farms until they are full.
                 [JsonProperty(PropertyName = "blocks", NullValueHandling = NullValueHandling.Ignore)]
+                [JsonConverter(typeof(SingleOrArrayConverter<string>))]
                 public List<String> blocks { get; set; } // List        Blocks that the mob is looking for to eat
 
                 [JsonProperty(PropertyName = "eat_delay", NullValueHandling = NullValueHandling.Ignore)]
@@ -1911,7 +1992,7 @@ namespace Exporter
                 public float speed_multiplier { get; set; } // 1.0	Movement speed multiplier of the mob when using this AI Goal
             }
 
-            public class Minecraft_behavior_random_fly
+            public class Minecraft_behavior_random_fly : Behavior
             {
                 //Allows a mob to randomly fly around.
                 [JsonProperty(PropertyName = "can_land_on_trees", NullValueHandling = NullValueHandling.Ignore)]
@@ -1924,14 +2005,14 @@ namespace Exporter
                 public int y_dist { get; set; } // Integer 	7	Distance in blocks that the mob will look up or down for a new spot to move to.Must be at least 1
             }
 
-            public class Minecraft_behavior_random_look_around
+            public class Minecraft_behavior_random_look_around : Behavior
             {
                 //Allows the mob to randomly look around.
                 [JsonProperty(PropertyName = "look_time", NullValueHandling = NullValueHandling.Ignore)]
                 public float[] look_time { get; set; } // Range [a, b]    [2, 4]  The range of time in seconds the mob will stay looking in a random direction before looking elsewhere
             }
 
-            public class Minecraft_behavior_random_stroll
+            public class Minecraft_behavior_random_stroll : Behavior
             {
                 //Allows a mob to randomly stroll around.
                 [JsonProperty(PropertyName = "xz_dist", NullValueHandling = NullValueHandling.Ignore)]
@@ -1941,7 +2022,7 @@ namespace Exporter
                 public int y_dist { get; set; } // Integer 	7	Distance in blocks that the mob will look up or down for a new spot to move to.Must be at least 1
             }
 
-            public class Minecraft_behavior_ranged_attack
+            public class Minecraft_behavior_ranged_attack : Behavior
             {
                 //Allows the mob to use ranged attacks like shooting arrows.
                 [JsonProperty(PropertyName = "attack_interval_max", NullValueHandling = NullValueHandling.Ignore)]
@@ -1969,23 +2050,23 @@ namespace Exporter
                 public float speed_multiplier { get; set; } //	1.0	Movement speed multiplier of the mob when using this AI Goal
             }
 
-            public class Minecraft_behavior_receive_love
+            public class Minecraft_behavior_receive_love : Behavior
             {
                 //Allows the villager to stop so another villager can breed with it.Can only be used by a Villager.
             }
 
-            public class Minecraft_behavior_restrict_open_door
+            public class Minecraft_behavior_restrict_open_door : Behavior
             {
                 //Allows the mob to stay indoors during night time.
             }
 
 
-            public class Minecraft_behavior_restrict_sun
+            public class Minecraft_behavior_restrict_sun : Behavior
             {
                 //Allows the mob to automatically start avoiding the sun when its a clear day out.
             }
 
-            public class Minecraft_behavior_run_around_like_crazy
+            public class Minecraft_behavior_run_around_like_crazy : Behavior
             {
                 //Allows the mob to run around aimlessly.
                 [JsonProperty(PropertyName = "speed_multiplier", NullValueHandling = NullValueHandling.Ignore)]
@@ -1993,7 +2074,7 @@ namespace Exporter
             }
 
 
-            public class Minecraft_behavior_send_event
+            public class Minecraft_behavior_send_event : Behavior
             {
                 //Allows the mob to send an event to another mob.
                 [JsonProperty(PropertyName = "cast_duration", NullValueHandling = NullValueHandling.Ignore)]
@@ -2015,7 +2096,7 @@ namespace Exporter
                 public SequenceSub sequence { get; set; } // List        List of events to send
             }
 
-            public class Minecraft_behavior_share_items
+            public class Minecraft_behavior_share_items : Behavior
             {
                 //Allows the mob to give items it has to others.
                 [JsonProperty(PropertyName = "entity_types", NullValueHandling = NullValueHandling.Ignore)]
@@ -2024,19 +2105,19 @@ namespace Exporter
             }
 
 
-            public class Minecraft_behavior_silverfish_merge_with_stone
+            public class Minecraft_behavior_silverfish_merge_with_stone : Behavior
             {
                 //Allows the mob to go into stone blocks like Silverfish do. Currently it can only be used by Silverfish.
             }
 
 
-            public class Minecraft_behavior_silverfish_wake_up_friends
+            public class Minecraft_behavior_silverfish_wake_up_friends : Behavior
             {
                 //Allows the mob to alert mobs in nearby blocks to come out. Currently it can only be used by Silverfish.
             }
 
 
-            public class Minecraft_behavior_skeleton_horse_trap
+            public class Minecraft_behavior_skeleton_horse_trap : Behavior
             {
                 //Allows Equine mobs to be Horse Traps and be triggered like them, spawning a lightning bolt and a bunch of horses when a player is nearby.Can only be used by Horses, Mules, Donkeys and Skeleton Horses.
                 [JsonProperty(PropertyName = "Duration", NullValueHandling = NullValueHandling.Ignore)]
@@ -2046,58 +2127,58 @@ namespace Exporter
                 public float within_radius { get; set; } //	0.0	Distance in blocks that the player has to be within to trigger the horse trap
             }
 
-            public class Minecraft_behavior_slime_attack
+            public class Minecraft_behavior_slime_attack : Behavior
             {
                 //Can only be used by Slimes and Magma Cubes.Allows the mob to use a melee attack like the slime's.
             }
 
-            public class Minecraft_behavior_slime_float
+            public class Minecraft_behavior_slime_float : Behavior
             {
                 //Can only be used by Slimes and Magma Cubes.Controls their ability to float in water / lava.
             }
 
-            public class Minecraft_behavior_slime_keep_on_jumping
+            public class Minecraft_behavior_slime_keep_on_jumping : Behavior
             {
                 //Can only be used by Slimes and Magma Cubes.Allows the mob to continuously jump around like a slime.
             }
 
-            public class Minecraft_behavior_slime_random_direction
+            public class Minecraft_behavior_slime_random_direction : Behavior
             {
                 //Can only be used by Slimes and Magma Cubes.Allows the mob to move in random directions like a slime.
             }
 
-            public class Minecraft_behavior_squid_dive
+            public class Minecraft_behavior_squid_dive : Behavior
             {
                 //Allows the squid to dive down in water.Can only be used by the Squid.
             }
 
-            public class Minecraft_behavior_squid_flee
+            public class Minecraft_behavior_squid_flee : Behavior
             {
                 //Allows the squid to swim away.Can only be used by the Squid.
             }
 
-            public class Minecraft_behavior_squid_idle
+            public class Minecraft_behavior_squid_idle : Behavior
             {
                 //Allows the squid to swim in place idly. Can only be used by the Squid.
             }
 
-            public class Minecraft_behavior_squid_move_away_from_ground
+            public class Minecraft_behavior_squid_move_away_from_ground : Behavior
             {
                 //Allows the squid to move away from ground blocks and back to water.Can only be used by the Squid.
             }
 
-            public class Minecraft_behavior_squid_out_of_water
+            public class Minecraft_behavior_squid_out_of_water : Behavior
             {
                 //Allows the squid to stick to the ground when outside water.Can only be used by the Squid.
             }
 
-            public class Minecraft_behavior_stay_while_sitting
+            public class Minecraft_behavior_stay_while_sitting : Behavior
             {
                 //Allows the mob to stay put while it is in a sitting state instead of doing something else.
             }
 
 
-            public class Minecraft_behavior_stomp_attack
+            public class Minecraft_behavior_stomp_attack : Behavior
             {
                 //Allows the mob to use the polar bear's melee attack.
                 [JsonProperty(PropertyName = "attack_types", NullValueHandling = NullValueHandling.Ignore)]
@@ -2116,7 +2197,7 @@ namespace Exporter
                 public bool track_target { get; set; } // Boolean	false	If true, this mob will chase after the target as long as it's a valid target
             }
 
-            public class Minecraft_behavior_summon_entity
+            public class Minecraft_behavior_summon_entity : Behavior
             {
                 //Allows the mob to attack the player by summoning other entities.
                 public class SummonChoicesSub
@@ -2177,6 +2258,7 @@ namespace Exporter
                     }
 
                     [JsonProperty(PropertyName = "sequence", NullValueHandling = NullValueHandling.Ignore)]
+                    [JsonConverter(typeof(SingleOrArrayConverter<SequenceSub>))]
                     public List<SequenceSub> sequence { get; set; } // List List of steps for the spell.Each step has the following parameters:
 
                     [JsonProperty(PropertyName = "start_sound_event", NullValueHandling = NullValueHandling.Ignore)]
@@ -2186,11 +2268,12 @@ namespace Exporter
                     public float weight { get; set; } // 0.0	The weight of this spell.Controls how likely the mob is to choose this spell when casting one
 
                     [JsonProperty(PropertyName = "summon_choices", NullValueHandling = NullValueHandling.Ignore)]
+                    [JsonConverter(typeof(SingleOrArrayConverter<SummonChoicesSub>))]
                     public List<SummonChoicesSub> summon_choices { get; set; } // List        List of spells for the mob to use to summon entities.Each spell has the following parameters:
                 }
             }
 
-            public class Minecraft_behavior_swell
+            public class Minecraft_behavior_swell : Behavior
             {
                 //Allows the creeper to swell up when a player is nearby.It can only be used by Creepers.
                 [JsonProperty(PropertyName = "start_distance", NullValueHandling = NullValueHandling.Ignore)]
@@ -2204,13 +2287,14 @@ namespace Exporter
                 //Can only be used by Villagers.Allows the mob to accept flowers from Iron Golems.
             }
 
-            public class Minecraft_behavior_tempt
+            public class Minecraft_behavior_tempt : Behavior
             {
                 //Allows the mob to be tempted by food they like.
                 [JsonProperty(PropertyName = "can_get_scared", NullValueHandling = NullValueHandling.Ignore)]
                 public bool can_get_scared { get; set; } // Boolean	false	If true, the mob can stop being tempted if the player moves too fast while close to this mob
 
                 [JsonProperty(PropertyName = "items", NullValueHandling = NullValueHandling.Ignore)]
+                [JsonConverter(typeof(SingleOrArrayConverter<string>))]
                 public List<string> items { get; set; } //  List List of items this mob is tempted by
 
                 [JsonProperty(PropertyName = "speed_multiplier", NullValueHandling = NullValueHandling.Ignore)]
@@ -2220,12 +2304,12 @@ namespace Exporter
                 public float within_radius { get; set; } //	0.0	Distance in blocks this mob can get tempted by a player holding an item they like
             }
 
-            public class Minecraft_behavior_trade_with_player
+            public class Minecraft_behavior_trade_with_player : Behavior
             {
                 //Allows the player to trade with this mob.
             }
 
-            public class Minecraft_behavior_vex_copy_owner_target
+            public class Minecraft_behavior_vex_copy_owner_target : Behavior
             {
                 //Allows the mob to target the same entity its owner is targeting.
                 [JsonProperty(PropertyName = "entity_types", NullValueHandling = NullValueHandling.Ignore)]
@@ -2233,17 +2317,17 @@ namespace Exporter
                 public List<EntityTypesSub> entity_types { get; set; } //  JSON Object List of entities this mob can copy the owner from
             }
 
-            public class Minecraft_behavior_vex_random_move
+            public class Minecraft_behavior_vex_random_move : Behavior
             {
                 //Allows the mob to move around randomly like the Vex.
             }
 
-            public class Minecraft_behavior_wither_random_attack_pos_goal
+            public class Minecraft_behavior_wither_random_attack_pos_goal : Behavior
             {
                 //Allows the wither to launch random attacks.Can only be used by the Wither Boss.
             }
 
-            public class Minecraft_behavior_wither_target_highest_damage
+            public class Minecraft_behavior_wither_target_highest_damage : Behavior
             {
                 //Allows the wither to focus its attacks on whichever mob has dealt the most damage to it.
                 [JsonProperty(PropertyName = "entity_types", NullValueHandling = NullValueHandling.Ignore)]

@@ -9,6 +9,7 @@ namespace Exporter
 {
     public class Entity
     {
+        [JsonIgnore]
         public string Name { get; set; }
 
         [JsonProperty(PropertyName = "minecraft:entity")]
@@ -56,6 +57,9 @@ namespace Exporter
             [JsonProperty(PropertyName = "minecraft:healable", NullValueHandling = NullValueHandling.Ignore)]
             public MCDataStructures.Components.Minecraft_healable minecraft_healable { get; set; }
 
+            [JsonProperty(PropertyName = "minecraft:identifier", NullValueHandling = NullValueHandling.Ignore)]
+            public MCDataStructures.Components.Minecraft_identity minecraft_identifier { get; set; }
+
             [JsonProperty(PropertyName = "minecraft:interact", NullValueHandling = NullValueHandling.Ignore)]
             [JsonConverter(typeof(SingleOrArrayConverter<MCDataStructures.Components.Minecraft_interact>))]
             public List<MCDataStructures.Components.Minecraft_interact> minecraft_interact { get; set; }
@@ -64,13 +68,16 @@ namespace Exporter
             public MCDataStructures.Components.Minecraft_inventory minecraft_inventory { get; set; }
 
             [JsonProperty(PropertyName = "minecraft:item_hopper", NullValueHandling = NullValueHandling.Ignore)]
-            public MCDataStructures.Components.Minecraft_item_hopper minecraft_item_hopper { get; set; }
+            [JsonConverter(typeof(MCDataStructures.Properties.PoorlyImplementedBooleanConverter))]
+            public MCDataStructures.Properties.PoorlyImplementedBooleanProperty minecraft_item_hopper { get; set; }
 
             [JsonProperty(PropertyName = "minecraft:jump_dynamic", NullValueHandling = NullValueHandling.Ignore)]
-            public MCDataStructures.Components.Minecraft_jump_dynamic minecraft_jump_dynamic { get; set; }
+            [JsonConverter(typeof(MCDataStructures.Properties.PoorlyImplementedBooleanConverter))]
+            public MCDataStructures.Properties.PoorlyImplementedBooleanProperty minecraft_jump_dynamic { get; set; }
 
             [JsonProperty(PropertyName = "minecraft:jump_static", NullValueHandling = NullValueHandling.Ignore)]
-            public MCDataStructures.Components.Minecraft_jump_static minecraft_jump_static { get; set; }
+            [JsonConverter(typeof(MCDataStructures.Properties.PoorlyImplementedBooleanConverter))]
+            public MCDataStructures.Properties.PoorlyImplementedBooleanProperty minecraft_jump_static { get; set; }
 
             [JsonProperty(PropertyName = "minecraft:leashable", NullValueHandling = NullValueHandling.Ignore)]
             public MCDataStructures.Components.Minecraft_leashable minecraft_leashable { get; set; }
@@ -113,6 +120,9 @@ namespace Exporter
 
             [JsonProperty(PropertyName = "minecraft:peek", NullValueHandling = NullValueHandling.Ignore)]
             public MCDataStructures.Components.Minecraft_peek minecraft_peek { get; set; }
+
+            [JsonProperty(PropertyName = "minecraft:physics", NullValueHandling = NullValueHandling.Ignore)]
+            public MCDataStructures.Components.Minecraft_physics minecraft_physics { get; set; }
 
             [JsonProperty(PropertyName = "minecraft:projectile", NullValueHandling = NullValueHandling.Ignore)]
             public MCDataStructures.Components.Minecraft_projectile minecraft_projectile { get; set; }
@@ -428,10 +438,139 @@ namespace Exporter
 
             [JsonProperty(PropertyName = "minecraft:behavior.wither_target_highest_damage", NullValueHandling = NullValueHandling.Ignore)]
             public MCDataStructures.Components.Minecraft_behavior_wither_target_highest_damage minecraft_behavior_wither_target_highest_damage { get; set; }
+
+            [JsonProperty(PropertyName = "minecraft:ambient_sound_interval", NullValueHandling = NullValueHandling.Ignore)]
+            public MCDataStructures.Properties.Minecraft_ambient_sound_interval minecraft_Ambient_Sound_Interval { get; set; }
+
+            [JsonProperty(PropertyName = "minecraft:burns_in_daylight", NullValueHandling = NullValueHandling.Ignore)]
+            [JsonConverter(typeof(MCDataStructures.Properties.PoorlyImplementedBooleanConverter))]
+            public MCDataStructures.Properties.PoorlyImplementedBooleanProperty minecraft_Burns_In_Daylight { get; set; }
+
+            [JsonProperty(PropertyName = "minecraft:can_climb", NullValueHandling = NullValueHandling.Ignore)]
+            [JsonConverter(typeof(MCDataStructures.Properties.PoorlyImplementedBooleanConverter))]
+            public MCDataStructures.Properties.PoorlyImplementedBooleanProperty minecraft_Can_Climb { get; set; }
+
+            [JsonProperty(PropertyName = "minecraft:can_fly", NullValueHandling = NullValueHandling.Ignore)]
+            [JsonConverter(typeof(MCDataStructures.Properties.PoorlyImplementedBooleanConverter))]
+            public MCDataStructures.Properties.PoorlyImplementedBooleanProperty minecraft_Can_Fly { get; set; }
+
+            [JsonProperty(PropertyName = "minecraft:can_power_jump", NullValueHandling = NullValueHandling.Ignore)]
+            [JsonConverter(typeof(MCDataStructures.Properties.PoorlyImplementedBooleanConverter))]
+            public MCDataStructures.Properties.PoorlyImplementedBooleanProperty minecraft_Can_Power_Jump { get; set; }
+
+            [JsonProperty(PropertyName = "minecraft:collision_box", NullValueHandling = NullValueHandling.Ignore)]
+            public MCDataStructures.Properties.Minecraft_collision_box minecraft_Collision_Box { get; set; }
+
+            [JsonProperty(PropertyName = "minecraft:color", NullValueHandling = NullValueHandling.Ignore)]
+            public MCDataStructures.Properties.Minecraft_color minecraft_Color { get; set; }
+
+            [JsonProperty(PropertyName = "minecraft:default_look_angle", NullValueHandling = NullValueHandling.Ignore)]
+            public MCDataStructures.Properties.Minecraft_default_look_angle minecraft_Default_Look_Angle { get; set; }
+
+            [JsonProperty(PropertyName = "minecraft:equipment", NullValueHandling = NullValueHandling.Ignore)]
+            public MCDataStructures.Properties.Minecraft_equipment minecraft_Equipment { get; set; }
+
+            [JsonProperty(PropertyName = "minecraft:fire_immune", NullValueHandling = NullValueHandling.Ignore)]
+            [JsonConverter(typeof(MCDataStructures.Properties.PoorlyImplementedBooleanConverter))]
+            public MCDataStructures.Properties.PoorlyImplementedBooleanProperty minecraft_Fire_Immune { get; set; }
+
+            [JsonProperty(PropertyName = "minecraft:floats_in_liquid", NullValueHandling = NullValueHandling.Ignore)]
+            [JsonConverter(typeof(MCDataStructures.Properties.PoorlyImplementedBooleanConverter))]
+            public MCDataStructures.Properties.PoorlyImplementedBooleanProperty minecraft_Floats_In_Liquid { get; set; }
+
+            [JsonProperty(PropertyName = "minecraft:flying_speed", NullValueHandling = NullValueHandling.Ignore)]
+            public MCDataStructures.Properties.Minecraft_flying_speed minecraft_Flying_Speed { get; set; }
+
+            [JsonProperty(PropertyName = "minecraft:foot_size", NullValueHandling = NullValueHandling.Ignore)]
+            public MCDataStructures.Properties.Minecraft_foot_size minecraft_Foot_Size { get; set; }
+
+            [JsonProperty(PropertyName = "minecraft:friction_modifier", NullValueHandling = NullValueHandling.Ignore)]
+            public MCDataStructures.Properties.Minecraft_friction_modifier minecraft_Friction_Modifier { get; set; }
+
+            [JsonProperty(PropertyName = "minecraft:ground_offset", NullValueHandling = NullValueHandling.Ignore)]
+            public MCDataStructures.Properties.Minecraft_ground_offset minecraft_Ground_Offset { get; set; }
+
+            [JsonProperty(PropertyName = "minecraft:hurt_when_wet", NullValueHandling = NullValueHandling.Ignore)]
+            [JsonConverter(typeof(MCDataStructures.Properties.PoorlyImplementedBooleanConverter))]
+            public MCDataStructures.Properties.PoorlyImplementedBooleanProperty minecraft_Hurt_When_Wet { get; set; }
+
+            [JsonProperty(PropertyName = "minecraft:input_ground_controlled", NullValueHandling = NullValueHandling.Ignore)]
+            [JsonConverter(typeof(MCDataStructures.Properties.PoorlyImplementedBooleanConverter))]
+            public MCDataStructures.Properties.PoorlyImplementedBooleanProperty minecraft_Input_Ground_Controlled { get; set; }
+
+            [JsonProperty(PropertyName = "minecraft:is_baby", NullValueHandling = NullValueHandling.Ignore)]
+            [JsonConverter(typeof(MCDataStructures.Properties.PoorlyImplementedBooleanConverter))]
+            public MCDataStructures.Properties.PoorlyImplementedBooleanProperty minecraft_Is_Baby { get; set; }
+
+            [JsonProperty(PropertyName = "minecraft:is_charged", NullValueHandling = NullValueHandling.Ignore)]
+            [JsonConverter(typeof(MCDataStructures.Properties.PoorlyImplementedBooleanConverter))]
+            public MCDataStructures.Properties.PoorlyImplementedBooleanProperty minecraft_Is_Charged { get; set; }
+
+            [JsonProperty(PropertyName = "minecraft:is_chested", NullValueHandling = NullValueHandling.Ignore)]
+            [JsonConverter(typeof(MCDataStructures.Properties.PoorlyImplementedBooleanConverter))]
+            public MCDataStructures.Properties.PoorlyImplementedBooleanProperty minecraft_Is_Chested { get; set; }
+
+            [JsonProperty(PropertyName = "minecraft:is_dyeable", NullValueHandling = NullValueHandling.Ignore)]
+            public MCDataStructures.Properties.Minecraft_is_dyeable minecraft_Is_Dyeable { get; set; }
+
+            [JsonProperty(PropertyName = "minecraft:is_ignited", NullValueHandling = NullValueHandling.Ignore)]
+            [JsonConverter(typeof(MCDataStructures.Properties.PoorlyImplementedBooleanConverter))]
+            public MCDataStructures.Properties.PoorlyImplementedBooleanProperty minecraft_Is_Ignited { get; set; }
+
+            [JsonProperty(PropertyName = "minecraft:is_saddled", NullValueHandling = NullValueHandling.Ignore)]
+            [JsonConverter(typeof(MCDataStructures.Properties.PoorlyImplementedBooleanConverter))]
+            public MCDataStructures.Properties.PoorlyImplementedBooleanProperty minecraft_Is_Saddled { get; set; }
+
+            [JsonProperty(PropertyName = "minecraft:is_shaking", NullValueHandling = NullValueHandling.Ignore)]
+            [JsonConverter(typeof(MCDataStructures.Properties.PoorlyImplementedBooleanConverter))]
+            public MCDataStructures.Properties.PoorlyImplementedBooleanProperty minecraft_Is_Shaking { get; set; }
+
+            [JsonProperty(PropertyName = "minecraft:is_sheared", NullValueHandling = NullValueHandling.Ignore)]
+            [JsonConverter(typeof(MCDataStructures.Properties.PoorlyImplementedBooleanConverter))]
+            public MCDataStructures.Properties.PoorlyImplementedBooleanProperty minecraft_Is_Sheared { get; set; }
+
+            [JsonProperty(PropertyName = "minecraft:is_stackable", NullValueHandling = NullValueHandling.Ignore)]
+            [JsonConverter(typeof(MCDataStructures.Properties.PoorlyImplementedBooleanConverter))]
+            public MCDataStructures.Properties.PoorlyImplementedBooleanProperty minecraft_Is_Stackable { get; set; }
+
+            [JsonProperty(PropertyName = "minecraft:is_tamed", NullValueHandling = NullValueHandling.Ignore)]
+            [JsonConverter(typeof(MCDataStructures.Properties.PoorlyImplementedBooleanConverter))]
+            public MCDataStructures.Properties.PoorlyImplementedBooleanProperty minecraft_Is_Tamed { get; set; }
+            
+            [JsonProperty(PropertyName = "minecraft:item_controllable", NullValueHandling = NullValueHandling.Ignore)]
+            public MCDataStructures.Properties.Minecraft_item_controllable minecraft_Item_Controllable { get; set; }
+
+            [JsonProperty(PropertyName = "minecraft:loot", NullValueHandling = NullValueHandling.Ignore)]
+            public MCDataStructures.Properties.Minecraft_loot minecraft_Loot { get; set; }
+
+            [JsonProperty(PropertyName = "minecraft:mark_variant", NullValueHandling = NullValueHandling.Ignore)]
+            public MCDataStructures.Properties.Minecraft_mark_variant minecraft_Mark_Variant { get; set; }
+
+            [JsonProperty(PropertyName = "minecraft:push_through", NullValueHandling = NullValueHandling.Ignore)]
+            public MCDataStructures.Properties.Minecraft_push_through minecraft_Push_Through { get; set; }
+
+            [JsonProperty(PropertyName = "minecraft:scale", NullValueHandling = NullValueHandling.Ignore)]
+            public MCDataStructures.Properties.Minecraft_scale minecraft_Scale { get; set; }
+
+            [JsonProperty(PropertyName = "minecraft:sound_volume", NullValueHandling = NullValueHandling.Ignore)]
+            public MCDataStructures.Properties.Minecraft_sound_volume minecraft_Sound_Volume { get; set; }
+
+            [JsonProperty(PropertyName = "minecraft:type_family", NullValueHandling = NullValueHandling.Ignore)]
+            public MCDataStructures.Properties.Minecraft_type_family minecraft_Type_Family { get; set; }
+
+            [JsonProperty(PropertyName = "minecraft:variant", NullValueHandling = NullValueHandling.Ignore)]
+            public MCDataStructures.Properties.Minecraft_variant minecraft_Variant { get; set; }
+
+            [JsonProperty(PropertyName = "minecraft:walk_animation_speed", NullValueHandling = NullValueHandling.Ignore)]
+            public MCDataStructures.Properties.Minecraft_walk_animation_speed minecraft_Walk_Animation_Speed { get; set; }
+
+            [JsonProperty(PropertyName = "minecraft:wants_jockey", NullValueHandling = NullValueHandling.Ignore)]
+            [JsonConverter(typeof(MCDataStructures.Properties.PoorlyImplementedBooleanConverter))]
+            public MCDataStructures.Properties.PoorlyImplementedBooleanProperty minecraft_Wants_Jockey { get; set; }
         }
 
         [JsonProperty(PropertyName = "components")]
-        public Components components { get; set; } = new Components();
+        public Components components { get; set; }
     }
 
 }

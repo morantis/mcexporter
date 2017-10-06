@@ -11,10 +11,10 @@ namespace Exporter
     {
         static void Main(string[] args)
         {
-            var unpacker = Unpacker.Create("C:\\Users\\pmeade\\Documents\\moba\\vanillabehaviorpack-master");
+            var unpacker = Unpacker.Create(Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments) + "\\moba\\vanillabehaviorpack-master");
             var pack = unpacker.Extract();
             var packer = Packer.Create("Moba", pack);
-            packer.Pack("C:\\Users\\pmeade\\Documents\\moba\\MinecraftBehaviorPacks"); 
+            packer.Pack(Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments) + "\\moba\\MinecraftBehaviorPacks"); 
 
             string output = JsonConvert.SerializeObject(pack);
 
