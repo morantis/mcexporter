@@ -587,8 +587,7 @@ namespace Exporter
                 {
                     ComponentGroup group = new ComponentGroup();
 
-//                    group.Components = JsonConvert.DeserializeObject(gToken.ToString());
-                    dynamic foo = JsonConvert.DeserializeObject(gToken.First().ToString());
+                    //group.Components = gToken.ToObject<Components>();
                     groups.Add(group);
                 }
 
