@@ -570,59 +570,14 @@ namespace Exporter
             public MCDataStructures.Properties.PoorlyImplementedBooleanProperty minecraft_Wants_Jockey { get; set; }
         }
 
-        public class ComponentGroupsConverter : JsonConverter
+
+        public bool ShouldSerializeComponentGroups()
         {
-            public override bool CanConvert(Type objectType)
-            {
-                return (objectType == typeof(List<ComponentGroup>));
-            }
-
-            public override object ReadJson(JsonReader reader, Type objectType, object existingValue, JsonSerializer serializer)
-            {
-                JToken token = JToken.Load(reader);
-
-                List<ComponentGroup> groups = new List<ComponentGroup>();
-
-                foreach (var gToken in token.Children())
-                {
-                    ComponentGroup group = new ComponentGroup();
-
-//                    group.Components = JsonConvert.DeserializeObject(gToken.ToString());
-                    dynamic foo = JsonConvert.DeserializeObject(gToken.First().ToString());
-                    groups.Add(group);
-                }
-
-                return existingValue;
-            }
-
-            public override bool CanWrite
-            {
-                get { return true; }
-            }
-
-            public override void WriteJson(JsonWriter writer, object value, JsonSerializer serializer)
-            {
-                List<ComponentGroup> groups = value as List<ComponentGroup>;
-
-                foreach (var group in groups)
-                {
-                    writer.WritePropertyName(group.Name);
-                    writer.WriteValue(group.Components);
-                }
-            }
-        }
-
-        public class ComponentGroup
-        {
-            [JsonIgnore]
-            public string Name { get; set; }
-
-            public List<Components> Components { get; set; }
+            return ComponentGroups?.Count > 0;
         }
 
         [JsonProperty(PropertyName = "component_groups", NullValueHandling = NullValueHandling.Ignore)]
-        [JsonConverter(typeof(ComponentGroupsConverter))]
-        public List<ComponentGroup> ComponentGroups { get; set; }
+        public Dictionary<string, Dictionary<string, Components>> ComponentGroups { get; set; }
 
         [JsonProperty(PropertyName = "components")]
         public Components components { get; set; }

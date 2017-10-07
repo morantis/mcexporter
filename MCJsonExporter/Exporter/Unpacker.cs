@@ -43,7 +43,10 @@ namespace Exporter
             // Chests
             foreach (var file in Directory.EnumerateFiles(Root + "/loot_tables/chests", "*.json"))
             {
-                dynamic chest = JsonConvert.DeserializeObject<LootTable>(File.ReadAllText(file));
+                dynamic chest = JsonConvert.DeserializeObject<LootTable>(File.ReadAllText(file), new JsonSerializerSettings
+                {
+                    DefaultValueHandling = DefaultValueHandling.Ignore
+                });
                 chest.Name = Path.GetFileNameWithoutExtension(file);
                 lootTables.Chests.Add(chest);
             }
@@ -51,7 +54,10 @@ namespace Exporter
             // Entities
             foreach (var file in Directory.EnumerateFiles(Root + "/loot_tables/entities", "*.json"))
             {
-                var entity = JsonConvert.DeserializeObject<LootTable>(File.ReadAllText(file));
+                var entity = JsonConvert.DeserializeObject<LootTable>(File.ReadAllText(file), new JsonSerializerSettings
+                {
+                    DefaultValueHandling = DefaultValueHandling.Ignore
+                });
                 entity.Name = Path.GetFileNameWithoutExtension(file);
                 lootTables.Entities.Add(entity);
             }
@@ -59,16 +65,25 @@ namespace Exporter
             // Equipment
             foreach (var file in Directory.EnumerateFiles(Root + "/loot_tables/equipment", "*.json"))
             {
-                var equipment = JsonConvert.DeserializeObject<LootTable>(File.ReadAllText(file));
+                var equipment = JsonConvert.DeserializeObject<LootTable>(File.ReadAllText(file), new JsonSerializerSettings
+                {
+                    DefaultValueHandling = DefaultValueHandling.Ignore
+                });
                 equipment.Name = Path.GetFileNameWithoutExtension(file);
                 lootTables.Equipment.Add(equipment);
             }
 
             // Fishing
-            lootTables.Gameplay.FishingJson = JsonConvert.DeserializeObject<LootTable>(File.ReadAllText(Root + "/loot_tables/gameplay/fishing.json"));
+            lootTables.Gameplay.FishingJson = JsonConvert.DeserializeObject<LootTable>(File.ReadAllText(Root + "/loot_tables/gameplay/fishing.json"), new JsonSerializerSettings
+            {
+                DefaultValueHandling = DefaultValueHandling.Ignore
+            });
             foreach (var file in Directory.EnumerateFiles(Root + "/loot_tables/gameplay/Fishing", "*.json"))
             {
-                var fishing = JsonConvert.DeserializeObject<LootTable>(File.ReadAllText(file));
+                var fishing = JsonConvert.DeserializeObject<LootTable>(File.ReadAllText(file), new JsonSerializerSettings
+                {
+                    DefaultValueHandling = DefaultValueHandling.Ignore
+                });
                 fishing.Name = Path.GetFileNameWithoutExtension(file);
                 lootTables.Gameplay.Fishing.Add(fishing);
             }
@@ -82,7 +97,10 @@ namespace Exporter
             var trading = new Trading();
             foreach (var file in Directory.EnumerateFiles(Root + "/trading", "*.json"))
             {
-                var trade = JsonConvert.DeserializeObject<Trade>(File.ReadAllText(file));
+                var trade = JsonConvert.DeserializeObject<Trade>(File.ReadAllText(file), new JsonSerializerSettings
+                {
+                    DefaultValueHandling = DefaultValueHandling.Ignore
+                });
                 trade.Name = Path.GetFileNameWithoutExtension(file);
                 trading.Trades.Add(trade);
             }
@@ -95,7 +113,10 @@ namespace Exporter
             try
             {
                 // Parse the manifest
-                pack.Manifest = JsonConvert.DeserializeObject<Manifest>(File.ReadAllText(Root + "/manifest.json"));
+                pack.Manifest = JsonConvert.DeserializeObject<Manifest>(File.ReadAllText(Root + "/manifest.json"), new JsonSerializerSettings
+                {
+                    DefaultValueHandling = DefaultValueHandling.Ignore
+                });
 
                 // Verify the icon exists. We will simply copy it later
                 if (!File.Exists(Root + "/pack_icon.png"))
