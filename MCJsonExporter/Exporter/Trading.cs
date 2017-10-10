@@ -9,7 +9,7 @@ namespace Exporter
     {
         internal void Save(string packDirectory)
         {
-            string subDirectory = packDirectory + "\\trading\\entities";
+            string subDirectory = packDirectory + "\\trading";
             Directory.CreateDirectory(subDirectory);
 
             foreach (var trade in Trades)

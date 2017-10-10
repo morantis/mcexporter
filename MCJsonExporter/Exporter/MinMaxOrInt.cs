@@ -8,7 +8,7 @@ using Newtonsoft.Json.Linq;
 
 namespace Exporter
 {
-    class RollsConverter : JsonConverter
+    class MinMaxOrIntConverter : JsonConverter
     {
         public override bool CanConvert(Type objectType)
         {

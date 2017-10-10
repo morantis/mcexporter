@@ -14,10 +14,17 @@ namespace Exporter
 
         public class UnnamedData
         {
+            [JsonProperty(PropertyName = "description", NullValueHandling = NullValueHandling.Ignore)]
             public string Description { get; set; }
+
+            [JsonProperty(PropertyName = "type", NullValueHandling = NullValueHandling.Ignore)]
             public string Name { get; set; }
-            public string UUIS { get; set; }
-            public float[] Version { get; set; }
+
+            [JsonProperty(PropertyName = "uuid", NullValueHandling = NullValueHandling.Ignore)]
+            public string UUID { get; set; }
+
+            [JsonProperty(PropertyName = "version", NullValueHandling = NullValueHandling.Ignore)]
+            public int[] Version { get; set; }
         }
 
         [JsonProperty(PropertyName = "header", NullValueHandling = NullValueHandling.Ignore)]
