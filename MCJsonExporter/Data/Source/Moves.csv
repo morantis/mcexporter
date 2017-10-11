@@ -1,0 +1,4 @@
+Name,Speed,Basic,Jump.Static,Climb
+SlowCreep,0.1,1,0,0
+MedCreep,0.25,1,0,0
+FastCreep,0.5,1,0,0

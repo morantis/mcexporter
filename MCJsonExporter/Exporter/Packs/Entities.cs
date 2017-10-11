@@ -7,17 +7,17 @@ namespace Exporter
 {
     public class Entities
     {
-        public List<Entity> Instances { get; internal set; } = new List<Entity>();
+        public Dictionary<string, Entity> Instances { get; internal set; } = new Dictionary<string, Entity>();
 
         internal void Save(string packDirectory)
         {
             string subDirectory = packDirectory + "\\entities";
             Directory.CreateDirectory(subDirectory);
 
-            foreach (var instance in Instances)
+            foreach (var pair in Instances)
             {
-                var json = JsonConvert.SerializeObject(instance, Formatting.Indented);
-                File.WriteAllText(subDirectory + "\\" + instance.Name + ".json", json);
+                var json = JsonConvert.SerializeObject(pair.Value, Formatting.Indented);
+                File.WriteAllText(subDirectory + "\\" + pair.Key + ".json", json);
             }
 
         }

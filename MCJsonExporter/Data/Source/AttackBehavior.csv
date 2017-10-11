@@ -1,0 +1,3 @@
+Name,Priority,EntityTypes,MustSee,MustReach
+RedCreep,2,BlueCreeps,1,1
+BlueCreep,2,RedCreep,1,1

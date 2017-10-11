@@ -1,0 +1,3 @@
+Name,Filter1,Distance1,Filter2,Distance2,Filter3,Distance3
+RedCreepEnemies,BlueCreep,16,BluePlayer,16,,
+BlueCreepEnemies,RedCreep,16,RedPlayer,16,,

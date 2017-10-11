@@ -46,37 +46,38 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Attribute.cs" />
-    <Compile Include="BehaviorPack.cs" />
-    <Compile Include="Component.cs" />
-    <Compile Include="Condition.cs" />
-    <Compile Include="Entities.cs" />
-    <Compile Include="Entity.cs" />
-    <Compile Include="EntityTypes.cs" />
-    <Compile Include="Entry.cs" />
-    <Compile Include="Filter.cs" />
-    <Compile Include="Function.cs" />
-    <Compile Include="Gameplay.cs" />
-    <Compile Include="Item.cs" />
-    <Compile Include="LootTable.cs" />
-    <Compile Include="LootTables.cs" />
-    <Compile Include="Manifest.cs" />
-    <Compile Include="MCDataStructures.cs" />
-    <Compile Include="MinMaxOrInt.cs" />
-    <Compile Include="Packer.cs" />
-    <Compile Include="Pool.cs" />
-    <Compile Include="PoorlyImplementedBooleanProperty.cs" />
+    <Compile Include="Serializers\SourceSerializer.cs" />
+    <Compile Include="Models\Attribute.cs" />
+    <Compile Include="Packs\BehaviorPack.cs" />
+    <Compile Include="Models\Component.cs" />
+    <Compile Include="Models\Condition.cs" />
+    <Compile Include="Packs\Entities.cs" />
+    <Compile Include="Models\Entity.cs" />
+    <Compile Include="Models\EntityTypes.cs" />
+    <Compile Include="Models\Entry.cs" />
+    <Compile Include="Models\Filter.cs" />
+    <Compile Include="Models\Function.cs" />
+    <Compile Include="Models\Gameplay.cs" />
+    <Compile Include="Models\Item.cs" />
+    <Compile Include="Models\LootTable.cs" />
+    <Compile Include="Packs\LootTables.cs" />
+    <Compile Include="Packs\Manifest.cs" />
+    <Compile Include="Models\MCDataStructures.cs" />
+    <Compile Include="Models\MinMaxOrInt.cs" />
+    <Compile Include="Serializers\PackSerializer.cs" />
+    <Compile Include="Models\Pool.cs" />
+    <Compile Include="Models\PoorlyImplementedBooleanProperty.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Property.cs" />
-    <Compile Include="SingleOrArrayConverter.cs" />
-    <Compile Include="Trade.cs" />
-    <Compile Include="Trading.cs" />
-    <Compile Include="Trigger.cs" />
-    <Compile Include="Unpacker.cs" />
+    <Compile Include="Models\Property.cs" />
+    <Compile Include="Models\SingleOrArrayConverter.cs" />
+    <Compile Include="Models\Trade.cs" />
+    <Compile Include="Packs\Trading.cs" />
+    <Compile Include="Models\Trigger.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

@@ -10,9 +10,6 @@ namespace Exporter
 {
     public class Entity
     {
-        [JsonIgnore]
-        public string Name { get; set; }
-
         [JsonProperty(PropertyName = "minecraft:entity")]
         public MinecraftEntity minecraftEntity { get; set; }
     }

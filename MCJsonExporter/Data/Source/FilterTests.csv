@@ -1,0 +1,5 @@
+Name,Test,Subject,Operator,Value
+Creep,is_family,other,eq,creep
+Blue,is_family,other,eq,blue
+Red,is_family,other,eq,red
+Player,is_family,other,eq,player

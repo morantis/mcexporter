@@ -1,0 +1,3 @@
+Entity,Family,Health,Move,Equip,Loot,Melee,Range,Enemy Entity Types
+Skeleton,RedCreep,Creep2,SlowCreep,Skel,Skel,Creep2,Creep2,RedCreepEnemies
+Witch,BlueCreep,Creep2,SlowCreep,Witch,Witch,Creep2,Creep2,BlueCreepEnemies

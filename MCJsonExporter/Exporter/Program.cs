@@ -9,17 +9,30 @@ namespace Exporter
 {
     class Program
     {
+
+        static BehaviorPack MakeSource(string basePackDir)
+        {
+            return Serializers.PackSerializer.Deserialize(basePackDir);
+        }
+
+        static bool MakePack(BehaviorPack pack, string projectName, string baseOutputDir)
+        {
+            return Serializers.PackSerializer.Serialize(pack, projectName, baseOutputDir);
+        }
+
         static void Main(string[] args)
         {
-            var unpacker = Unpacker.Create(Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments) + "\\moba\\vanillabehaviorpack-master");
-            var pack = unpacker.Extract();
-            var packer = Packer.Create("Moba", pack);
-            packer.Pack(Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments) + "\\moba\\MinecraftBehaviorPacks"); 
+            var pack = MakeSource(Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments) + "\\moba\\vanillabehaviorpack-master");
+            bool success = MakePack(pack, "Moba", Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments) + "\\moba\\MinecraftBehaviorPacks");
 
-            string output = JsonConvert.SerializeObject(pack);
-
-            Console.Write(output);
-
+            if (success)
+            {
+                Console.Write("Succeed");
+            }
+            else
+            {
+                Console.Write("Fail");
+            }
         }
     }
 }
