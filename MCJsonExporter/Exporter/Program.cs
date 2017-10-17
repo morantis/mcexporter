@@ -17,6 +17,7 @@ namespace Exporter
 
         static bool MakePack(BehaviorPack pack, string projectName, string baseOutputDir)
         {
+            Serializers.SourceSerializer.ApplySource(pack, Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments) + "\\moba\\Source");
             return Serializers.PackSerializer.Serialize(pack, projectName, baseOutputDir);
         }
 
