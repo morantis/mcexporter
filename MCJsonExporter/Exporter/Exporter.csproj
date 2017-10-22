@@ -46,6 +46,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Serializers\EntityComponentsConverter.cs" />
     <Compile Include="Serializers\SourceSerializer.cs" />
     <Compile Include="Models\Attribute.cs" />
     <Compile Include="Packs\BehaviorPack.cs" />

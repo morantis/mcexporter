@@ -113,12 +113,13 @@ namespace Exporter.Serializers
 
             // Process the contents
             var line = enReader.ReadLine();
-            while (line.Length > 0)
+            while (line != null && line.Length > 0)
             {
                 var parts = line.Split(',');
 
                 Entity entity = new Entity() { Family = parts[1], Health = parts[2], Move = parts[3], Equip = parts[4], Loot = parts[5], Melee = parts[6], Range = parts[7], EnemyFilterGroup = parts[8] };
-                entities.Add(parts[0], entity);
+                entities.Add(parts[0].ToLower(), entity);
+                line = enReader.ReadLine();
             }
 
             return entities;
@@ -142,12 +143,13 @@ namespace Exporter.Serializers
 
             // Process the contents
             var line = enReader.ReadLine();
-            while (line.Length > 0)
+            while (line != null && line.Length > 0)
             {
                 var parts = line.Split(',');
 
-                var obj = new AttackBehaviors() { Priority = Convert.ToInt32(parts[1]), EntityTypes = parts[2], MustSee = Convert.ToBoolean(parts[3]), MustReach = Convert.ToBoolean(parts[4]));
-                coll.Add(parts[0], obj);
+                var obj = new AttackBehaviors() { Priority = Convert.ToInt32(parts[1]), EntityTypes = parts[2], MustSee = Convert.ToBoolean(parts[3]), MustReach = Convert.ToBoolean(parts[4]) };
+                coll.Add(parts[0].ToLower(), obj);
+                line = enReader.ReadLine();
             }
 
             return coll;
@@ -171,12 +173,13 @@ namespace Exporter.Serializers
 
             // Process the contents
             var line = enReader.ReadLine();
-            while (line.Length > 0)
+            while (line != null && line.Length > 0)
             {
                 var parts = line.Split(',');
 
-                var obj = new Families() { Type1 = parts[1], Type2 = parts[2], Type3 = parts[3], Type4 = parts[4], Type5 = parts[5], );
-                coll.Add(parts[0], obj);
+                var obj = new Families() { Type1 = parts[1], Type2 = parts[2], Type3 = parts[3], Type4 = parts[4], Type5 = parts[5] };
+                coll.Add(parts[0].ToLower(), obj);
+                line = enReader.ReadLine();
             }
 
             return coll;
@@ -200,7 +203,7 @@ namespace Exporter.Serializers
 
             // Process the contents
             var line = enReader.ReadLine();
-            while (line.Length > 0)
+            while (line != null && line.Length > 0)
             {
                 var parts = line.Split(',');
 
@@ -213,7 +216,8 @@ namespace Exporter.Serializers
                     Test4 = parts[5],
                     Test5 = parts[6]
                 };
-                coll.Add(parts[0], obj);
+                coll.Add(parts[0].ToLower(), obj);
+                line = enReader.ReadLine();
             }
 
             return coll;
@@ -237,12 +241,13 @@ namespace Exporter.Serializers
 
             // Process the contents
             var line = enReader.ReadLine();
-            while (line.Length > 0)
+            while (line != null && line.Length > 0)
             {
                 var parts = line.Split(',');
 
                 var obj = new FilterTest() { Test = parts[1], Subject = parts[2], Operator = parts[3], Value = parts[4]};
-                coll.Add(parts[0], obj);
+                coll.Add(parts[0].ToLower(), obj);
+                line = enReader.ReadLine();
             }
 
             return coll;
@@ -266,12 +271,13 @@ namespace Exporter.Serializers
 
             // Process the contents
             var line = enReader.ReadLine();
-            while (line.Length > 0)
+            while (line != null && line.Length > 0)
             {
                 var parts = line.Split(',');
 
                 var obj = new Health() { Default = Convert.ToInt32(parts[1]), Max = Convert.ToInt32(parts[2]) };
-                coll.Add(parts[0], obj);
+                coll.Add(parts[0].ToLower(), obj);
+                line = enReader.ReadLine();
             }
 
             return coll;
@@ -295,12 +301,13 @@ namespace Exporter.Serializers
 
             // Process the contents
             var line = enReader.ReadLine();
-            while (line.Length > 0)
+            while (line != null && line.Length > 0)
             {
                 var parts = line.Split(',');
 
                 var obj = new Melee() { Damage = Convert.ToInt32(parts[1]) };
-                coll.Add(parts[0], obj);
+                coll.Add(parts[0].ToLower(), obj);
+                line = enReader.ReadLine();
             }
 
             return coll;
@@ -324,12 +331,13 @@ namespace Exporter.Serializers
 
             // Process the contents
             var line = enReader.ReadLine();
-            while (line.Length > 0)
+            while (line != null && line.Length > 0)
             {
                 var parts = line.Split(',');
 
                 var obj = new Moves() { Speed = Convert.ToDouble(parts[1]), Basic = Convert.ToBoolean(parts[2]), Jump = Convert.ToBoolean(parts[3]), Climb = Convert.ToBoolean(parts[4]) };
-                coll.Add(parts[0], obj);
+                coll.Add(parts[0].ToLower(), obj);
+                line = enReader.ReadLine();
             }
 
             return coll;
@@ -353,12 +361,13 @@ namespace Exporter.Serializers
 
             // Process the contents
             var line = enReader.ReadLine();
-            while (line.Length > 0)
+            while (line != null && line.Length > 0)
             {
                 var parts = line.Split(',');
 
                 var obj = new Range() { Projectile = parts[1], IntervalMin = Convert.ToInt32(parts[2]), IntervalMax = Convert.ToInt32(parts[3]), Radius = Convert.ToInt32(parts[4]) };
-                coll.Add(parts[0], obj);
+                coll.Add(parts[0].ToLower(), obj);
+                line = enReader.ReadLine();
             }
 
             return coll;
@@ -399,7 +408,6 @@ namespace Exporter.Serializers
                 }
 
                 var bnat = pEntity.minecraftEntity.Components["minecraft:behavior.nearest_attackable_target"] as MCDataStructures.Minecraft_behavior_nearest_attackable_target;
-                bnat.
             }
 
             return true;
