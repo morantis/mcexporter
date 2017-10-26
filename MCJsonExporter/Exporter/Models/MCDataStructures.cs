@@ -34,7 +34,8 @@ namespace Exporter
         {
             // Defines an entity's melee attack and any additional effects on it.
             [JsonProperty(PropertyName = "damage", NullValueHandling = NullValueHandling.Ignore, DefaultValueHandling = DefaultValueHandling.Ignore)]
-            public float[] Damage;
+            [JsonConverter(typeof(MinMaxOrIntConverter))]
+            public MinMaxOrInt Damage;
 
             [JsonProperty(PropertyName = "effect_duration", NullValueHandling = NullValueHandling.Ignore, DefaultValueHandling = DefaultValueHandling.Ignore)]
             public float Effect_duration { get; set; } // {get; set;} //	0.0	Duration in seconds of the status ailment applied to the damaged entity
@@ -65,6 +66,15 @@ namespace Exporter
 
             [JsonProperty(PropertyName = "value", NullValueHandling = NullValueHandling.Ignore, DefaultValueHandling = DefaultValueHandling.Ignore)]
             public int Value { get; set; } // {get; set;} // Integer  1	The initial value of the strength
+        }
+
+        public class Minecraft_health : Attribute
+        {
+            [JsonProperty(PropertyName = "max", NullValueHandling = NullValueHandling.Ignore, DefaultValueHandling = DefaultValueHandling.Ignore)]
+            public int Max { get; set; } // {get; set;} // Integer 	5	The maximum health of this entity
+
+            [JsonProperty(PropertyName = "value", NullValueHandling = NullValueHandling.Ignore, DefaultValueHandling = DefaultValueHandling.Ignore)]
+            public int Value { get; set; } // {get; set;} // Integer  1	The initial health of the strength
         }
 
 
@@ -498,44 +508,49 @@ namespace Exporter
             public string ID { get; set; }
         }
 
-        [JsonConverter(typeof(SingleOrArrayConverter<Component>))]
         public class Minecraft_interact : Component
         {
-            //Defines interactions with this entity.
-            [JsonProperty(PropertyName = "add_items", NullValueHandling = NullValueHandling.Ignore, DefaultValueHandling = DefaultValueHandling.Ignore)]
-            [JsonConverter(typeof(SingleOrArrayConverter<ItemsObj>))]
-            public List<ItemsObj> add_items { get; set; } // JSON Object Loot table with items to add to the player's inventory upon successful interaction
+            public class Inner : Component
+            {
+                //Defines interactions with this entity.
+                [JsonProperty(PropertyName = "add_items", NullValueHandling = NullValueHandling.Ignore, DefaultValueHandling = DefaultValueHandling.Ignore)]
+                [JsonConverter(typeof(SingleOrArrayConverter<ItemsObj>))]
+                public List<ItemsObj> add_items { get; set; } // JSON Object Loot table with items to add to the player's inventory upon successful interaction
 
-            [JsonProperty(PropertyName = "cooldown", NullValueHandling = NullValueHandling.Ignore, DefaultValueHandling = DefaultValueHandling.Ignore)]
-            public float cooldown { get; set; } //	0.0	Time in seconds before this entity can be interacted with again
+                [JsonProperty(PropertyName = "cooldown", NullValueHandling = NullValueHandling.Ignore, DefaultValueHandling = DefaultValueHandling.Ignore)]
+                public float cooldown { get; set; } //	0.0	Time in seconds before this entity can be interacted with again
 
-            [JsonProperty(PropertyName = "hurt_item", NullValueHandling = NullValueHandling.Ignore, DefaultValueHandling = DefaultValueHandling.Ignore)]
-            public int hurt_item { get; set; } //Integer	0	The amount of damage the item will take when used to interact with this entity.A value of 0 means the item won't lose durability
+                [JsonProperty(PropertyName = "hurt_item", NullValueHandling = NullValueHandling.Ignore, DefaultValueHandling = DefaultValueHandling.Ignore)]
+                public int hurt_item { get; set; } //Integer	0	The amount of damage the item will take when used to interact with this entity.A value of 0 means the item won't lose durability
 
-            [JsonProperty(PropertyName = "interact_text", NullValueHandling = NullValueHandling.Ignore, DefaultValueHandling = DefaultValueHandling.Ignore)]
-            public string interact_text { get; set; } // String       Text to show when the player is able to interact in this way with this entity when playing with Touch-screen controls
+                [JsonProperty(PropertyName = "interact_text", NullValueHandling = NullValueHandling.Ignore, DefaultValueHandling = DefaultValueHandling.Ignore)]
+                public string interact_text { get; set; } // String       Text to show when the player is able to interact in this way with this entity when playing with Touch-screen controls
 
-            [JsonProperty(PropertyName = "on_interact", NullValueHandling = NullValueHandling.Ignore, DefaultValueHandling = DefaultValueHandling.Ignore)]
-            public MinecraftEvent on_interact { get; set; } // String       Event to fire when the interaction occurs
+                [JsonProperty(PropertyName = "on_interact", NullValueHandling = NullValueHandling.Ignore, DefaultValueHandling = DefaultValueHandling.Ignore)]
+                public MinecraftEvent on_interact { get; set; } // String       Event to fire when the interaction occurs
 
-            [JsonProperty(PropertyName = "play_sounds", NullValueHandling = NullValueHandling.Ignore, DefaultValueHandling = DefaultValueHandling.Ignore)]
-            public string play_sounds { get; set; } // String  List of sounds to play when the interaction occurs
+                [JsonProperty(PropertyName = "play_sounds", NullValueHandling = NullValueHandling.Ignore, DefaultValueHandling = DefaultValueHandling.Ignore)]
+                public string play_sounds { get; set; } // String  List of sounds to play when the interaction occurs
 
-            [JsonProperty(PropertyName = "spawn_entities", NullValueHandling = NullValueHandling.Ignore, DefaultValueHandling = DefaultValueHandling.Ignore)]
-            public string spawn_entities { get; set; } // String       List of entities to spawn when the interaction occurs
+                [JsonProperty(PropertyName = "spawn_entities", NullValueHandling = NullValueHandling.Ignore, DefaultValueHandling = DefaultValueHandling.Ignore)]
+                public string spawn_entities { get; set; } // String       List of entities to spawn when the interaction occurs
 
-            [JsonProperty(PropertyName = "spawn_items", NullValueHandling = NullValueHandling.Ignore, DefaultValueHandling = DefaultValueHandling.Ignore)]
-            [JsonConverter(typeof(SingleOrArrayConverter<ItemsObj>))]
-            public List<ItemsObj> spawn_items { get; set; }
+                [JsonProperty(PropertyName = "spawn_items", NullValueHandling = NullValueHandling.Ignore, DefaultValueHandling = DefaultValueHandling.Ignore)]
+                [JsonConverter(typeof(SingleOrArrayConverter<ItemsObj>))]
+                public List<ItemsObj> spawn_items { get; set; }
 
-            [JsonProperty(PropertyName = "swing", NullValueHandling = NullValueHandling.Ignore, DefaultValueHandling = DefaultValueHandling.Ignore)]
-            public bool swing { get; set; } // Boolean	false	If true, the player will do the 'swing' animation when interacting with this entity
+                [JsonProperty(PropertyName = "swing", NullValueHandling = NullValueHandling.Ignore, DefaultValueHandling = DefaultValueHandling.Ignore)]
+                public bool swing { get; set; } // Boolean	false	If true, the player will do the 'swing' animation when interacting with this entity
 
-            [JsonProperty(PropertyName = "transform_to_item", NullValueHandling = NullValueHandling.Ignore, DefaultValueHandling = DefaultValueHandling.Ignore)]
-            public string transform_to_item { get; set; } // String  The item used will transform to this item upon successful interaction. Format: itemName:auxValue
+                [JsonProperty(PropertyName = "transform_to_item", NullValueHandling = NullValueHandling.Ignore, DefaultValueHandling = DefaultValueHandling.Ignore)]
+                public string transform_to_item { get; set; } // String  The item used will transform to this item upon successful interaction. Format: itemName:auxValue
 
-            [JsonProperty(PropertyName = "use_item", NullValueHandling = NullValueHandling.Ignore, DefaultValueHandling = DefaultValueHandling.Ignore)]
-            public bool use_item { get; set; } // Boolean false	If true, the interaction will use an item
+                [JsonProperty(PropertyName = "use_item", NullValueHandling = NullValueHandling.Ignore, DefaultValueHandling = DefaultValueHandling.Ignore)]
+                public bool use_item { get; set; } // Boolean false	If true, the interaction will use an item
+            }
+
+            [JsonConverter(typeof(SingleOrArrayConverter<Inner>))]
+            public Inner inner { get; set; }
         }
 
         public class Minecraft_inventory : Component
@@ -602,6 +617,13 @@ namespace Exporter
 
             [JsonProperty(PropertyName = "setTarget", NullValueHandling = NullValueHandling.Ignore, DefaultValueHandling = DefaultValueHandling.Ignore)]
             public bool setTarget { get; set; } // Boolean true	If true, this entity will set the attack target as the entity that looked at it
+        }
+
+        public class Minecraft_movement : Component
+        {
+            //This component accents the movement of an entity.
+            [JsonProperty(PropertyName = "value", NullValueHandling = NullValueHandling.Ignore, DefaultValueHandling = DefaultValueHandling.Ignore)]
+            public double Value { get; set; } //	
         }
 
         public class Minecraft_movement_basic : Component

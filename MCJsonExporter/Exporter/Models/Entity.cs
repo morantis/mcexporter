@@ -14,6 +14,7 @@ namespace Exporter
         public MinecraftEntity minecraftEntity { get; set; }
     }
 
+
     public class MinecraftEntity
     {
         public bool ShouldSerializeComponentGroups()
@@ -29,12 +30,12 @@ namespace Exporter
         public Dictionary<string, object> ComponentGroups { get; set; }
 
         [JsonProperty(PropertyName = "components")]
-        [JsonConverter(typeof(Serializers.EntityComponentsConverter))]
-        public Dictionary<string, Component> Components { get; set; }
+        public Dictionary<string, object> Components { get; set; }
 
         [JsonProperty(PropertyName = "events", NullValueHandling = NullValueHandling.Ignore)]
         //public Dictionary<string, MCDataStructures.Component> components { get; set; }
         public Dictionary<string, object> Events { get; set; }
     }
 
+    
 }

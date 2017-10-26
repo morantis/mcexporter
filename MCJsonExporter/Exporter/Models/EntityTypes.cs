@@ -11,9 +11,19 @@ namespace Exporter
 
     public class EntityTypes
     {
+        public class SubSection
+        {
+            [JsonProperty(PropertyName = "any_of", NullValueHandling = NullValueHandling.Ignore, DefaultValueHandling = DefaultValueHandling.Ignore)]
+            [JsonConverter(typeof(SingleOrArrayConverter<Filter>))]
+            public List<Filter> AnyOf { get; set; } = new List<Filter>();// Minecraft Filter Conditions that make this entry in the list valid
+
+            [JsonProperty(PropertyName = "all_of", NullValueHandling = NullValueHandling.Ignore, DefaultValueHandling = DefaultValueHandling.Ignore)]
+            [JsonConverter(typeof(SingleOrArrayConverter<Filter>))]
+            public List<Filter> AllOf { get; set; } = new List<Filter>(); // Minecraft Filter Conditions that make this entry in the list valid
+        }
+
         [JsonProperty(PropertyName = "filters", NullValueHandling = NullValueHandling.Ignore, DefaultValueHandling = DefaultValueHandling.Ignore)]
-        [JsonConverter(typeof(SingleOrArrayConverter<Filter>))]
-        public List<Filter> filters { get; set; }// Minecraft Filter Conditions that make this entry in the list valid
+        public SubSection filters{ get; set; } 
 
         [JsonProperty(PropertyName = "max_dist", NullValueHandling = NullValueHandling.Ignore, DefaultValueHandling = DefaultValueHandling.Ignore)]
         public float max_dist { get; set; } // 16	Maximum distance this mob can be away to be a valid choice

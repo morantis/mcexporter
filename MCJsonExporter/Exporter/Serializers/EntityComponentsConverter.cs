@@ -23,7 +23,7 @@ namespace Exporter.Serializers
             {
                 return token.ToObject<List<Component>>();
             }
-            return new List<Component> { Component.Create( token.ToObject<Component>() };
+            return new List<Component> { token.ToObject<Component>() };
         }
 
         public override bool CanWrite
