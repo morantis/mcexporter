@@ -1569,7 +1569,8 @@ namespace Exporter
             public float look_distance { get; set; } //	8.0	The distance in blocks from which the entity will look at
 
             [JsonProperty(PropertyName = "look_time", NullValueHandling = NullValueHandling.Ignore, DefaultValueHandling = DefaultValueHandling.Ignore)]
-            public float[] look_time { get; set; } //Time range to look at the entity
+            [JsonConverter(typeof(MinMaxOrIntConverter))]
+            public MinMaxOrInt look_time { get; set; } //Time range to look at the entity
 
             [JsonProperty(PropertyName = "probability", NullValueHandling = NullValueHandling.Ignore, DefaultValueHandling = DefaultValueHandling.Ignore)]
             public float probability { get; set; } //	0.02	The probability of looking at the target. A value of 1.00 is 100%

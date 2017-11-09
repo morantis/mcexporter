@@ -22,6 +22,8 @@ namespace Exporter.Serializers
             public string Range { get; set; }
             public string EnemyFilterGroup { get; set; }
             public string FightBackFilterGroup { get; set; }
+            public string Shooter { get; set; }
+            public string Charge { get; set; }
         }
 
         public class Families
@@ -108,7 +110,7 @@ namespace Exporter.Serializers
                 var parts = line.ToLower().Split(',');
                 if (parts[0].Length > 0)
                 {
-                    Entity entity = new Entity() { Family = parts[1], Health = parts[2], Move = parts[3], Equip = parts[4], Loot = parts[5], Melee = parts[6], Range = parts[7], EnemyFilterGroup = parts[8], FightBackFilterGroup = parts[9] };
+                    Entity entity = new Entity() { Family = parts[1], Health = parts[2], Move = parts[3], Equip = parts[4], Loot = parts[5], Melee = parts[6], Range = parts[7], EnemyFilterGroup = parts[8], FightBackFilterGroup = parts[9], Shooter = parts[10], Charge = parts[11] };
                     entities.Add(parts[0].ToLower(), entity);
                 }
                 line = enReader.ReadLine();
@@ -446,92 +448,92 @@ namespace Exporter.Serializers
             if (components.ContainsKey("minecraft:timer")) components["minecraft:timer"] = (components["minecraft:timer"] as Newtonsoft.Json.Linq.JObject)?.ToObject<MCDataStructures.Minecraft_timer>();
             if (components.ContainsKey("minecraft:trade_table")) components["minecraft:trade_table"] = (components["minecraft:trade_table"] as Newtonsoft.Json.Linq.JObject)?.ToObject<MCDataStructures.Minecraft_trade_table>();
             if (components.ContainsKey("minecraft:transformation")) components["minecraft:transformation"] = (components["minecraft:trade_table"] as Newtonsoft.Json.Linq.JObject)?.ToObject<MCDataStructures.Minecraft_transformation>();
-            if (components.ContainsKey("minecraft:behavior_avoid_mob_type")) components["minecraft:behavior_avoid_mob_type"] = (components["minecraft:behavior_avoid_mob_type"] as Newtonsoft.Json.Linq.JObject)?.ToObject<MCDataStructures.Minecraft_behavior_avoid_mob_type>();
-            if (components.ContainsKey("minecraft:behavior_beg")) components["minecraft:behavior_beg"] = (components["minecraft:behavior_beg"] as Newtonsoft.Json.Linq.JObject)?.ToObject<MCDataStructures.Minecraft_behavior_beg>();
-            if (components.ContainsKey("minecraft:behavior_break_door")) components["minecraft:behavior_break_door"] = (components["minecraft:behavior_break_door"] as Newtonsoft.Json.Linq.JObject)?.ToObject<MCDataStructures.Minecraft_behavior_break_door>();
-            if (components.ContainsKey("minecraft:behavior_breed")) components["minecraft:behavior_breed"] = (components["minecraft:behavior_breedminecraft:behavior_breed"] as Newtonsoft.Json.Linq.JObject)?.ToObject<MCDataStructures.Minecraft_behavior_breed>();
-            if (components.ContainsKey("minecraft:behavior_charge_attack")) components["minecraft:behavior_charge_attack"] = (components["minecraft:behavior_charge_attack"] as Newtonsoft.Json.Linq.JObject)?.ToObject<MCDataStructures.Minecraft_behavior_charge_attack>();
-            if (components.ContainsKey("minecraft:behavior_controlled_by_player")) components["minecraft:behavior_controlled_by_player"] = (components["minecraft:behavior_controlled_by_player"] as Newtonsoft.Json.Linq.JObject)?.ToObject<MCDataStructures.Minecraft_behavior_controlled_by_player>();
-            if (components.ContainsKey("minecraft:behavior_defend_village_target")) components["minecraft:behavior_defend_village_target"] = (components["minecraft:behavior_defend_village_target"] as Newtonsoft.Json.Linq.JObject)?.ToObject<MCDataStructures.Minecraft_behavior_defend_village_target>();
-            if (components.ContainsKey("minecraft:behavior_door_interact")) components["minecraft:behavior_door_interact"] = (components["minecraft:behavior_door_interact"] as Newtonsoft.Json.Linq.JObject)?.ToObject<MCDataStructures.Minecraft_behavior_door_interact>();
-            if (components.ContainsKey("minecraft:behavior_dragonchargeplayer")) components["minecraft:behavior_dragonchargeplayer"] = (components["minecraft:behavior_dragonchargeplayer"] as Newtonsoft.Json.Linq.JObject)?.ToObject<MCDataStructures.Minecraft_behavior_dragonchargeplayer>();
-            if (components.ContainsKey("minecraft:behavior_dragondeath")) components["minecraft:behavior_dragondeath"] = (components["minecraft:behavior_dragondeath"] as Newtonsoft.Json.Linq.JObject)?.ToObject<MCDataStructures.Minecraft_behavior_dragondeath>();
-            if (components.ContainsKey("minecraft:behavior_dragonflaming")) components["minecraft:behavior_dragonflaming"] = (components["minecraft:behavior_dragonflaming"] as Newtonsoft.Json.Linq.JObject)?.ToObject<MCDataStructures.Minecraft_behavior_dragonflaming>();
-            if (components.ContainsKey("minecraft:behavior_dragonholdingpattern")) components["minecraft:behavior_dragonholdingpattern"] = (components["minecraft:behavior_dragonholdingpattern"] as Newtonsoft.Json.Linq.JObject)?.ToObject<MCDataStructures.Minecraft_behavior_dragonholdingpattern>();
-            if (components.ContainsKey("minecraft:behavior_dragonlanding")) components["minecraft:behavior_dragonlanding"] = (components["minecraft:behavior_dragonlanding"] as Newtonsoft.Json.Linq.JObject)?.ToObject<MCDataStructures.Minecraft_behavior_dragonlanding>();
-            if (components.ContainsKey("minecraft:behavior_dragonscanning")) components["minecraft:behavior_dragonscanning"] = (components["minecraft:behavior_dragonscanning"] as Newtonsoft.Json.Linq.JObject)?.ToObject<MCDataStructures.Minecraft_behavior_dragonscanning>();
-            if (components.ContainsKey("minecraft:behavior_dragonstrafeplayer")) components["minecraft:behavior_dragonstrafeplayer"] = (components["minecraft:behavior_dragonstrafeplayer"] as Newtonsoft.Json.Linq.JObject)?.ToObject<MCDataStructures.Minecraft_behavior_dragonstrafeplayer>();
-            if (components.ContainsKey("minecraft:behavior_dragontakeoff")) components["minecraft:behavior_dragontakeoff"] = (components["minecraft:behavior_dragontakeoff"] as Newtonsoft.Json.Linq.JObject)?.ToObject<MCDataStructures.Minecraft_behavior_dragontakeoff>();
-            if (components.ContainsKey("minecraft:behavior_eat_block")) components["minecraft:behavior_eat_block"] = (components["minecraft:behavior_eat_blockminecraft:behavior_eat_block"] as Newtonsoft.Json.Linq.JObject)?.ToObject<MCDataStructures.Minecraft_behavior_eat_block>();
-            if (components.ContainsKey("minecraft:behavior_enderman_leave_block")) components["minecraft:behavior_enderman_leave_block"] = (components["minecraft:behavior_enderman_leave_block"] as Newtonsoft.Json.Linq.JObject)?.ToObject<MCDataStructures.Minecraft_behavior_enderman_leave_block>();
-            if (components.ContainsKey("minecraft:behavior_enderman_take_block")) components["minecraft:behavior_enderman_take_block"] = (components["minecraft:behavior_enderman_take_block"] as Newtonsoft.Json.Linq.JObject)?.ToObject<MCDataStructures.Minecraft_behavior_enderman_take_block>();
-            if (components.ContainsKey("minecraft:behavior_find_mount")) components["minecraft:behavior_find_mount"] = (components["minecraft:behavior_find_mount"] as Newtonsoft.Json.Linq.JObject)?.ToObject<MCDataStructures.Minecraft_behavior_find_mount>();
-            if (components.ContainsKey("minecraft:behavior_flee_sun")) components["minecraft:behavior_flee_sun"] = (components["minecraft:behavior_flee_sun"] as Newtonsoft.Json.Linq.JObject)?.ToObject<MCDataStructures.Minecraft_behavior_flee_sun>();
-            if (components.ContainsKey("minecraft:behavior_float")) components["minecraft:behavior_float"] = (components["minecraft:behavior_float"] as Newtonsoft.Json.Linq.JObject)?.ToObject<MCDataStructures.Minecraft_behavior_float>();
-            if (components.ContainsKey("minecraft:behavior_float_wander")) components["minecraft:behavior_float_wander"] = (components["minecraft:behavior_float_wander"] as Newtonsoft.Json.Linq.JObject)?.ToObject<MCDataStructures.Minecraft_behavior_float_wander>();
-            if (components.ContainsKey("minecraft:behavior_follow_caravan")) components["minecraft:behavior_follow_caravan"] = (components["minecraft:behavior_follow_caravan"] as Newtonsoft.Json.Linq.JObject)?.ToObject<MCDataStructures.Minecraft_behavior_follow_caravan>();
-            if (components.ContainsKey("minecraft:behavior_follow_mob")) components["minecraft:behavior_follow_mob"] = (components["minecraft:behavior_follow_mob"] as Newtonsoft.Json.Linq.JObject)?.ToObject<MCDataStructures.Minecraft_behavior_follow_mob>();
-            if (components.ContainsKey("minecraft:behavior_follow_owner")) components["minecraft:behavior_follow_owner"] = (components["minecraft:behavior_follow_mob"] as Newtonsoft.Json.Linq.JObject)?.ToObject<MCDataStructures.Minecraft_behavior_follow_owner>();
-            if (components.ContainsKey("minecraft:behavior_follow_parent")) components["minecraft:behavior_follow_parent"] = (components["minecraft:behavior_follow_parent"] as Newtonsoft.Json.Linq.JObject)?.ToObject<MCDataStructures.Minecraft_behavior_follow_parent>();
-            if (components.ContainsKey("minecraft:behavior_guardian_attack")) components["minecraft:behavior_guardian_attack"] = (components["minecraft:behavior_guardian_attack"] as Newtonsoft.Json.Linq.JObject)?.ToObject<MCDataStructures.Minecraft_behavior_guardian_attack>();
-            if (components.ContainsKey("minecraft:behavior_harvest_farm_block")) components["minecraft:behavior_harvest_farm_block"] = (components["minecraft:behavior_harvest_farm_block"] as Newtonsoft.Json.Linq.JObject)?.ToObject<MCDataStructures.Minecraft_behavior_harvest_farm_block>();
-            if (components.ContainsKey("minecraft:behavior_hurt_by_target")) components["minecraft:behavior_hurt_by_target"] = (components["minecraft:behavior_hurt_by_target"] as Newtonsoft.Json.Linq.JObject)?.ToObject<MCDataStructures.Minecraft_behavior_hurt_by_target>();
-            if (components.ContainsKey("minecraft:behavior_leap_at_target")) components["minecraft:behavior_leap_at_target"] = (components["minecraft:behavior_leap_at_target"] as Newtonsoft.Json.Linq.JObject)?.ToObject<MCDataStructures.Minecraft_behavior_leap_at_target>();
-            if (components.ContainsKey("minecraft:behavior_look_at_entity")) components["minecraft:behavior_look_at_entity"] = (components["minecraft:behavior_look_at_entity"] as Newtonsoft.Json.Linq.JObject)?.ToObject<MCDataStructures.Minecraft_behavior_look_at_entity>();
-            if (components.ContainsKey("minecraft:behavior_look_at_player")) components["minecraft:behavior_look_at_player"] = (components["minecraft:behavior_look_at_player"] as Newtonsoft.Json.Linq.JObject)?.ToObject<MCDataStructures.Minecraft_behavior_look_at_player>();
-            if (components.ContainsKey("minecraft:behavior_look_at_target")) components["minecraft:behavior_look_at_target"] = (components["minecraft:behavior_look_at_target"] as Newtonsoft.Json.Linq.JObject)?.ToObject<MCDataStructures.Minecraft_behavior_look_at_target>();
-            if (components.ContainsKey("minecraft:behavior_look_at_trading_player")) components["minecraft:behavior_look_at_trading_player"] = (components["minecraft:behavior_look_at_trading_player"] as Newtonsoft.Json.Linq.JObject)?.ToObject<MCDataStructures.Minecraft_behavior_look_at_trading_player>();
-            if (components.ContainsKey("minecraft:behavior_make_love")) components["minecraft:behavior_make_love"] = (components["minecraft:behavior_make_love"] as Newtonsoft.Json.Linq.JObject)?.ToObject<MCDataStructures.Minecraft_behavior_make_love>();
-            if (components.ContainsKey("minecraft:behavior_melee_attack")) components["minecraft:behavior_melee_attack"] = (components["minecraft:behavior_melee_attack"] as Newtonsoft.Json.Linq.JObject)?.ToObject<MCDataStructures.Minecraft_behavior_melee_attack>();
-            if (components.ContainsKey("minecraft:behavior_mount_pathing")) components["minecraft:behavior_mount_pathing"] = (components["minecraft:behavior_mount_pathing"] as Newtonsoft.Json.Linq.JObject)?.ToObject<MCDataStructures.Minecraft_behavior_mount_pathing>();
-            if (components.ContainsKey("minecraft:behavior_move_indoors")) components["minecraft:behavior_move_indoors"] = (components["minecraft:behavior_move_indoors"] as Newtonsoft.Json.Linq.JObject)?.ToObject<MCDataStructures.Minecraft_behavior_move_indoors>();
-            if (components.ContainsKey("minecraft:behavior_move_through_village")) components["minecraft:behavior_move_through_village"] = (components["minecraft:behavior_move_through_village"] as Newtonsoft.Json.Linq.JObject)?.ToObject<MCDataStructures.Minecraft_behavior_move_through_village>();
-            if (components.ContainsKey("minecraft:behavior_move_towards_restriction")) components["minecraft:behavior_move_towards_restriction"] = (components["minecraft:behavior_move_towards_restriction"] as Newtonsoft.Json.Linq.JObject)?.ToObject<MCDataStructures.Minecraft_behavior_move_towards_restriction>();
-            if (components.ContainsKey("minecraft:behavior_move_towards_target")) components["minecraft:behavior_move_towards_target"] = (components["minecraft:behavior_move_towards_target"] as Newtonsoft.Json.Linq.JObject)?.ToObject<MCDataStructures.Minecraft_behavior_move_towards_target>();
-            if (components.ContainsKey("minecraft:behavior_nearest_attackable_target")) components["minecraft:behavior_nearest_attackable_target"] = (components["minecraft:behavior_nearest_attackable_target"] as Newtonsoft.Json.Linq.JObject)?.ToObject<MCDataStructures.Minecraft_behavior_nearest_attackable_target>();
-            if (components.ContainsKey("minecraft:behavior_ocelot_sit_on_block")) components["minecraft:behavior_ocelot_sit_on_block"] = (components["minecraft:behavior_ocelot_sit_on_block"] as Newtonsoft.Json.Linq.JObject)?.ToObject<MCDataStructures.Minecraft_behavior_ocelot_sit_on_block>();
-            if (components.ContainsKey("minecraft:behavior_ocelotattack")) components["minecraft:behavior_ocelotattack"] = (components["minecraft:behavior_ocelotattack"] as Newtonsoft.Json.Linq.JObject)?.ToObject<MCDataStructures.Minecraft_behavior_ocelotattack>();
-            if (components.ContainsKey("minecraft:behavior_offer_flower")) components["minecraft:behavior_offer_flower"] = (components["minecraft:behavior_offer_flower"] as Newtonsoft.Json.Linq.JObject)?.ToObject<MCDataStructures.Minecraft_behavior_offer_flower>();
-            if (components.ContainsKey("minecraft:behavior_open_door")) components["minecraft:behavior_open_door"] = (components["minecraft:behavior_open_door"] as Newtonsoft.Json.Linq.JObject)?.ToObject<MCDataStructures.Minecraft_behavior_open_door>();
-            if (components.ContainsKey("minecraft:behavior_owner_hurt_by_target")) components["minecraft:behavior_owner_hurt_by_target"] = (components["minecraft:behavior_owner_hurt_by_target"] as Newtonsoft.Json.Linq.JObject)?.ToObject<MCDataStructures.Minecraft_behavior_owner_hurt_by_target>();
-            if (components.ContainsKey("minecraft:behavior_owner_hurt_target")) components["minecraft:behavior_owner_hurt_target"] = (components["minecraft:behavior_owner_hurt_target"] as Newtonsoft.Json.Linq.JObject)?.ToObject<MCDataStructures.Minecraft_behavior_owner_hurt_target>();
-            if (components.ContainsKey("minecraft:behavior_panic")) components["minecraft:behavior_panic"] = (components["minecraft:behavior_panic"] as Newtonsoft.Json.Linq.JObject)?.ToObject<MCDataStructures.Minecraft_behavior_panic>();
-            if (components.ContainsKey("minecraft:behavior_peek")) components["minecraft:behavior_peek"] = (components["minecraft:behavior_peek"] as Newtonsoft.Json.Linq.JObject)?.ToObject<MCDataStructures.Minecraft_behavior_peek>();
-            if (components.ContainsKey("minecraft:behavior_pickup_items")) components["minecraft:behavior_pickup_items"] = (components["minecraft:behavior_pickup_items"] as Newtonsoft.Json.Linq.JObject)?.ToObject<MCDataStructures.Minecraft_behavior_pickup_items>();
-            if (components.ContainsKey("minecraft:behavior_play")) components["minecraft:behavior_play"] = (components["minecraft:behavior_play"] as Newtonsoft.Json.Linq.JObject)?.ToObject<MCDataStructures.Minecraft_behavior_play>();
-            if (components.ContainsKey("minecraft:behavior_player_ride_tamed")) components["minecraft:behavior_player_ride_tamed"] = (components["minecraft:behavior_player_ride_tamed"] as Newtonsoft.Json.Linq.JObject)?.ToObject<MCDataStructures.Minecraft_behavior_player_ride_tamed>();
-            if (components.ContainsKey("minecraft:behavior_raid_garden")) components["minecraft:behavior_raid_garden"] = (components["minecraft:behavior_raid_garden"] as Newtonsoft.Json.Linq.JObject)?.ToObject<MCDataStructures.Minecraft_behavior_raid_garden>();
-            if (components.ContainsKey("minecraft:behavior_random_fly")) components["minecraft:behavior_random_fly"] = (components["minecraft:behavior_random_fly"] as Newtonsoft.Json.Linq.JObject)?.ToObject<MCDataStructures.Minecraft_behavior_random_fly>();
-            if (components.ContainsKey("minecraft:behavior_random_look_around")) components["minecraft:behavior_random_look_around"] = (components["minecraft:behavior_random_look_around"] as Newtonsoft.Json.Linq.JObject)?.ToObject<MCDataStructures.Minecraft_behavior_random_look_around>();
-            if (components.ContainsKey("minecraft:behavior_random_stroll")) components["minecraft:behavior_random_stroll"] = (components["minecraft:behavior_random_stroll"] as Newtonsoft.Json.Linq.JObject)?.ToObject<MCDataStructures.Minecraft_behavior_random_stroll>();
-            if (components.ContainsKey("minecraft:behavior_ranged_attack")) components["minecraft:behavior_ranged_attack"] = (components["minecraft:behavior_ranged_attack"] as Newtonsoft.Json.Linq.JObject)?.ToObject<MCDataStructures.Minecraft_behavior_ranged_attack>();
-            if (components.ContainsKey("minecraft:behavior_receive_love")) components["minecraft:behavior_receive_love"] = (components["minecraft:behavior_receive_love"] as Newtonsoft.Json.Linq.JObject)?.ToObject<MCDataStructures.Minecraft_behavior_receive_love>();
-            if (components.ContainsKey("minecraft:behavior_restrict_open_door")) components["minecraft:behavior_restrict_open_door"] = (components["minecraft:behavior_restrict_open_door"] as Newtonsoft.Json.Linq.JObject)?.ToObject<MCDataStructures.Minecraft_behavior_restrict_open_door>();
-            if (components.ContainsKey("minecraft:behavior_restrict_sun")) components["minecraft:behavior_restrict_sun"] = (components["minecraft:behavior_restrict_sun"] as Newtonsoft.Json.Linq.JObject)?.ToObject<MCDataStructures.Minecraft_behavior_restrict_sun>();
-            if (components.ContainsKey("minecraft:behavior_run_around_like_crazy")) components["minecraft:behavior_run_around_like_crazy"] = (components["minecraft:behavior_run_around_like_crazy"] as Newtonsoft.Json.Linq.JObject)?.ToObject<MCDataStructures.Minecraft_behavior_run_around_like_crazy>();
-            if (components.ContainsKey("minecraft:behavior_send_event")) components["minecraft:behavior_send_event"] = (components["minecraft:behavior_send_event"] as Newtonsoft.Json.Linq.JObject)?.ToObject<MCDataStructures.Minecraft_behavior_send_event>();
-            if (components.ContainsKey("minecraft:behavior_share_items")) components["minecraft:behavior_share_items"] = (components["minecraft:behavior_share_items"] as Newtonsoft.Json.Linq.JObject)?.ToObject<MCDataStructures.Minecraft_behavior_share_items>();
-            if (components.ContainsKey("minecraft:behavior_silverfish_merge_with_stone")) components["minecraft:behavior_silverfish_merge_with_stone"] = (components["minecraft:behavior_silverfish_merge_with_stone"] as Newtonsoft.Json.Linq.JObject)?.ToObject<MCDataStructures.Minecraft_behavior_silverfish_merge_with_stone>();
-            if (components.ContainsKey("minecraft:behavior_silverfish_wake_up_friends")) components["minecraft:behavior_silverfish_wake_up_friends"] = (components["minecraft:behavior_silverfish_wake_up_friends"] as Newtonsoft.Json.Linq.JObject)?.ToObject<MCDataStructures.Minecraft_behavior_silverfish_wake_up_friends>();
-            if (components.ContainsKey("minecraft:behavior_skeleton_horse_trap")) components["minecraft:behavior_skeleton_horse_trap"] = (components["minecraft:behavior_skeleton_horse_trap"] as Newtonsoft.Json.Linq.JObject)?.ToObject<MCDataStructures.Minecraft_behavior_skeleton_horse_trap>();
-            if (components.ContainsKey("minecraft:behavior_slime_attack")) components["minecraft:behavior_slime_attack"] = (components["minecraft:behavior_slime_attack"] as Newtonsoft.Json.Linq.JObject)?.ToObject<MCDataStructures.Minecraft_behavior_slime_attack>();
-            if (components.ContainsKey("minecraft:behavior_slime_float")) components["minecraft:behavior_slime_float"] = (components["minecraft:behavior_slime_float"] as Newtonsoft.Json.Linq.JObject)?.ToObject<MCDataStructures.Minecraft_behavior_slime_float>();
-            if (components.ContainsKey("minecraft:behavior_slime_keep_on_jumping")) components["minecraft:behavior_slime_keep_on_jumping"] = (components["minecraft:behavior_slime_keep_on_jumping"] as Newtonsoft.Json.Linq.JObject)?.ToObject<MCDataStructures.Minecraft_behavior_slime_keep_on_jumping>();
-            if (components.ContainsKey("minecraft:behavior_slime_random_direction")) components["minecraft:behavior_slime_random_direction"] = (components["minecraft:behavior_slime_random_direction"] as Newtonsoft.Json.Linq.JObject)?.ToObject<MCDataStructures.Minecraft_behavior_slime_random_direction>();
-            if (components.ContainsKey("minecraft:behavior_squid_dive")) components["minecraft:behavior_squid_dive"] = (components["minecraft:behavior_squid_dive"] as Newtonsoft.Json.Linq.JObject)?.ToObject<MCDataStructures.Minecraft_behavior_squid_dive>();
-            if (components.ContainsKey("minecraft:behavior_squid_flee")) components["minecraft:behavior_squid_flee"] = (components["minecraft:behavior_squid_flee"] as Newtonsoft.Json.Linq.JObject)?.ToObject<MCDataStructures.Minecraft_behavior_squid_flee>();
-            if (components.ContainsKey("minecraft:behavior_squid_idle")) components["minecraft:behavior_squid_idle"] = (components["minecraft:behavior_squid_idle"] as Newtonsoft.Json.Linq.JObject)?.ToObject<MCDataStructures.Minecraft_behavior_squid_idle>();
-            if (components.ContainsKey("minecraft:behavior_squid_move_away_from_ground")) components["minecraft:behavior_squid_move_away_from_ground"] = (components["minecraft:behavior_squid_move_away_from_ground"] as Newtonsoft.Json.Linq.JObject)?.ToObject<MCDataStructures.Minecraft_behavior_squid_move_away_from_ground>();
-            if (components.ContainsKey("minecraft:behavior_squid_out_of_water")) components["minecraft:behavior_squid_out_of_water"] = (components["minecraft:behavior_squid_out_of_water"] as Newtonsoft.Json.Linq.JObject)?.ToObject<MCDataStructures.Minecraft_behavior_squid_out_of_water>();
-            if (components.ContainsKey("minecraft:behavior_stay_while_sitting")) components["minecraft:behavior_stay_while_sitting"] = (components["minecraft:behavior_stay_while_sitting"] as Newtonsoft.Json.Linq.JObject)?.ToObject<MCDataStructures.Minecraft_behavior_stay_while_sitting>();
-            if (components.ContainsKey("minecraft:behavior_stomp_attack")) components["minecraft:behavior_stomp_attack"] = (components["minecraft:behavior_stomp_attack"] as Newtonsoft.Json.Linq.JObject)?.ToObject<MCDataStructures.Minecraft_behavior_stomp_attack>();
-            if (components.ContainsKey("minecraft:behavior_summon_entity")) components["minecraft:behavior_summon_entity"] = (components["minecraft:behavior_summon_entity"] as Newtonsoft.Json.Linq.JObject)?.ToObject<MCDataStructures.Minecraft_behavior_summon_entity>();
-            if (components.ContainsKey("minecraft:behavior_swell")) components["minecraft:behavior_swell"] = (components["minecraft:behavior_swell"] as Newtonsoft.Json.Linq.JObject)?.ToObject<MCDataStructures.Minecraft_behavior_swell>();
-            if (components.ContainsKey("minecraft:behavior_take_flower")) components["minecraft:behavior_take_flower"] = (components["minecraft:behavior_swell"] as Newtonsoft.Json.Linq.JObject)?.ToObject<MCDataStructures.Minecraft_behavior_take_flower>();
-            if (components.ContainsKey("minecraft:behavior_tempt")) components["minecraft:behavior_tempt"] = (components["minecraft:behavior_tempt"] as Newtonsoft.Json.Linq.JObject)?.ToObject<MCDataStructures.Minecraft_behavior_tempt>();
-            if (components.ContainsKey("minecraft:behavior_trade_with_player")) components["minecraft:behavior_trade_with_player"] = (components["minecraft:behavior_trade_with_player"] as Newtonsoft.Json.Linq.JObject)?.ToObject<MCDataStructures.Minecraft_behavior_trade_with_player>();
-            if (components.ContainsKey("minecraft:behavior_vex_copy_owner_target")) components["minecraft:behavior_vex_copy_owner_target"] = (components["minecraft:behavior_vex_copy_owner_target"] as Newtonsoft.Json.Linq.JObject)?.ToObject<MCDataStructures.Minecraft_behavior_vex_copy_owner_target>();
-            if (components.ContainsKey("minecraft:behavior_vex_random_move")) components["minecraft:behavior_vex_random_move"] = (components["minecraft:behavior_vex_random_move"] as Newtonsoft.Json.Linq.JObject)?.ToObject<MCDataStructures.Minecraft_behavior_vex_random_move>();
+            if (components.ContainsKey("minecraft:behavior.avoid_mob_type")) components["minecraft:behavior.avoid_mob_type"] = (components["minecraft:behavior.avoid_mob_type"] as Newtonsoft.Json.Linq.JObject)?.ToObject<MCDataStructures.Minecraft_behavior_avoid_mob_type>();
+            if (components.ContainsKey("minecraft:behavior.beg")) components["minecraft:behavior.beg"] = (components["minecraft:behavior.beg"] as Newtonsoft.Json.Linq.JObject)?.ToObject<MCDataStructures.Minecraft_behavior_beg>();
+            if (components.ContainsKey("minecraft:behavior.break_door")) components["minecraft:behavior.break_door"] = (components["minecraft:behavior.break_door"] as Newtonsoft.Json.Linq.JObject)?.ToObject<MCDataStructures.Minecraft_behavior_break_door>();
+            if (components.ContainsKey("minecraft:behavior.breed")) components["minecraft:behavior.breed"] = (components["minecraft:behavior.breedminecraft:behavior.breed"] as Newtonsoft.Json.Linq.JObject)?.ToObject<MCDataStructures.Minecraft_behavior_breed>();
+            if (components.ContainsKey("minecraft:behavior.charge_attack")) components["minecraft:behavior.charge_attack"] = (components["minecraft:behavior.charge_attack"] as Newtonsoft.Json.Linq.JObject)?.ToObject<MCDataStructures.Minecraft_behavior_charge_attack>();
+            if (components.ContainsKey("minecraft:behavior.controlled_by_player")) components["minecraft:behavior.controlled_by_player"] = (components["minecraft:behavior.controlled_by_player"] as Newtonsoft.Json.Linq.JObject)?.ToObject<MCDataStructures.Minecraft_behavior_controlled_by_player>();
+            if (components.ContainsKey("minecraft:behavior.defend_village_target")) components["minecraft:behavior.defend_village_target"] = (components["minecraft:behavior.defend_village_target"] as Newtonsoft.Json.Linq.JObject)?.ToObject<MCDataStructures.Minecraft_behavior_defend_village_target>();
+            if (components.ContainsKey("minecraft:behavior.door_interact")) components["minecraft:behavior.door_interact"] = (components["minecraft:behavior.door_interact"] as Newtonsoft.Json.Linq.JObject)?.ToObject<MCDataStructures.Minecraft_behavior_door_interact>();
+            if (components.ContainsKey("minecraft:behavior.dragonchargeplayer")) components["minecraft:behavior.dragonchargeplayer"] = (components["minecraft:behavior.dragonchargeplayer"] as Newtonsoft.Json.Linq.JObject)?.ToObject<MCDataStructures.Minecraft_behavior_dragonchargeplayer>();
+            if (components.ContainsKey("minecraft:behavior.dragondeath")) components["minecraft:behavior.dragondeath"] = (components["minecraft:behavior.dragondeath"] as Newtonsoft.Json.Linq.JObject)?.ToObject<MCDataStructures.Minecraft_behavior_dragondeath>();
+            if (components.ContainsKey("minecraft:behavior.dragonflaming")) components["minecraft:behavior.dragonflaming"] = (components["minecraft:behavior.dragonflaming"] as Newtonsoft.Json.Linq.JObject)?.ToObject<MCDataStructures.Minecraft_behavior_dragonflaming>();
+            if (components.ContainsKey("minecraft:behavior.dragonholdingpattern")) components["minecraft:behavior.dragonholdingpattern"] = (components["minecraft:behavior.dragonholdingpattern"] as Newtonsoft.Json.Linq.JObject)?.ToObject<MCDataStructures.Minecraft_behavior_dragonholdingpattern>();
+            if (components.ContainsKey("minecraft:behavior.dragonlanding")) components["minecraft:behavior.dragonlanding"] = (components["minecraft:behavior.dragonlanding"] as Newtonsoft.Json.Linq.JObject)?.ToObject<MCDataStructures.Minecraft_behavior_dragonlanding>();
+            if (components.ContainsKey("minecraft:behavior.dragonscanning")) components["minecraft:behavior.dragonscanning"] = (components["minecraft:behavior.dragonscanning"] as Newtonsoft.Json.Linq.JObject)?.ToObject<MCDataStructures.Minecraft_behavior_dragonscanning>();
+            if (components.ContainsKey("minecraft:behavior.dragonstrafeplayer")) components["minecraft:behavior.dragonstrafeplayer"] = (components["minecraft:behavior.dragonstrafeplayer"] as Newtonsoft.Json.Linq.JObject)?.ToObject<MCDataStructures.Minecraft_behavior_dragonstrafeplayer>();
+            if (components.ContainsKey("minecraft:behavior.dragontakeoff")) components["minecraft:behavior.dragontakeoff"] = (components["minecraft:behavior.dragontakeoff"] as Newtonsoft.Json.Linq.JObject)?.ToObject<MCDataStructures.Minecraft_behavior_dragontakeoff>();
+            if (components.ContainsKey("minecraft:behavior.eat_block")) components["minecraft:behavior.eat_block"] = (components["minecraft:behavior.eat_blockminecraft:behavior.eat_block"] as Newtonsoft.Json.Linq.JObject)?.ToObject<MCDataStructures.Minecraft_behavior_eat_block>();
+            if (components.ContainsKey("minecraft:behavior.enderman_leave_block")) components["minecraft:behavior.enderman_leave_block"] = (components["minecraft:behavior.enderman_leave_block"] as Newtonsoft.Json.Linq.JObject)?.ToObject<MCDataStructures.Minecraft_behavior_enderman_leave_block>();
+            if (components.ContainsKey("minecraft:behavior.enderman_take_block")) components["minecraft:behavior.enderman_take_block"] = (components["minecraft:behavior.enderman_take_block"] as Newtonsoft.Json.Linq.JObject)?.ToObject<MCDataStructures.Minecraft_behavior_enderman_take_block>();
+            if (components.ContainsKey("minecraft:behavior.find_mount")) components["minecraft:behavior.find_mount"] = (components["minecraft:behavior.find_mount"] as Newtonsoft.Json.Linq.JObject)?.ToObject<MCDataStructures.Minecraft_behavior_find_mount>();
+            if (components.ContainsKey("minecraft:behavior.flee_sun")) components["minecraft:behavior.flee_sun"] = (components["minecraft:behavior.flee_sun"] as Newtonsoft.Json.Linq.JObject)?.ToObject<MCDataStructures.Minecraft_behavior_flee_sun>();
+            if (components.ContainsKey("minecraft:behavior.float")) components["minecraft:behavior.float"] = (components["minecraft:behavior.float"] as Newtonsoft.Json.Linq.JObject)?.ToObject<MCDataStructures.Minecraft_behavior_float>();
+            if (components.ContainsKey("minecraft:behavior.float_wander")) components["minecraft:behavior.float_wander"] = (components["minecraft:behavior.float_wander"] as Newtonsoft.Json.Linq.JObject)?.ToObject<MCDataStructures.Minecraft_behavior_float_wander>();
+            if (components.ContainsKey("minecraft:behavior.follow_caravan")) components["minecraft:behavior.follow_caravan"] = (components["minecraft:behavior.follow_caravan"] as Newtonsoft.Json.Linq.JObject)?.ToObject<MCDataStructures.Minecraft_behavior_follow_caravan>();
+            if (components.ContainsKey("minecraft:behavior.follow_mob")) components["minecraft:behavior.follow_mob"] = (components["minecraft:behavior.follow_mob"] as Newtonsoft.Json.Linq.JObject)?.ToObject<MCDataStructures.Minecraft_behavior_follow_mob>();
+            if (components.ContainsKey("minecraft:behavior.follow_owner")) components["minecraft:behavior.follow_owner"] = (components["minecraft:behavior.follow_mob"] as Newtonsoft.Json.Linq.JObject)?.ToObject<MCDataStructures.Minecraft_behavior_follow_owner>();
+            if (components.ContainsKey("minecraft:behavior.follow_parent")) components["minecraft:behavior.follow_parent"] = (components["minecraft:behavior.follow_parent"] as Newtonsoft.Json.Linq.JObject)?.ToObject<MCDataStructures.Minecraft_behavior_follow_parent>();
+            if (components.ContainsKey("minecraft:behavior.guardian_attack")) components["minecraft:behavior.guardian_attack"] = (components["minecraft:behavior.guardian_attack"] as Newtonsoft.Json.Linq.JObject)?.ToObject<MCDataStructures.Minecraft_behavior_guardian_attack>();
+            if (components.ContainsKey("minecraft:behavior.harvest_farm_block")) components["minecraft:behavior.harvest_farm_block"] = (components["minecraft:behavior.harvest_farm_block"] as Newtonsoft.Json.Linq.JObject)?.ToObject<MCDataStructures.Minecraft_behavior_harvest_farm_block>();
+            if (components.ContainsKey("minecraft:behavior.hurt_by_target")) components["minecraft:behavior.hurt_by_target"] = (components["minecraft:behavior.hurt_by_target"] as Newtonsoft.Json.Linq.JObject)?.ToObject<MCDataStructures.Minecraft_behavior_hurt_by_target>();
+            if (components.ContainsKey("minecraft:behavior.leap_at_target")) components["minecraft:behavior.leap_at_target"] = (components["minecraft:behavior.leap_at_target"] as Newtonsoft.Json.Linq.JObject)?.ToObject<MCDataStructures.Minecraft_behavior_leap_at_target>();
+            if (components.ContainsKey("minecraft:behavior.look_at_entity")) components["minecraft:behavior.look_at_entity"] = (components["minecraft:behavior.look_at_entity"] as Newtonsoft.Json.Linq.JObject)?.ToObject<MCDataStructures.Minecraft_behavior_look_at_entity>();
+            if (components.ContainsKey("minecraft:behavior.look_at_player")) components["minecraft:behavior.look_at_player"] = (components["minecraft:behavior.look_at_player"] as Newtonsoft.Json.Linq.JObject)?.ToObject<MCDataStructures.Minecraft_behavior_look_at_player>();
+            if (components.ContainsKey("minecraft:behavior.look_at_target")) components["minecraft:behavior.look_at_target"] = (components["minecraft:behavior.look_at_target"] as Newtonsoft.Json.Linq.JObject)?.ToObject<MCDataStructures.Minecraft_behavior_look_at_target>();
+            if (components.ContainsKey("minecraft:behavior.look_at_trading_player")) components["minecraft:behavior.look_at_trading_player"] = (components["minecraft:behavior.look_at_trading_player"] as Newtonsoft.Json.Linq.JObject)?.ToObject<MCDataStructures.Minecraft_behavior_look_at_trading_player>();
+            if (components.ContainsKey("minecraft:behavior.make_love")) components["minecraft:behavior.make_love"] = (components["minecraft:behavior.make_love"] as Newtonsoft.Json.Linq.JObject)?.ToObject<MCDataStructures.Minecraft_behavior_make_love>();
+            if (components.ContainsKey("minecraft:behavior.melee_attack")) components["minecraft:behavior.melee_attack"] = (components["minecraft:behavior.melee_attack"] as Newtonsoft.Json.Linq.JObject)?.ToObject<MCDataStructures.Minecraft_behavior_melee_attack>();
+            if (components.ContainsKey("minecraft:behavior.mount_pathing")) components["minecraft:behavior.mount_pathing"] = (components["minecraft:behavior.mount_pathing"] as Newtonsoft.Json.Linq.JObject)?.ToObject<MCDataStructures.Minecraft_behavior_mount_pathing>();
+            if (components.ContainsKey("minecraft:behavior.move_indoors")) components["minecraft:behavior.move_indoors"] = (components["minecraft:behavior.move_indoors"] as Newtonsoft.Json.Linq.JObject)?.ToObject<MCDataStructures.Minecraft_behavior_move_indoors>();
+            if (components.ContainsKey("minecraft:behavior.move_through_village")) components["minecraft:behavior.move_through_village"] = (components["minecraft:behavior.move_through_village"] as Newtonsoft.Json.Linq.JObject)?.ToObject<MCDataStructures.Minecraft_behavior_move_through_village>();
+            if (components.ContainsKey("minecraft:behavior.move_towards_restriction")) components["minecraft:behavior.move_towards_restriction"] = (components["minecraft:behavior.move_towards_restriction"] as Newtonsoft.Json.Linq.JObject)?.ToObject<MCDataStructures.Minecraft_behavior_move_towards_restriction>();
+            if (components.ContainsKey("minecraft:behavior.move_towards_target")) components["minecraft:behavior.move_towards_target"] = (components["minecraft:behavior.move_towards_target"] as Newtonsoft.Json.Linq.JObject)?.ToObject<MCDataStructures.Minecraft_behavior_move_towards_target>();
+            if (components.ContainsKey("minecraft:behavior.nearest_attackable_target")) components["minecraft:behavior.nearest_attackable_target"] = (components["minecraft:behavior.nearest_attackable_target"] as Newtonsoft.Json.Linq.JObject)?.ToObject<MCDataStructures.Minecraft_behavior_nearest_attackable_target>();
+            if (components.ContainsKey("minecraft:behavior.ocelot_sit_on_block")) components["minecraft:behavior.ocelot_sit_on_block"] = (components["minecraft:behavior.ocelot_sit_on_block"] as Newtonsoft.Json.Linq.JObject)?.ToObject<MCDataStructures.Minecraft_behavior_ocelot_sit_on_block>();
+            if (components.ContainsKey("minecraft:behavior.ocelotattack")) components["minecraft:behavior.ocelotattack"] = (components["minecraft:behavior.ocelotattack"] as Newtonsoft.Json.Linq.JObject)?.ToObject<MCDataStructures.Minecraft_behavior_ocelotattack>();
+            if (components.ContainsKey("minecraft:behavior.offer_flower")) components["minecraft:behavior.offer_flower"] = (components["minecraft:behavior.offer_flower"] as Newtonsoft.Json.Linq.JObject)?.ToObject<MCDataStructures.Minecraft_behavior_offer_flower>();
+            if (components.ContainsKey("minecraft:behavior.open_door")) components["minecraft:behavior.open_door"] = (components["minecraft:behavior.open_door"] as Newtonsoft.Json.Linq.JObject)?.ToObject<MCDataStructures.Minecraft_behavior_open_door>();
+            if (components.ContainsKey("minecraft:behavior.owner_hurt_by_target")) components["minecraft:behavior.owner_hurt_by_target"] = (components["minecraft:behavior.owner_hurt_by_target"] as Newtonsoft.Json.Linq.JObject)?.ToObject<MCDataStructures.Minecraft_behavior_owner_hurt_by_target>();
+            if (components.ContainsKey("minecraft:behavior.owner_hurt_target")) components["minecraft:behavior.owner_hurt_target"] = (components["minecraft:behavior.owner_hurt_target"] as Newtonsoft.Json.Linq.JObject)?.ToObject<MCDataStructures.Minecraft_behavior_owner_hurt_target>();
+            if (components.ContainsKey("minecraft:behavior.panic")) components["minecraft:behavior.panic"] = (components["minecraft:behavior.panic"] as Newtonsoft.Json.Linq.JObject)?.ToObject<MCDataStructures.Minecraft_behavior_panic>();
+            if (components.ContainsKey("minecraft:behavior.peek")) components["minecraft:behavior.peek"] = (components["minecraft:behavior.peek"] as Newtonsoft.Json.Linq.JObject)?.ToObject<MCDataStructures.Minecraft_behavior_peek>();
+            if (components.ContainsKey("minecraft:behavior.pickup_items")) components["minecraft:behavior.pickup_items"] = (components["minecraft:behavior.pickup_items"] as Newtonsoft.Json.Linq.JObject)?.ToObject<MCDataStructures.Minecraft_behavior_pickup_items>();
+            if (components.ContainsKey("minecraft:behavior.play")) components["minecraft:behavior.play"] = (components["minecraft:behavior.play"] as Newtonsoft.Json.Linq.JObject)?.ToObject<MCDataStructures.Minecraft_behavior_play>();
+            if (components.ContainsKey("minecraft:behavior.player_ride_tamed")) components["minecraft:behavior.player_ride_tamed"] = (components["minecraft:behavior.player_ride_tamed"] as Newtonsoft.Json.Linq.JObject)?.ToObject<MCDataStructures.Minecraft_behavior_player_ride_tamed>();
+            if (components.ContainsKey("minecraft:behavior.raid_garden")) components["minecraft:behavior.raid_garden"] = (components["minecraft:behavior.raid_garden"] as Newtonsoft.Json.Linq.JObject)?.ToObject<MCDataStructures.Minecraft_behavior_raid_garden>();
+            if (components.ContainsKey("minecraft:behavior.random_fly")) components["minecraft:behavior.random_fly"] = (components["minecraft:behavior.random_fly"] as Newtonsoft.Json.Linq.JObject)?.ToObject<MCDataStructures.Minecraft_behavior_random_fly>();
+            if (components.ContainsKey("minecraft:behavior.random_look_around")) components["minecraft:behavior.random_look_around"] = (components["minecraft:behavior.random_look_around"] as Newtonsoft.Json.Linq.JObject)?.ToObject<MCDataStructures.Minecraft_behavior_random_look_around>();
+            if (components.ContainsKey("minecraft:behavior.random_stroll")) components["minecraft:behavior.random_stroll"] = (components["minecraft:behavior.random_stroll"] as Newtonsoft.Json.Linq.JObject)?.ToObject<MCDataStructures.Minecraft_behavior_random_stroll>();
+            if (components.ContainsKey("minecraft:behavior.ranged_attack")) components["minecraft:behavior.ranged_attack"] = (components["minecraft:behavior.ranged_attack"] as Newtonsoft.Json.Linq.JObject)?.ToObject<MCDataStructures.Minecraft_behavior_ranged_attack>();
+            if (components.ContainsKey("minecraft:behavior.receive_love")) components["minecraft:behavior.receive_love"] = (components["minecraft:behavior.receive_love"] as Newtonsoft.Json.Linq.JObject)?.ToObject<MCDataStructures.Minecraft_behavior_receive_love>();
+            if (components.ContainsKey("minecraft:behavior.restrict_open_door")) components["minecraft:behavior.restrict_open_door"] = (components["minecraft:behavior.restrict_open_door"] as Newtonsoft.Json.Linq.JObject)?.ToObject<MCDataStructures.Minecraft_behavior_restrict_open_door>();
+            if (components.ContainsKey("minecraft:behavior.restrict_sun")) components["minecraft:behavior.restrict_sun"] = (components["minecraft:behavior.restrict_sun"] as Newtonsoft.Json.Linq.JObject)?.ToObject<MCDataStructures.Minecraft_behavior_restrict_sun>();
+            if (components.ContainsKey("minecraft:behavior.run_around_like_crazy")) components["minecraft:behavior.run_around_like_crazy"] = (components["minecraft:behavior.run_around_like_crazy"] as Newtonsoft.Json.Linq.JObject)?.ToObject<MCDataStructures.Minecraft_behavior_run_around_like_crazy>();
+            if (components.ContainsKey("minecraft:behavior.send_event")) components["minecraft:behavior.send_event"] = (components["minecraft:behavior.send_event"] as Newtonsoft.Json.Linq.JObject)?.ToObject<MCDataStructures.Minecraft_behavior_send_event>();
+            if (components.ContainsKey("minecraft:behavior.share_items")) components["minecraft:behavior.share_items"] = (components["minecraft:behavior.share_items"] as Newtonsoft.Json.Linq.JObject)?.ToObject<MCDataStructures.Minecraft_behavior_share_items>();
+            if (components.ContainsKey("minecraft:behavior.silverfish_merge_with_stone")) components["minecraft:behavior.silverfish_merge_with_stone"] = (components["minecraft:behavior.silverfish_merge_with_stone"] as Newtonsoft.Json.Linq.JObject)?.ToObject<MCDataStructures.Minecraft_behavior_silverfish_merge_with_stone>();
+            if (components.ContainsKey("minecraft:behavior.silverfish_wake_up_friends")) components["minecraft:behavior.silverfish_wake_up_friends"] = (components["minecraft:behavior.silverfish_wake_up_friends"] as Newtonsoft.Json.Linq.JObject)?.ToObject<MCDataStructures.Minecraft_behavior_silverfish_wake_up_friends>();
+            if (components.ContainsKey("minecraft:behavior.skeleton_horse_trap")) components["minecraft:behavior.skeleton_horse_trap"] = (components["minecraft:behavior.skeleton_horse_trap"] as Newtonsoft.Json.Linq.JObject)?.ToObject<MCDataStructures.Minecraft_behavior_skeleton_horse_trap>();
+            if (components.ContainsKey("minecraft:behavior.slime_attack")) components["minecraft:behavior.slime_attack"] = (components["minecraft:behavior.slime_attack"] as Newtonsoft.Json.Linq.JObject)?.ToObject<MCDataStructures.Minecraft_behavior_slime_attack>();
+            if (components.ContainsKey("minecraft:behavior.slime_float")) components["minecraft:behavior.slime_float"] = (components["minecraft:behavior.slime_float"] as Newtonsoft.Json.Linq.JObject)?.ToObject<MCDataStructures.Minecraft_behavior_slime_float>();
+            if (components.ContainsKey("minecraft:behavior.slime_keep_on_jumping")) components["minecraft:behavior.slime_keep_on_jumping"] = (components["minecraft:behavior.slime_keep_on_jumping"] as Newtonsoft.Json.Linq.JObject)?.ToObject<MCDataStructures.Minecraft_behavior_slime_keep_on_jumping>();
+            if (components.ContainsKey("minecraft:behavior.slime_random_direction")) components["minecraft:behavior.slime_random_direction"] = (components["minecraft:behavior.slime_random_direction"] as Newtonsoft.Json.Linq.JObject)?.ToObject<MCDataStructures.Minecraft_behavior_slime_random_direction>();
+            if (components.ContainsKey("minecraft:behavior.squid_dive")) components["minecraft:behavior.squid_dive"] = (components["minecraft:behavior.squid_dive"] as Newtonsoft.Json.Linq.JObject)?.ToObject<MCDataStructures.Minecraft_behavior_squid_dive>();
+            if (components.ContainsKey("minecraft:behavior.squid_flee")) components["minecraft:behavior.squid_flee"] = (components["minecraft:behavior.squid_flee"] as Newtonsoft.Json.Linq.JObject)?.ToObject<MCDataStructures.Minecraft_behavior_squid_flee>();
+            if (components.ContainsKey("minecraft:behavior.squid_idle")) components["minecraft:behavior.squid_idle"] = (components["minecraft:behavior.squid_idle"] as Newtonsoft.Json.Linq.JObject)?.ToObject<MCDataStructures.Minecraft_behavior_squid_idle>();
+            if (components.ContainsKey("minecraft:behavior.squid_move_away_from_ground")) components["minecraft:behavior.squid_move_away_from_ground"] = (components["minecraft:behavior.squid_move_away_from_ground"] as Newtonsoft.Json.Linq.JObject)?.ToObject<MCDataStructures.Minecraft_behavior_squid_move_away_from_ground>();
+            if (components.ContainsKey("minecraft:behavior.squid_out_of_water")) components["minecraft:behavior.squid_out_of_water"] = (components["minecraft:behavior.squid_out_of_water"] as Newtonsoft.Json.Linq.JObject)?.ToObject<MCDataStructures.Minecraft_behavior_squid_out_of_water>();
+            if (components.ContainsKey("minecraft:behavior.stay_while_sitting")) components["minecraft:behavior.stay_while_sitting"] = (components["minecraft:behavior.stay_while_sitting"] as Newtonsoft.Json.Linq.JObject)?.ToObject<MCDataStructures.Minecraft_behavior_stay_while_sitting>();
+            if (components.ContainsKey("minecraft:behavior.stomp_attack")) components["minecraft:behavior.stomp_attack"] = (components["minecraft:behavior.stomp_attack"] as Newtonsoft.Json.Linq.JObject)?.ToObject<MCDataStructures.Minecraft_behavior_stomp_attack>();
+            if (components.ContainsKey("minecraft:behavior.summon_entity")) components["minecraft:behavior.summon_entity"] = (components["minecraft:behavior.summon_entity"] as Newtonsoft.Json.Linq.JObject)?.ToObject<MCDataStructures.Minecraft_behavior_summon_entity>();
+            if (components.ContainsKey("minecraft:behavior.swell")) components["minecraft:behavior.swell"] = (components["minecraft:behavior.swell"] as Newtonsoft.Json.Linq.JObject)?.ToObject<MCDataStructures.Minecraft_behavior_swell>();
+            if (components.ContainsKey("minecraft:behavior.take_flower")) components["minecraft:behavior.take_flower"] = (components["minecraft:behavior.swell"] as Newtonsoft.Json.Linq.JObject)?.ToObject<MCDataStructures.Minecraft_behavior_take_flower>();
+            if (components.ContainsKey("minecraft:behavior.tempt")) components["minecraft:behavior.tempt"] = (components["minecraft:behavior.tempt"] as Newtonsoft.Json.Linq.JObject)?.ToObject<MCDataStructures.Minecraft_behavior_tempt>();
+            if (components.ContainsKey("minecraft:behavior.trade_with_player")) components["minecraft:behavior.trade_with_player"] = (components["minecraft:behavior.trade_with_player"] as Newtonsoft.Json.Linq.JObject)?.ToObject<MCDataStructures.Minecraft_behavior_trade_with_player>();
+            if (components.ContainsKey("minecraft:behavior.vex_copy_owner_target")) components["minecraft:behavior.vex_copy_owner_target"] = (components["minecraft:behavior.vex_copy_owner_target"] as Newtonsoft.Json.Linq.JObject)?.ToObject<MCDataStructures.Minecraft_behavior_vex_copy_owner_target>();
+            if (components.ContainsKey("minecraft:behavior.vex_random_move")) components["minecraft:behavior.vex_random_move"] = (components["minecraft:behavior.vex_random_move"] as Newtonsoft.Json.Linq.JObject)?.ToObject<MCDataStructures.Minecraft_behavior_vex_random_move>();
 
         }
 
@@ -605,14 +607,6 @@ namespace Exporter.Serializers
                 }
 
                 {
-                    var attack = new MCDataStructures.Minecraft_behavior_melee_attack();
-                    attack.Priority = 3;
-                    attack.speed_multiplier = 1;
-                    attack.track_target = false;
-                    pEntity.minecraftEntity.Components["minecraft:behavior.melee_attack"] = attack;
-                }
-
-                {
                     pEntity.minecraftEntity.Components["minecraft:attack"] = new MCDataStructures.Minecraft_attack();
                     var melcomp = pEntity.minecraftEntity.Components["minecraft:attack"] as MCDataStructures.Minecraft_attack;
                     var mel = melee[pair.Value.Melee.ToLower()];
@@ -652,6 +646,21 @@ namespace Exporter.Serializers
                     bnatcomp.within_radius = 2;
                     bnatcomp.Priority = 2;
                 }
+
+                {
+                    pEntity.minecraftEntity.Components["minecraft:behavior.melee_attack"] = new MCDataStructures.Minecraft_behavior_melee_attack();
+                    var meleecomp = pEntity.minecraftEntity.Components["minecraft:behavior.melee_attack"] as MCDataStructures.Minecraft_behavior_melee_attack;
+                    meleecomp.track_target = true;
+                    meleecomp.Priority = 2;
+                }
+
+                //{
+                //    pEntity.minecraftEntity.Components["minecraft:behavior.move_towards_target"] = new MCDataStructures.Minecraft_behavior_move_towards_target();
+                //    var mttcomp = pEntity.minecraftEntity.Components["minecraft:behavior.move_towards_target"] as MCDataStructures.Minecraft_behavior_move_towards_target;
+                //    mttcomp.within_radius = 10;
+                //    mttcomp.Priority = 2;
+                //}
+
                 {
                     pEntity.minecraftEntity.Components["minecraft:behavior.hurt_by_target"] = new MCDataStructures.Minecraft_behavior_hurt_by_target();
                     var hurtcomp = pEntity.minecraftEntity.Components["minecraft:behavior.hurt_by_target"] as MCDataStructures.Minecraft_behavior_hurt_by_target;
@@ -664,6 +673,42 @@ namespace Exporter.Serializers
 
                     hurtcomp.alert_same_type = false;
                     hurtcomp.Priority = 2;
+                }
+                {
+                    pEntity.minecraftEntity.Components["minecraft:behavior.look_at_target"] = new MCDataStructures.Minecraft_behavior_look_at_target();
+                    var lookcomp = pEntity.minecraftEntity.Components["minecraft:behavior.look_at_target"] as MCDataStructures.Minecraft_behavior_look_at_target;
+                    lookcomp.probability = 0.1F;
+                    lookcomp.look_time = 1;
+                    lookcomp.look_distance = 10;
+                    lookcomp.Priority = 2;
+                }
+
+                //{
+                //    if (entities[pair.Key.ToLower()].Range.ToLower() == "true")
+                //    {
+                //        pEntity.minecraftEntity.Components["minecraft:behavior.behavior_ranged_attack"] = new MCDataStructures.Minecraft_behavior_ranged_attack();
+                //        var rangedcomp = pEntity.minecraftEntity.Components["minecraft:behavior.behavior_ranged_attack"] as MCDataStructures.Minecraft_behavior_ranged_attack;
+                //        rangedcomp.Priority = 2;
+                //        rangedcomp.attack_radius = 10;
+
+                //    }
+                //    else
+                //    {
+                //        pEntity.minecraftEntity.Components.Remove("minecraft:behavior.behavior_ranged_attack");
+                //    }
+                //}
+
+                {
+                    if (entities[pair.Key.ToLower()].Charge.ToLower() == "true")
+                    {
+                        pEntity.minecraftEntity.Components["minecraft:behavior.charge_attack"] = new MCDataStructures.Minecraft_behavior_charge_attack();
+                        var chargecomp = pEntity.minecraftEntity.Components["minecraft:behavior.charge_attack"] as MCDataStructures.Minecraft_behavior_charge_attack;
+                        chargecomp.Priority = 2;
+                    }
+                    else
+                    {
+                        pEntity.minecraftEntity.Components.Remove("minecraft:behavior.charge_attack");
+                    }
                 }
             }
 

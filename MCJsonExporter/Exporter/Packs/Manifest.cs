@@ -34,12 +34,14 @@ namespace Exporter
         [JsonConverter(typeof(SingleOrArrayConverter<UnnamedData>))]
         public List<UnnamedData> Modules { get; set; }
 
-        [JsonProperty(PropertyName = "dependencies", NullValueHandling = NullValueHandling.Ignore)]
-        [JsonConverter(typeof(SingleOrArrayConverter<UnnamedData>))]
-        public List<UnnamedData> Dependencies { get; set; }
+        //[JsonProperty(PropertyName = "dependencies", NullValueHandling = NullValueHandling.Ignore)]
+        //[JsonConverter(typeof(SingleOrArrayConverter<UnnamedData>))]
+        //public List<UnnamedData> Dependencies { get; set; }
 
         internal void Save(string packDirectory)
         {
+            Header.Description = "Moba";
+            Modules[0].Description = "Moba";
             var json = JsonConvert.SerializeObject(this, Formatting.Indented);
 
             File.WriteAllText(packDirectory + "\\manifest.json", json);
